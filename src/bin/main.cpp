@@ -1,5 +1,5 @@
-#include"..\include\root.h"
-#include<allegro5\allegro.h>
+#include"../include/root.h"
+#include<allegro5/allegro.h>
 
 int main(int argv, char** argc) {
 
