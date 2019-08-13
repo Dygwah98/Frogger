@@ -1,20 +1,35 @@
-1. A fully playable level with a flexible structure
-2. A basic menu to modify in-game parameters (like difficulty, resolution etc.)
-3. miscellaneous
+a. A fully playable level with a flexible structure
+b. A basic menu to modify in-game parameters (like difficulty, resolution etc.)
+c. miscellaneous
 
-1//
-a. controls
-b. position detection and management (either through collision or through other means)
-c. enemies
-d. movement
-e. death conditions (there's a lot of 'em)
-f. victory conditions (they're less)
-g. level-to-level e level-to-menu transition
-h. some basic animations
+a//
 
-2//
-a. options to manage difficulty/music/resolution/etc.
-b. working exit button
-c. working start button
+1. controls
+1.1. 4 directions, fixed speed
+1.2. game pause option
+1.3. game exit option (or back-to-menu option)
 
-3//
+2. position detection and management (either through collision or underlying matrices)
+
+3. enemies
+3.1. single direction, fixed speed
+
+4. death conditions (there's a lot of 'em)
+
+5. victory conditions (they're less)
+5.1. a frog has reached a safe zone (next frog)
+5.2. all frogs are in place (level transition)
+
+6. level-to-level e level-to-menu transitions
+
+7. some basic animations
+
+b//
+
+1. options to manage difficulty/music/resolution/etc.
+
+2. working exit button
+
+3. working start button
+
+c//
