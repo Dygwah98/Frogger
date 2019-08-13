@@ -5,9 +5,10 @@ int main(int argv, char** argc) {
 
     if(!al_init()) {
 
-        std::cerr << "al_init() failed\n";
+        std::cerr << "al_init(): failed\n";
         return -1;
     }
 
+    std::cout << "al_init(): successful\n";
     return 0;
 }

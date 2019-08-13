@@ -1,0 +1,20 @@
+1. A fully playable level with a flexible structure
+2. A basic menu to modify in-game parameters (like difficulty, resolution etc.)
+3. miscellaneous
+
+1//
+a. controls
+b. position detection and management (either through collision or through other means)
+c. enemies
+d. movement
+e. death conditions (there's a lot of 'em)
+f. victory conditions (they're less)
+g. level-to-level e level-to-menu transition
+h. some basic animations
+
+2//
+a. options to manage difficulty/music/resolution/etc.
+b. working exit button
+c. working start button
+
+3//
