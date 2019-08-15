@@ -2,7 +2,7 @@ a. A fully playable level with a flexible structure
 b. A basic menu to modify in-game parameters (like difficulty, resolution etc.)
 c. miscellaneous
 
-a//
+-a//
 
 1. controls
 1.1. 4 directions, fixed speed
@@ -24,7 +24,7 @@ a//
 
 7. some basic animations
 
-b//
+-b//
 
 1. options to manage difficulty/music/resolution/etc.
 
@@ -32,4 +32,4 @@ b//
 
 3. working start button
 
-c//
+-c//
