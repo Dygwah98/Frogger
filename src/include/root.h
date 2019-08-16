@@ -2,7 +2,11 @@
 #include<allegro5/allegro.h>
 using namespace std;
 //LOGICA
-
+/*
+    oggetto rappresentante un'entita' (monostato) sulla linea
+    - può essere specializzata per entita' multistato (nemici con animazioni/altro)
+*/
+class GameObject;
 /*
     rappresenta una riga dell'area di gioco
     - si limita a contenere una rappresentazione minimale dei vari oggetti

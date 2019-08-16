@@ -7,18 +7,14 @@
     - può verificare se in una data posizione si verifica una collisione
 
     interfaccia leggera e semplice, così da nascondere la complessità interna
+
+    PROBLEMA: diventa complicato gestire nemici con comportamenti complessi, o con più stati
 */
 class Line {
 
     private:
         //pixel length of a Line on screen
         static float dim;
-        //numero di elementi della Line
-        const size_t n;
-        //array di elementi: ogni char corrisponde a un elemento
-        const char elements[];
-        //array di posizioni: elements[i] sarà in posizione positions[i] (con head = 0)
-        float positions[];
         //offset sulle posizioni: in ogni momento, la posizione reale di ogni elemento sarà ( positions[i] + head ) % dim
         float head;
 
