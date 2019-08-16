@@ -12,7 +12,10 @@ class Graphics {
         //funzione che inizializza le componenti interne di Allegro
         static bool initAllegro();
 
+        ALLEGRO_DISPLAY_MODE getDispMode();
+
         ALLEGRO_DISPLAY* display;
+        ALLEGRO_TIMER* timer;
 
     protected:
     
