@@ -1,14 +1,11 @@
-#include"../include/root.h"
+#include"../include/graphics.h"
+#include"../include/level.h"
+#include"../include/line.h"
 #include<allegro5/allegro.h>
 
 int main(int argv, char** argc) {
 
-    if(!al_init()) {
-
-        std::cerr << "al_init(): failed\n";
-        return -1;
-    }
-
-    std::cout << "al_init(): successful\n";
+    Graphics g;
+    
     return 0;
 }

@@ -7,6 +7,11 @@
 class Graphics {
 
     private:
+        //true se l'inizializzazione di Allegro va a buon fine
+        static bool isValid;
+        //funzione che inizializza le componenti interne di Allegro
+        static bool initAllegro();
+
         ALLEGRO_DISPLAY* display;
 
     protected:

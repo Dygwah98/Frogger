@@ -1,12 +1,14 @@
 #include<iostream>
+#include<cassert>
 #include<allegro5/allegro.h>
+#include<allegro5/allegro_image.h>
 using namespace std;
 //LOGICA
 /*
     oggetto rappresentante un'entita' (monostato) sulla linea
     - può essere specializzata per entita' multistato (nemici con animazioni/altro)
 */
-class GameObject;
+//class GameObject;
 /*
     rappresenta una riga dell'area di gioco
     - si limita a contenere una rappresentazione minimale dei vari oggetti
@@ -16,17 +18,17 @@ class GameObject;
 
     interfaccia leggera e semplice per Level, così da nascondere la complessità interna
 */
-class Line;
+//class Line;
 /*
     istanza del giocatore, solite cose
 */
-class Player;
+//class Player;
 /*
     rappresenta l'intera istanza (solo logica?) di un livello
 
     vab, quantomeno l'handle alla grafica? O viceversa
 */
-class Level;
+//class Level;
 
 //END LOGICA
 //GRAFICA
@@ -34,12 +36,12 @@ class Level;
 /*
     gestisce l'animazione come sequenza di bitmaps connesse fra loro
 */
-class Animation;
+//class Animation;
 /*
     si occupa di disegnare le varie linee e il player on top of that
     - dovrebbe gestire anche le animazioni?
         - se si, deve anche comunicare lo stop ai controlli?
 */
-class Graphics;
+//class Graphics;
 
 //END GRAFICA
