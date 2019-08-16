@@ -12,8 +12,7 @@ bool Graphics::initAllegro() {
 Graphics::Graphics(): display(nullptr) {
 
     //inizializzazione delle routines interne
-    if(!isValid) 
-        assert(initAllegro());
+    if(!isValid) assert(initAllegro());
 }
 
 Graphics::~Graphics() {

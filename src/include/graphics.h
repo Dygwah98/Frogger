@@ -17,8 +17,12 @@ class Graphics {
     protected:
     
     public:
-        //funzione che si occupa di inizializzare i vari addon e le funzionalità di Allegro
+        //funzione che si occupa di inizializzare le componenti grafiche
         Graphics();
+
+        //?? costruttore con parametri (magari per l'inizializzazione del display) ??//
+        //Graphics(...)
+        
         //dealloca le risorse di Allegro
         ~Graphics();
 };
