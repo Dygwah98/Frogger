@@ -1,8 +1,19 @@
+#ifndef ROOT_H
+#define ROOT_H
+
 #include<iostream>
 #include<cassert>
 #include<allegro5/allegro.h>
 #include<allegro5/allegro_image.h>
 using namespace std;
+
+template<class T>
+inline bool in_range(T lower, T val, T upper, bool loweq = true, bool upeq = true) {
+    return (loweq ? lower >= val : lower > val) and (upeq ? val >= upper : val > upper);
+}
+
+#endif
+
 //LOGICA
 /*
     oggetto rappresentante un'entita' (monostato) sulla linea

@@ -15,22 +15,22 @@ ALLEGRO_DISPLAY_MODE Graphics::getDispMode() {
     al_get_display_mode(0, &temp);
 
     for(size_t i = 1; i < al_get_num_display_modes(); ++i) {
+        
         al_get_display_mode(i, &temp);
-        if(temp.width >= 750 and temp.width <= 850 and temp.height >= 550 and temp.height <= 650) 
+        if(in_range<int>(750, temp.width, 850) and in_range<int>(550, temp.height, 650))
             return temp;
     }
 
     return temp;
 }
 
-Graphics::Graphics(): display(nullptr), timer(nullptr) {
+Graphics::Graphics(): display(nullptr), timer(nullptr), event_queue(nullptr) {
 
     //inizializzazione dell'API di Allegro
     if(!isValid) assert(initAllegro());
     
     //si trovano i parametri adatti per display e timer
     ALLEGRO_DISPLAY_MODE disp = Graphics::getDispMode();
-
 //    cout << disp.format << " " << disp.height << " " << disp.refresh_rate << " " << disp.width << endl;
 
     //inizializzazione display:
@@ -42,15 +42,23 @@ Graphics::Graphics(): display(nullptr), timer(nullptr) {
 
     al_clear_to_color(al_map_rgb(0,0,0));
     al_flip_display();
-
 //    al_rest(4.0);
+
     //inizializzazione timer:
     timer = al_create_timer(1.0/disp.refresh_rate);
     assert(timer != nullptr);
+
+    //inizializzazione coda degli eventi:
+    event_queue = al_create_event_queue();
+    assert(event_queue != nullptr);
+
+    al_register_event_source(event_queue, al_get_display_event_source(display));
+    al_register_event_source(event_queue, al_get_timer_event_source(timer));
 }
 
 Graphics::~Graphics() {
     
-    if(display != nullptr)  al_destroy_display(display);
-    if(timer != nullptr)    al_destroy_timer(timer);
+    if(display     != nullptr) al_destroy_display(display);
+    if(timer       != nullptr) al_destroy_timer(timer);
+    if(event_queue != nullptr) al_destroy_event_queue(event_queue);
 }
