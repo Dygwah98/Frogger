@@ -9,7 +9,7 @@ bool Graphics::initAllegro() {
     return isValid;
 }
 
-ALLEGRO_DISPLAY_MODE getDispMode() {
+ALLEGRO_DISPLAY_MODE Graphics::getDispMode() {
 
     ALLEGRO_DISPLAY_MODE temp;
     al_get_display_mode(0, &temp);
@@ -31,6 +31,8 @@ Graphics::Graphics(): display(nullptr), timer(nullptr) {
     //si trovano i parametri adatti per display e timer
     ALLEGRO_DISPLAY_MODE disp = Graphics::getDispMode();
 
+//    cout << disp.format << " " << disp.height << " " << disp.refresh_rate << " " << disp.width << endl;
+
     //inizializzazione display:
     al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
     al_set_new_display_refresh_rate(disp.refresh_rate);
@@ -41,6 +43,7 @@ Graphics::Graphics(): display(nullptr), timer(nullptr) {
     al_clear_to_color(al_map_rgb(0,0,0));
     al_flip_display();
 
+//    al_rest(4.0);
     //inizializzazione timer:
     timer = al_create_timer(1.0/disp.refresh_rate);
     assert(timer != nullptr);
