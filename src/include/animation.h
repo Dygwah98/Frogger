@@ -2,4 +2,10 @@
 
 class Animation {
 
+    private:
+
+    protected:
+    
+    public:
+
 };

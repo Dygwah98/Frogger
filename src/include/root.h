@@ -10,7 +10,7 @@ using namespace std;
 
 template<class T>
 inline bool in_range(T lower, T val, T upper, bool loweq = true, bool upeq = true) {
-    return (loweq ? lower >= val : lower > val) and (upeq ? val >= upper : val > upper);
+    return (loweq ? val >= lower : val > lower) and (upeq ? upper >= val : upper > val);
 }
 
 #endif

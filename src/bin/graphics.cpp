@@ -14,7 +14,7 @@ ALLEGRO_DISPLAY_MODE Graphics::getDispMode() {
     ALLEGRO_DISPLAY_MODE temp;
     al_get_display_mode(0, &temp);
 
-    for(size_t i = 1; i < al_get_num_display_modes(); ++i) {
+    for(int i = 1; i < al_get_num_display_modes(); ++i) {
         
         al_get_display_mode(i, &temp);
         if(in_range<int>(750, temp.width, 850) and in_range<int>(550, temp.height, 650))
