@@ -23,10 +23,14 @@ class Graphics {
     public:
         //funzione che si occupa di inizializzare le componenti grafiche
         Graphics();
-
         //?? costruttore con parametri (magari per l'inizializzazione del display) ??//
         //Graphics(...)
-
         //dealloca le risorse di Allegro
         ~Graphics();
+        //true se tutte le componenti sono valide per l'uso
+        bool is_ready() const;
+        //avvia il timer e la coda degli eventi
+        void launch();
+        //stoppa il timer e la coda degli eventi
+        void suspend();
 };

@@ -40,9 +40,9 @@ Graphics::Graphics(): display(nullptr), timer(nullptr), event_queue(nullptr) {
     display = al_create_display(disp.width, disp.height);
     assert(display != nullptr);
 
-    al_clear_to_color(al_map_rgb(0,0,0));
+    al_clear_to_color(al_map_rgb(0, 0, 0));
     al_flip_display();
-//    al_rest(4.0);
+//    al_rest(2.0);
 
     //inizializzazione timer:
     timer = al_create_timer(1.0/disp.refresh_rate);
@@ -54,6 +54,7 @@ Graphics::Graphics(): display(nullptr), timer(nullptr), event_queue(nullptr) {
 
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
+    al_pause_event_queue(event_queue, true);
 }
 
 Graphics::~Graphics() {
@@ -61,4 +62,23 @@ Graphics::~Graphics() {
     if(display     != nullptr) al_destroy_display(display);
     if(timer       != nullptr) al_destroy_timer(timer);
     if(event_queue != nullptr) al_destroy_event_queue(event_queue);
+}
+
+bool Graphics::is_ready() const {
+
+    return isValid and al_get_timer_started(timer) and !al_is_event_queue_paused(event_queue);
+}
+
+void Graphics::launch() {
+
+    al_flush_event_queue(event_queue);
+    al_start_timer(timer);
+    al_pause_event_queue(event_queue, false);
+}
+
+void Graphics::suspend() {
+
+    al_stop_timer(timer);
+    al_flush_event_queue(event_queue);
+    al_pause_event_queue(event_queue, true);
 }
