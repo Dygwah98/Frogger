@@ -71,6 +71,8 @@ bool Graphics::is_ready() const {
 
 void Graphics::launch() {
 
+    if(is_ready()) return;
+
     al_flush_event_queue(event_queue);
     al_start_timer(timer);
     al_pause_event_queue(event_queue, false);
@@ -78,6 +80,8 @@ void Graphics::launch() {
 
 void Graphics::suspend() {
 
+    if(!is_ready()) return;
+    
     al_stop_timer(timer);
     al_flush_event_queue(event_queue);
     al_pause_event_queue(event_queue, true);
