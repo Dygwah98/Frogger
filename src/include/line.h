@@ -1,3 +1,6 @@
+#ifndef LINE_H
+#define LINE_H
+
 #include"root.h"
 /*
     rappresenta una riga dell'area di gioco
@@ -28,3 +31,5 @@ class Line {
         //setter for the length of a line
         static void setLineDimension(const float&);
 };
+
+#endif

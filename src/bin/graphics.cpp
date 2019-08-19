@@ -42,7 +42,6 @@ Graphics::Graphics(): display(nullptr), timer(nullptr), event_queue(nullptr) {
 
     al_clear_to_color(al_map_rgb(0, 0, 0));
     al_flip_display();
-//    al_rest(2.0);
 
     //inizializzazione timer:
     timer = al_create_timer(1.0/disp.refresh_rate);

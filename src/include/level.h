@@ -1,4 +1,8 @@
-#include"root.h"
+#ifndef LEVEL_H
+#define LEVEL_H
+
+#include"graphics.h"
+#include"line.h"
 /*
     rappresenta l'intera istanza (solo logica?) di un livello
 
@@ -7,9 +11,13 @@
 class Level {
 
     private:
+        Graphics& graphics;
+        vector<Line> lines;
 
     protected:
 
     public:
-    
+        Level(Graphics&);
 };
+
+#endif

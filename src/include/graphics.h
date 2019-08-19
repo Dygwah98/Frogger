@@ -1,3 +1,6 @@
+#ifndef GRAPHICS_H
+#define GRAPHICS_H
+
 #include"root.h"
 /*
     si occupa di disegnare le varie linee e il player on top of that
@@ -34,3 +37,5 @@ class Graphics {
         //stoppa il timer e la coda degli eventi
         void suspend();
 };
+
+#endif

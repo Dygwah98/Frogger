@@ -6,6 +6,10 @@
 int main(int argv, char** argc) {
 
     Graphics g;
+//    al_rest(1.0);
+
+    Level l(g);
+//    al_rest(1.0);
     
     return 0;
 }
