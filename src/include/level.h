@@ -1,6 +1,7 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
+#include"gamecomponent.h"
 #include"graphics.h"
 #include"line.h"
 #include"player.h"
@@ -9,7 +10,7 @@
 
     vab, quantomeno l'handle alla grafica? O viceversa
 */
-class Level {
+class Level : public GameComponent {
 
     private:
         Graphics& graphics;
@@ -20,6 +21,7 @@ class Level {
 
     public:
         Level(Graphics&);
+        virtual ~Level();
 };
 
 #endif
