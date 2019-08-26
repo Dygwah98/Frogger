@@ -3,6 +3,7 @@
 
 #include"graphics.h"
 #include"line.h"
+#include"player.h"
 /*
     rappresenta l'intera istanza (solo logica?) di un livello
 
@@ -13,6 +14,7 @@ class Level {
     private:
         Graphics& graphics;
         vector<Line> lines;
+        Player player;
 
     protected:
 

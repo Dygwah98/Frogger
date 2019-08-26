@@ -1,3 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include"gameobject.h"
 
 class Player: public GameObject {
@@ -11,5 +14,8 @@ class Player: public GameObject {
     protected:
     
     public:
+        Player();
         Player(const int&, const float&);
 };
+
+#endif

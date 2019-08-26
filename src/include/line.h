@@ -1,7 +1,7 @@
 #ifndef LINE_H
 #define LINE_H
 
-#include"root.h"
+#include"gameobject.h"
 /*
     rappresenta una riga dell'area di gioco
     - si limita a contenere una rappresentazione minimale dei vari oggetti
@@ -16,6 +16,7 @@
 class Line {
 
     private:
+        vector<GameObject> objects;
         //pixel length of a Line on screen
         static float dim;
         //offset sulle posizioni: in ogni momento, la posizione reale di ogni elemento sarà ( positions[i] + head ) % dim

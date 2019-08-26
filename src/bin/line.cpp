@@ -12,6 +12,6 @@ void Line::setLineDimension(const float& f) {
     Line::dim = f; 
 }
 
-Line::Line(): head(0.0f) {}
+Line::Line(): objects(), head(0.0f) {}
 
-Line::Line(const Line& l): head(l.head) {}
+Line::Line(const Line& l): objects(), head(l.head) {}

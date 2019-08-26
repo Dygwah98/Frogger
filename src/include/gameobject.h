@@ -1,3 +1,6 @@
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
+
 #include"root.h"
 
 class GameObject {
@@ -11,7 +14,10 @@ class GameObject {
     protected:
     
     public:
+        GameObject();
         GameObject(const int&, const float&);
         bool collides(const GameObject&) const;
         virtual ~GameObject();
 };
+
+#endif
