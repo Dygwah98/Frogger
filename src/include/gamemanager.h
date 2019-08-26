@@ -2,6 +2,7 @@
 #define GAMEMANAGER_H
 
 #include"level.h"
+#include"menu.h"
 
 class GameManager {
 
