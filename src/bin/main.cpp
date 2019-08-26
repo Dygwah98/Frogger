@@ -8,7 +8,7 @@ int main(int argv, char** argc) {
     
     Level l(g);
     gm.add(&l);
-    
+
     Menu m(g);
     gm.add(&m);
 

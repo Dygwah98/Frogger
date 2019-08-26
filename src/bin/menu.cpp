@@ -2,4 +2,4 @@
 
 Menu::Menu(Graphics& g): GameComponent(), g(g) {}
 
-Menu::~Menu() {}
+//Menu::~Menu() {}

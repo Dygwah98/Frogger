@@ -6,7 +6,7 @@ class GameComponent {
     private:
     protected:
         GameComponent() {}
-        virtual ~GameComponent() {}
+        ~GameComponent() {}
     public:
 };
 

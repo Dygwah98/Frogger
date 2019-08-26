@@ -2,4 +2,4 @@
 
 Level::Level(Graphics& g): GameComponent(), graphics(g), lines(), player() {}
 
-Level::~Level() {}
+//Level::~Level() {}

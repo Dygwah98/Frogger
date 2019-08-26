@@ -21,7 +21,7 @@ class Level : public GameComponent {
 
     public:
         Level(Graphics&);
-        virtual ~Level();
+        //virtual ~Level();
 };
 
 #endif
