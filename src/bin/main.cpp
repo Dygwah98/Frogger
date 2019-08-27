@@ -3,7 +3,9 @@
 
 int main(int argv, char** argc) {
 
-    cout << endl;
+    cout << endl << "STARTING: " << argc[0] << endl << endl;
+
+    //allocazioni delle risorse
     Graphics g;
     GameManager gm(g);
     
@@ -13,8 +15,12 @@ int main(int argv, char** argc) {
     GameComponent* m = new Menu(g);
     gm.add(m);
 
-    cout << endl << endl;
+    //deallocazioni dinamiche delle risorse
+    cout << endl;
     delete m;
     delete l;
+
+    //deallocazioni statiche delle risorse
+    cout << endl;
     return 0;
 }
