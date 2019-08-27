@@ -11,6 +11,8 @@ bool Graphics::initAllegro() {
 
 ALLEGRO_DISPLAY_MODE Graphics::getDispMode() {
 
+    cout << "Graphics::getDispMode() " << this << endl;
+
     ALLEGRO_DISPLAY_MODE temp;
     al_get_display_mode(0, &temp);
 
@@ -54,6 +56,8 @@ Graphics::Graphics(): display(nullptr), timer(nullptr), event_queue(nullptr) {
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_pause_event_queue(event_queue, true);
+
+    cout << "Graphics::Graphics() " << this << endl;
 }
 
 Graphics::~Graphics() {
@@ -61,6 +65,8 @@ Graphics::~Graphics() {
     if(display     != nullptr) al_destroy_display(display);
     if(timer       != nullptr) al_destroy_timer(timer);
     if(event_queue != nullptr) al_destroy_event_queue(event_queue);
+
+    cout << "Graphics::~Graphics() " << this << endl;
 }
 
 bool Graphics::is_ready() const {

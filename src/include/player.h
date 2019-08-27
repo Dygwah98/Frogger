@@ -16,6 +16,7 @@ class Player: public GameObject {
     public:
         Player();
         Player(const int&, const float&);
+        ~Player();
 };
 
 #endif

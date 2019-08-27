@@ -14,6 +14,7 @@ class GameManager {
 
     public:
         GameManager(Graphics& g);
+        ~GameManager();
         bool add(GameComponent* l);
 };
 

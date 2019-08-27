@@ -3,14 +3,18 @@
 
 int main(int argv, char** argc) {
 
+    cout << endl;
     Graphics g;
     GameManager gm(g);
     
-    Level l(g);
-    gm.add(&l);
+    GameComponent* l = new Level(g);
+    gm.add(l);
 
-    Menu m(g);
-    gm.add(&m);
+    GameComponent* m = new Menu(g);
+    gm.add(m);
 
+    cout << endl << endl;
+    delete m;
+    delete l;
     return 0;
 }

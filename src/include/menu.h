@@ -11,7 +11,7 @@ class Menu : public GameComponent {
     protected:
     public:
         Menu(Graphics& g);
-        //virtual ~Menu();
+        ~Menu();
 };
 
 #endif
