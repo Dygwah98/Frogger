@@ -23,20 +23,29 @@ GameComponent::map_type Level::exec() {
     
     while(!STOP) {
 
-        const auto& ev = graphics.next();
+        const Event& ev = graphics.next_event();
         switch(ev) {
-            case Graphics::Event::Exit:
+            case Event::Exit:
+            
                 STOP = true;
-                break;
+                
+            break;
 
-            case Graphics::Event::Execute:
-                break;
+            case Event::Execute:
+            
+                //call the logic routines
+            
+            break;
 
-            case Graphics::Event::Redraw:
-                break;
+            case Event::Redraw:
+            
+                //call the graphic routines
+            
+            break;
             
             default:
-                break;
+            
+            break;
         }
     }
     

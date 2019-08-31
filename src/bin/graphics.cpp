@@ -26,7 +26,7 @@ ALLEGRO_DISPLAY_MODE Graphics::getDispMode() {
     return temp;
 }
 
-Graphics::Graphics(): display(nullptr), timer(nullptr), event_queue(nullptr) {
+Graphics::Graphics(): display(nullptr), timer(nullptr), event_queue(nullptr), redraw(false), key_pressed{Keys::nd} {
 
     //inizializzazione dell'API di Allegro
     if(!isValid) assert(initAllegro());
@@ -93,7 +93,7 @@ void Graphics::suspend() {
     al_pause_event_queue(event_queue, true);
 }
 
-Graphics::Event Graphics::next() {
+Event Graphics::next_event() {
 
     Event ret = Event::nd;
     
@@ -102,15 +102,31 @@ Graphics::Event Graphics::next() {
     
     switch(ev.type) {
         
-        case ALLEGRO_EVENT_DISPLAY_CLOSE: 
+        case ALLEGRO_EVENT_DISPLAY_CLOSE:
+
             ret = Event::Exit;
-            break;
+        
+        break;
+
+        case ALLEGRO_EVENT_KEY_DOWN:
+        
+            if(Graphics::keymap.find(ev.keyboard.keycode) != Graphics::keymap.end())
+                key_pressed = Graphics::keymap.at(ev.keyboard.keycode);
+        
+        break;
 
         case ALLEGRO_EVENT_KEY_UP:
-            ret = (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE ? Event::Exit : Event::nd);
-            break;
+        
+            if(Graphics::keymap.find(ev.keyboard.keycode) != Graphics::keymap.end())
+                if(ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+                    ret = Event::Exit;
+                else if(key_pressed == Graphics::keymap.at(ev.keyboard.keycode))
+                    key_pressed = Keys::nd;
+        
+        break;
 
         case ALLEGRO_EVENT_TIMER:
+        
             if(!redraw) {
                 ret = Event::Execute;
                 redraw = true;
@@ -119,11 +135,18 @@ Graphics::Event Graphics::next() {
                 ret = Event::Redraw;
                 redraw = false;
             }
-            break;
+        
+        break;
 
         default:
-            break;
+        
+        break;
     }
 
     return ret;
+}
+
+Keys Graphics::next_key() {
+
+    return key_pressed;
 }
