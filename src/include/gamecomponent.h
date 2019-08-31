@@ -3,21 +3,20 @@
 
 #include"root.h"
 
-typedef char map_type;
-
 class GameComponent {
 
     private:
-        inline static map<map_type, int> map = {
-            {'E', -1}, {'m', 0}, {'l', 1}
-        };
-        
+
     protected:
         GameComponent() { 
             cout << "GameComponent::GameComponent() " << this << endl;
         }
 
+        inline static string types = "Eml";
+
     public:
+        using map_type = char;
+
         virtual ~GameComponent() { 
             cout << "GameComponent::~GameComponent() " << this << endl;
         }
@@ -25,9 +24,10 @@ class GameComponent {
         virtual map_type exec()     = 0;
         virtual map_type get_type() = 0;
 
-        static map_type get_exit_key() {
-            return 'E';
+        static map_type exit_val() {
+            return types[0];
         }
+
 };
 
 #endif

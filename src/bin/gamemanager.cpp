@@ -25,16 +25,14 @@ bool GameManager::add(GameComponent* c) {
 
 void GameManager::launchGame() {
 
-    map_type temp = root->exec();
-    cout << "actual val: " << temp << endl;
-    while(temp != GameComponent::get_exit_key()) {
+    GameComponent::map_type temp = root->exec();
+    
+    while(temp != GameComponent::exit_val()) {
         
         for(auto& it : components)
          if(it->get_type() == temp) {
             temp = it->exec();
             break;
         }
-
-        cout << "actual val: " << temp << endl;
     }
 }

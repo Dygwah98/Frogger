@@ -15,16 +15,21 @@ class Graphics {
         static bool isValid;
         //funzione che inizializza le componenti interne di Allegro
         static bool initAllegro();
-        //restituisce i parametri adatti per l'inizializzazione del display
-        ALLEGRO_DISPLAY_MODE getDispMode();
 
         ALLEGRO_DISPLAY* display;
         ALLEGRO_TIMER* timer;
         ALLEGRO_EVENT_QUEUE* event_queue;
 
+        bool redraw;
+
+        //restituisce i parametri adatti per l'inizializzazione del display
+        ALLEGRO_DISPLAY_MODE getDispMode();
+
     protected:
     
     public:
+        enum struct Event : int { nd = -1, Exit = 0, Execute = 1, Redraw = 2 };
+
         //funzione che si occupa di inizializzare le componenti grafiche
         Graphics();
         //?? costruttore con parametri (magari per l'inizializzazione del display) ??//
@@ -38,7 +43,7 @@ class Graphics {
         //stoppa il timer e la coda degli eventi
         void suspend();
 
-        ALLEGRO_EVENT next();
+        Event next();
 };
 
 #endif

@@ -93,10 +93,37 @@ void Graphics::suspend() {
     al_pause_event_queue(event_queue, true);
 }
 
-ALLEGRO_EVENT Graphics::next() {
+Graphics::Event Graphics::next() {
 
+    Event ret = Event::nd;
+    
     ALLEGRO_EVENT ev;
     al_wait_for_event(event_queue, &ev);
     
-    return ev;
+    switch(ev.type) {
+        
+        case ALLEGRO_EVENT_DISPLAY_CLOSE: 
+            ret = Event::Exit;
+            break;
+
+        case ALLEGRO_EVENT_KEY_UP:
+            ret = (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE ? Event::Exit : Event::nd);
+            break;
+
+        case ALLEGRO_EVENT_TIMER:
+            if(!redraw) {
+                ret = Event::Execute;
+                redraw = true;
+            
+            } else if(al_is_event_queue_empty(event_queue)) {
+                ret = Event::Redraw;
+                redraw = false;
+            }
+            break;
+
+        default:
+            break;
+    }
+
+    return ret;
 }

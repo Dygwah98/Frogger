@@ -8,12 +8,12 @@ int main(int argv, char** argc) {
 
     Graphics g;
     GameManager gm(g);
-    
-    GameComponent* l = new Level(g);
-    gm.add(l);
 
     GameComponent* m = new Menu(g);
     gm.addAsRoot(m);
+    
+    GameComponent* l = new Level(g);
+    gm.add(l);
 
     //avvio del gioco       
     cout << endl << "ESECUZIONE: " << argc[0] << endl << endl;
@@ -23,8 +23,8 @@ int main(int argv, char** argc) {
     //deallocazioni dinamiche delle risorse   
     cout << endl << "DEALLOCAZIONE: " << argc[0] << endl << endl;
     
+    delete l;    
     delete m;
-    delete l;
 
     //deallocazioni statiche delle risorse
     cout << endl;

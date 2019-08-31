@@ -10,11 +10,11 @@ Menu::~Menu() {
     cout << "Menu::~Menu() " << this << endl;
 }
 
-map_type Menu::type() { return 'm'; }
+GameComponent::map_type Menu::type() { return GameComponent::types[1]; }
 
-map_type Menu::get_type() { return Menu::type(); }
+GameComponent::map_type Menu::get_type() { return Menu::type(); }
 
-map_type Menu::exec() {
+GameComponent::map_type Menu::exec() {
     
     return Level::type();
 }
