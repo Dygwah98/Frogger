@@ -117,10 +117,10 @@ Event Graphics::next_event() {
 
         case ALLEGRO_EVENT_KEY_UP:
         
-            if(Graphics::keymap.find(ev.keyboard.keycode) != Graphics::keymap.end())
-                if(ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            if(ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
                     ret = Event::Exit;
-                else if(key_pressed == Graphics::keymap.at(ev.keyboard.keycode))
+            else if(Graphics::keymap.find(ev.keyboard.keycode) != Graphics::keymap.end())
+                if(key_pressed == Graphics::keymap.at(ev.keyboard.keycode))
                     key_pressed = Keys::nd;
         
         break;
