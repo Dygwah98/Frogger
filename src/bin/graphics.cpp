@@ -4,7 +4,7 @@ bool Graphics::isValid = false;
 
 bool Graphics::initAllegro() {
 
-    isValid = al_init();
+    isValid = al_init() and al_install_keyboard();
 
     return isValid;
 }
@@ -55,6 +55,7 @@ Graphics::Graphics(): display(nullptr), timer(nullptr), event_queue(nullptr) {
 
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
+    al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_pause_event_queue(event_queue, true);
 
     cout << "Graphics::Graphics() " << this << endl;
@@ -90,4 +91,12 @@ void Graphics::suspend() {
     al_stop_timer(timer);
     al_flush_event_queue(event_queue);
     al_pause_event_queue(event_queue, true);
+}
+
+ALLEGRO_EVENT Graphics::next() {
+
+    ALLEGRO_EVENT ev;
+    al_wait_for_event(event_queue, &ev);
+    
+    return ev;
 }

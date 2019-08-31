@@ -37,6 +37,8 @@ class Graphics {
         void launch();
         //stoppa il timer e la coda degli eventi
         void suspend();
+
+        ALLEGRO_EVENT next();
 };
 
 #endif

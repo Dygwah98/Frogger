@@ -25,8 +25,8 @@ class GameComponent {
         virtual map_type exec()     = 0;
         virtual map_type get_type() = 0;
 
-        static int get_exit_val() {
-            return map.at('E');
+        static map_type get_exit_key() {
+            return 'E';
         }
 };
 
