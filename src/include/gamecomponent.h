@@ -3,13 +3,31 @@
 
 #include"root.h"
 
+typedef char map_type;
+
 class GameComponent {
 
     private:
+        inline static map<map_type, int> map = {
+            {'E', -1}, {'m', 0}, {'l', 1}
+        };
+        
     protected:
-        GameComponent()     { cout << "GameComponent::GameComponent() " << this << endl;  }
+        GameComponent() { 
+            cout << "GameComponent::GameComponent() " << this << endl;
+        }
+
     public:
-        virtual ~GameComponent()    { cout << "GameComponent::~GameComponent() " << this << endl; }
+        virtual ~GameComponent() { 
+            cout << "GameComponent::~GameComponent() " << this << endl;
+        }
+
+        virtual map_type exec()     = 0;
+        virtual map_type get_type() = 0;
+
+        static int get_exit_val() {
+            return map.at('E');
+        }
 };
 
 #endif

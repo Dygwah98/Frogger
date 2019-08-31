@@ -22,6 +22,9 @@ class Level : public GameComponent {
     public:
         Level(Graphics&);
         ~Level();
+        static map_type type();
+        virtual map_type get_type() override;
+        virtual map_type exec() override;
 };
 
 #endif

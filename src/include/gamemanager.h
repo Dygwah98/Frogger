@@ -9,13 +9,16 @@ class GameManager {
     private:
         Graphics& g;
         vector<GameComponent*> components;
+        GameComponent* root;
    
     protected:
 
     public:
-        GameManager(Graphics& g);
+        GameManager(Graphics&);
         ~GameManager();
-        bool add(GameComponent* l);
+        bool addAsRoot(GameComponent*);
+        bool add(GameComponent*);
+        void launchGame();
 };
 
 #endif
