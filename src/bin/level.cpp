@@ -18,17 +18,16 @@ GameComponent::map_type Level::exec() {
 
     //qua va la partita
     bool STOP = false;
-    
+    map_type ret = GameComponent::exit_val();
+
     graphics.launch();
     
     while(!STOP) {
 
         const Event& ev = graphics.next_event();
         switch(ev) {
-            case Event::Exit:
-            
+            case Event::Exit:        
                 STOP = true;
-                
             break;
 
             case Event::Execute:
@@ -51,5 +50,5 @@ GameComponent::map_type Level::exec() {
     
     graphics.suspend();
     
-    return GameComponent::exit_val();
+    return ret;
 }
