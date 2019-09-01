@@ -12,6 +12,17 @@ void Line::setLineDimension(const float& f) {
     Line::dim = f; 
 }
 
-Line::Line(): objects(), head(0.0f) {}
+Line::Line(): head(0.0f), objects() {}
 
-Line::Line(const Line& l): objects(), head(l.head) {}
+Line::Line(const Line& l): head(l.head), objects() {}
+
+void Line::shift_head() {}
+
+bool Line::check_for_collision(const GameObject& g) const {
+    
+    for(const auto& it : objects) {
+        //verifica se l'oggetto collide coll'input
+    }
+    
+    return false;
+}

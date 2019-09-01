@@ -16,21 +16,28 @@
 class Line {
 
     private:
-        vector<GameObject> objects;
         //pixel length of a Line on screen
         static float dim;
         //offset sulle posizioni: in ogni momento, la posizione reale di ogni elemento sarà ( positions[i] + head ) % dim
         float head;
-
+    
+        vector<GameObject> objects;
+    
     protected:
     
     public:
-        Line();
-        Line(const Line&);
         //getter for the length of a line
         static const float& getLineDimension();
         //setter for the length of a line
         static void setLineDimension(const float&);
+        
+        Line();
+        
+        Line(const Line&);
+
+        void shift_head();
+
+        bool check_for_collision(const GameObject&) const;
 };
 
 #endif

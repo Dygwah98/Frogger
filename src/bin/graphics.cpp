@@ -101,11 +101,8 @@ Event Graphics::next_event() {
     al_wait_for_event(event_queue, &ev);
     
     switch(ev.type) {
-        
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
-
             ret = Event::Exit;
-        
         break;
 
         case ALLEGRO_EVENT_KEY_DOWN:
@@ -139,7 +136,6 @@ Event Graphics::next_event() {
         break;
 
         default:
-        
         break;
     }
 

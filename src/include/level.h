@@ -14,7 +14,7 @@ class Level : public GameComponent {
 
     private:
         Graphics& graphics;
-        vector<Line> lines;
+        map<int, Line> lines;
         Player player;
 
     protected:

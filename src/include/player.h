@@ -6,17 +6,23 @@
 class Player: public GameObject {
 
     private:
-        //true se il player è vivo
-        bool isAlive;
+        //posizione sulla mappa
+        int position;
         //true se il player è in movimento
         bool isMoving;
+        //numero di vite del player
+        int lifes;
 
     protected:
     
     public:
         Player();
         Player(const int&, const float&);
-        ~Player();
+        virtual ~Player();
+
+        int get_position() const;
+
+        bool is_moving() const;
 };
 
 #endif
