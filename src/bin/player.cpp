@@ -26,3 +26,14 @@ bool Player::is_dead() const {
 
     return lifes == 0;
 }
+
+void Player::lose_life() {
+
+    if(lifes > 0) --lifes;
+}
+
+void Player::reposition(const int& i, const float& f) {
+
+    position = i;
+    set_coord(f);
+}

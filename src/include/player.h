@@ -25,6 +25,10 @@ class Player: public GameObject {
         bool is_moving() const;
 
         bool is_dead() const;
+
+        void lose_life();
+
+        void reposition(const int&, const float&);
 };
 
 #endif

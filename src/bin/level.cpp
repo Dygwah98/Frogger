@@ -16,9 +16,9 @@ GameComponent::map_type Level::get_type() { return Level::type(); }
 
 GameComponent::map_type Level::exec() {
 
-    //qua va la partita
-    bool STOP = false;
     map_type ret = GameComponent::exit_val();
+
+    bool STOP = false;
 
     graphics.launch();
     
@@ -34,21 +34,27 @@ GameComponent::map_type Level::exec() {
                 
                 //controlla se sono avvenute collisioni sulla linea sulla quale si trova il player
                 if(lines.find(player.get_position()) != lines.end() and lines.at(player.get_position()).check_for_collision(player)) {
-                    //il player perde una vita
-                        //se il player arriva a 0 vite: 
-                        if(player.is_dead()) {
-                            STOP = true;
-                            break;
-                        } else {
-                            //il player riparte dal basso
-                        }
+                    
+                    player.lose_life();
+                    //se il player arriva a 0 vite: 
+                    if(player.is_dead()) {
+                        STOP = true;
+                        break;
+                    } else {
+                        //i valori esatti vanno ancora determinati
+                        player.reposition(0, 0.0f);
+                    }
                 }
                 
                 //controlla se il player deve muoversi
                 if(!player.is_moving() and graphics.next_key() != Keys::nd) {
+                    
                     //se si: attiva il movimento
+                
                 } else if(player.is_moving()) {
+                
                     //se si: continua il movimento
+                
                 }
                 
                 //shifta ogni linea secondo la sua velocità
