@@ -6,7 +6,7 @@
 class Player: public GameObject {
 
     private:
-        //posizione sulla mappa
+        //posizione sulla mappa (linea)
         int position;
         //true se il player è in movimento
         bool isMoving;
@@ -23,6 +23,8 @@ class Player: public GameObject {
         int get_position() const;
 
         bool is_moving() const;
+
+        bool is_dead() const;
 };
 
 #endif

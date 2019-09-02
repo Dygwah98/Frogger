@@ -32,12 +32,16 @@ GameComponent::map_type Level::exec() {
 
             case Event::Execute:
                 
-                //controlla se sono avvenute collisioni 
+                //controlla se sono avvenute collisioni sulla linea sulla quale si trova il player
                 if(lines.find(player.get_position()) != lines.end() and lines.at(player.get_position()).check_for_collision(player)) {
-                    //cerca una collisione su quella linea
-                        //se avviene: il player riparte dal basso e perde una vita
-                            //se il player arriva a 0 vite: 
-                                //STOP = true; break;
+                    //il player perde una vita
+                        //se il player arriva a 0 vite: 
+                        if(player.is_dead()) {
+                            STOP = true;
+                            break;
+                        } else {
+                            //il player riparte dal basso
+                        }
                 }
                 
                 //controlla se il player deve muoversi

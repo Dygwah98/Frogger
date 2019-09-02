@@ -21,3 +21,8 @@ bool Player::is_moving() const {
 
     return isMoving;
 }
+
+bool Player::is_dead() const {
+
+    return lifes == 0;
+}
