@@ -1,6 +1,6 @@
 #include"../include/gamemanager.h"
 
-GameManager::GameManager(Graphics& g): g(g), components(), root(nullptr) {
+GameManager::GameManager(EventHandler& eh): graphics(eh.get_graphic_context()), events(eh), components(), root(nullptr) {
 
     cout << "GameManager::GameManager() " << this << endl;
 }

@@ -1,6 +1,6 @@
 #include"../include/menu.h"
 
-Menu::Menu(Graphics& g): GameComponent(), g(g) {
+Menu::Menu(EventHandler& eh): GameComponent(), graphics(eh.get_graphic_context()), events(eh) {
 
     cout << "Menu::Menu() " << this << endl;
 }

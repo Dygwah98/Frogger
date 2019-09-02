@@ -1,6 +1,6 @@
 #include"../include/level.h"
 
-Level::Level(Graphics& g): GameComponent(), graphics(g), lines(), player() {
+Level::Level(EventHandler& eh): GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), player() {
 
     cout << "Level::Level() " << this << endl;
 }
@@ -20,15 +20,15 @@ GameComponent::map_type Level::exec() {
 
     bool STOP = false;
 
-    graphics.launch();
+    events.launch();
     
     //alcune shortcut per rendere più leggibile il codice
-    const auto& is_player_on_a_line = [&]() -> bool { return lines.find(player.get_position()) != lines.end(); };
-    const auto& player_does_collide = [&]() -> bool { return lines.at(player.get_position()).check_for_collision(player); };
+    const auto& is_player_on_a_line = [&]()->bool { return lines.find(player.get_position()) != lines.end(); };
+    const auto& player_does_collide = [&]()->bool { return lines.at(player.get_position()).check_for_collision(player); };
 
     while(!STOP) {
 
-        const Event& ev = graphics.next_event();
+        const Event& ev = events.next_event();
         switch(ev) {
             case Event::Exit:        
                 STOP = true;
@@ -51,7 +51,7 @@ GameComponent::map_type Level::exec() {
                 }
                 
                 //controlla se il player deve muoversi
-                if(!player.is_moving() and graphics.next_key() != Keys::nd) {
+                if(!player.is_moving() and events.next_key() != Keys::nd) {
                     
                     //se si: attiva il movimento
                 
@@ -78,7 +78,7 @@ GameComponent::map_type Level::exec() {
         }
     }
     
-    graphics.suspend();
+    events.suspend();
     
     return ret;
 }

@@ -1,16 +1,17 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include"graphics.h"
+#include"eventhandler.h"
 #include"level.h"
 
 class Menu : public GameComponent {
 
     private:
-        Graphics& g;
+        Graphics& graphics;
+        EventHandler& events;
     protected:
     public:
-        Menu(Graphics& g);
+        Menu(EventHandler&);
         ~Menu();
         static map_type type();
         virtual map_type get_type() override;

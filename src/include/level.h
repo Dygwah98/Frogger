@@ -2,7 +2,7 @@
 #define LEVEL_H
 
 #include"gamecomponent.h"
-#include"graphics.h"
+#include"eventhandler.h"
 #include"line.h"
 #include"player.h"
 /*
@@ -14,13 +14,14 @@ class Level : public GameComponent {
 
     private:
         Graphics& graphics;
+        EventHandler& events;
         map<int, Line> lines;
         Player player;
 
     protected:
 
     public:
-        Level(Graphics&);
+        Level(EventHandler&);
         ~Level();
         static map_type type();
         virtual map_type get_type() override;

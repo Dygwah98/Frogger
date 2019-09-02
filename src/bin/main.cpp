@@ -7,12 +7,13 @@ int main(int argv, char** argc) {
     cout << endl << "ALLOCAZIONE: " << argc[0] << endl << endl;
 
     Graphics g;
-    GameManager gm(g);
+    EventHandler ev(g);
+    GameManager gm(ev);
 
-    GameComponent* m = new Menu(g);
+    GameComponent* m = new Menu(ev);
     gm.addAsRoot(m);
     
-    GameComponent* l = new Level(g);
+    GameComponent* l = new Level(ev);
     gm.add(l);
 
     //avvio del gioco       
