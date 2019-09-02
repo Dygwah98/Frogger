@@ -22,6 +22,10 @@ GameComponent::map_type Level::exec() {
 
     graphics.launch();
     
+    //alcune shortcut per rendere più leggibile il codice
+    const auto& is_player_on_a_line = [&]() -> bool { return lines.find(player.get_position()) != lines.end(); };
+    const auto& player_does_collide = [&]() -> bool { return lines.at(player.get_position()).check_for_collision(player); };
+
     while(!STOP) {
 
         const Event& ev = graphics.next_event();
@@ -33,7 +37,7 @@ GameComponent::map_type Level::exec() {
             case Event::Execute:
                 
                 //controlla se sono avvenute collisioni sulla linea sulla quale si trova il player
-                if(lines.find(player.get_position()) != lines.end() and lines.at(player.get_position()).check_for_collision(player)) {
+                if(is_player_on_a_line() and player_does_collide()) {
                     
                     player.lose_life();
                     //se il player arriva a 0 vite: 
