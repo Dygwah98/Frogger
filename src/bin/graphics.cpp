@@ -37,9 +37,6 @@ Graphics::Graphics(): display(nullptr), buffer(nullptr), queue() {
     if(!isValid) assert(initAllegro());
     
     ALLEGRO_DISPLAY_MODE data = getDispMode();
-
-//    cout << disp.format << " " << disp.height << " " << disp.refresh_rate << " " << disp.width << endl;
-
     //inizializzazione display:
     al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
     al_set_new_display_refresh_rate(data.refresh_rate);

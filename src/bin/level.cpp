@@ -22,7 +22,7 @@ GameComponent::map_type Level::exec() {
 
     events.launch();
     //alcune shortcut per rendere più leggibile il codice
-    const auto& is_player_on_a_line = [&]() -> bool { return lines.find(player.get_position()) != lines.end(); };
+    const auto& is_player_on_a_line = [&]() -> bool { return contains<int, Line>(lines, player.get_position()); };
     const auto& player_does_collide = [&]() -> bool { return lines.at(player.get_position()).check_for_collision(player); };
 
     while(!STOP) {

@@ -16,6 +16,11 @@ inline bool in_range(T lower, T val, T upper, bool loweq = true, bool upeq = tru
     return (loweq ? val >= lower : val > lower) and (upeq ? upper >= val : upper > val);
 }
 
+template<class K, class V>
+inline bool contains(map<K, V> map, K key) {
+    return map.find(K) != map.end();
+}
+
 #endif
 
 //LOGICA

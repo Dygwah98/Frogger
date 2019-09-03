@@ -76,8 +76,8 @@ Event EventHandler::next_event() {
 
         case ALLEGRO_EVENT_KEY_DOWN:
         
-            if(EventHandler::keymap.find(key) != EventHandler::keymap.end())
-                key_pressed = EventHandler::keymap.at(key);
+            if(contains<int, Keys>(keymap, key))
+                key_pressed = keymap.at(key);
         
         break;
 
@@ -86,8 +86,8 @@ Event EventHandler::next_event() {
             if(ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
                     ret = Event::Exit;
 
-            else if(EventHandler::keymap.find(key) != EventHandler::keymap.end())
-                if(key_pressed == EventHandler::keymap.at(key))
+            else if(contains<int, Keys>(keymap, key))
+                if(key_pressed == keymap.at(key))
                     key_pressed = Keys::nd;
         
         break;
