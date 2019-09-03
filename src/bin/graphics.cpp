@@ -31,7 +31,7 @@ ALLEGRO_DISPLAY* Graphics::get_display() {
     return display;
 }
 
-Graphics::Graphics(): display(nullptr), queue() {
+Graphics::Graphics(): display(nullptr), buffer(nullptr), queue() {
 
     //inizializzazione dell'API di Allegro
     if(!isValid) assert(initAllegro());
@@ -46,6 +46,7 @@ Graphics::Graphics(): display(nullptr), queue() {
 
     display = al_create_display(data.width, data.height);
     assert(display != nullptr);
+    buffer = al_create_bitmap(data.width, data.height);
 
     al_clear_to_color(al_map_rgb(0, 0, 0));
     al_flip_display();
@@ -56,16 +57,30 @@ Graphics::Graphics(): display(nullptr), queue() {
 Graphics::~Graphics() {
     
     if(display != nullptr) al_destroy_display(display);
+    if(buffer != nullptr)  al_destroy_bitmap(buffer);
 
     cout << "Graphics::~Graphics() " << this << endl;
 }
 
-void Graphics::push_image(ALLEGRO_BITMAP* b, float x, float y, unsigned pr, bool is_p) {
+void Graphics::push_image(ALLEGRO_BITMAP* b, float x, float y, Priority pr, bool is_p) {
 
+    //priority va usata per l'inserimento in coda
+    queue.push_back( {b, x, y, is_p} );
 }
 
 void Graphics::redraw() {
 
+    al_set_target_bitmap(buffer);
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    for(const auto& it : queue)
+        al_draw_bitmap(it.bitmap, it.x, it.y, 0);
+    al_set_target_backbuffer(display);
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    //al_draw_scaled_bitmap(buffer, 0, 0, screenWidth, screenHeight, scaleX, scaleY, scaleW, scaleH, 0);
+    remove_if(queue.begin(), queue.end(),
+    [&](const auto& it) {
+        return !it.is_permanent;
+    });
 }
 
 void Graphics::clear() {

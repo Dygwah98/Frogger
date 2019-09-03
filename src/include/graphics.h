@@ -9,12 +9,13 @@
         - se si, deve anche comunicare lo stop ai controlli?
 */
 
+enum struct Priority : int {LOW = 0, MEDIUM = 1, HIGH = 2};
+
 struct Image {
 
     ALLEGRO_BITMAP* bitmap;
     float x;
     float y;
-    unsigned priority; 
     bool is_permanent;
 
 };
@@ -40,7 +41,7 @@ class Graphics {
         ALLEGRO_DISPLAY_MODE getDispMode();
         
         ALLEGRO_DISPLAY* get_display();
-        
+
     protected:
     
     public:
@@ -51,7 +52,7 @@ class Graphics {
         //dealloca le risorse di Allegro
         ~Graphics();
         //aggiunge una bitmap alla queue
-        void push_image(ALLEGRO_BITMAP*, float, float, unsigned, bool);
+        void push_image(ALLEGRO_BITMAP*, float, float, Priority, bool);
         //disegna gli elementi presenti nella queue, consumandoli se is_permanent = false
         void redraw();
         //elimina tutti gli elementi nella queue e resetta il buffer
