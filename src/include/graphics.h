@@ -2,13 +2,11 @@
 #define GRAPHICS_H
 
 #include"root.h"
-
 /*
     si occupa di disegnare le varie linee e il player on top of that
     - dovrebbe gestire anche le animazioni?
         - se si, deve anche comunicare lo stop ai controlli?
 */
-
 enum struct Priority : int {LOW = 0, MEDIUM = 1, HIGH = 2};
 
 struct Image {
@@ -33,7 +31,7 @@ class Graphics {
 
         ALLEGRO_DISPLAY* display;
         //bitmap d'appoggio, usata per la scalabilità
-        ALLEGRO_BITMAP* buffer;
+        Image buffer;
         
         vector<Image> queue;
 
@@ -41,6 +39,14 @@ class Graphics {
         ALLEGRO_DISPLAY_MODE getDispMode();
         
         ALLEGRO_DISPLAY* get_display();
+
+        int scaleW;
+        
+        int scaleH;
+        
+        int scaleX;    
+        
+        int scaleY;
 
     protected:
     
