@@ -18,7 +18,7 @@ inline bool in_range(T lower, T val, T upper, bool loweq = true, bool upeq = tru
 
 template<class K, class V>
 inline bool contains(map<K, V> map, K key) {
-    return map.find(K) != map.end();
+    return map.find(key) != map.end();
 }
 
 #endif

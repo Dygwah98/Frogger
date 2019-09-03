@@ -74,10 +74,7 @@ void Graphics::redraw() {
     al_set_target_backbuffer(display);
     al_clear_to_color(al_map_rgb(0, 0, 0));
     //al_draw_scaled_bitmap(buffer, 0, 0, screenWidth, screenHeight, scaleX, scaleY, scaleW, scaleH, 0);
-    remove_if(queue.begin(), queue.end(),
-    [&](const auto& it) {
-        return !it.is_permanent;
-    });
+    remove_if(queue.begin(), queue.end(), [&](const auto& it) -> bool { return !it.is_permanent; });
 }
 
 void Graphics::clear() {
