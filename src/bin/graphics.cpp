@@ -48,9 +48,7 @@ Graphics::Graphics(): display(nullptr), buffer({nullptr, 0.0f, 0.0f, true}), que
     buffer.x = data.width;
     buffer.y = data.height;  
 
-    int sx = data.width / data.width;
-    int sy = data.height / data.height;
-    int scale = std::min(sx, sy);
+    int scale = std::min(data.width/data.width, data.height/data.height);
     
     scaleW = buffer.x * scale;
     scaleH = buffer.y * scale;
@@ -85,10 +83,15 @@ void Graphics::redraw() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
     for(const auto& it : queue)
         al_draw_bitmap(it.bitmap, it.x, it.y, 0);
+    
     al_set_target_backbuffer(display);
     al_clear_to_color(al_map_rgb(0, 0, 0));
     al_draw_scaled_bitmap(buffer.bitmap, 0, 0, buffer.x, buffer.y, scaleX, scaleY, scaleW, scaleH, 0);
-    remove_if(queue.begin(), queue.end(), [&](const auto& it) -> bool { return !it.is_permanent; });
+    
+    remove_if(queue.begin(), queue.end(), 
+    [&](const auto& it) -> bool { 
+        return !it.is_permanent; 
+    });
 }
 
 void Graphics::clear() {
