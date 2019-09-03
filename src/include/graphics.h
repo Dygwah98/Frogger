@@ -7,7 +7,7 @@
     - dovrebbe gestire anche le animazioni?
         - se si, deve anche comunicare lo stop ai controlli?
 */
-enum struct Priority : int {LOW = 0, MEDIUM = 1, HIGH = 2};
+enum struct Priority : int {BACK = 0, MIDDLE = 1, FRONT = 2};
 
 struct Image {
 
@@ -29,24 +29,25 @@ class Graphics {
         //funzione che inizializza le componenti interne di Allegro
         static bool initAllegro();
 
+        //struttura di Allegro per il disegno su schermo
         ALLEGRO_DISPLAY* display;
         //bitmap d'appoggio, usata per la scalabilità
         Image buffer;
-        
+        //fattore di scala
+        int scaleW;
+        //fattore di scala
+        int scaleH;
+        //fattore di scala
+        int scaleX;    
+        //fattore di scala
+        int scaleY;
+        //coda di immagini da disegnare sul buffer
         vector<Image> queue;
 
         //restituisce i parametri adatti per l'inizializzazione del display
         ALLEGRO_DISPLAY_MODE getDispMode();
-        
+        //getter del display
         ALLEGRO_DISPLAY* get_display();
-
-        int scaleW;
-        
-        int scaleH;
-        
-        int scaleX;    
-        
-        int scaleY;
 
     protected:
     

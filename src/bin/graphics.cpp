@@ -35,15 +35,17 @@ Graphics::Graphics(): display(nullptr), buffer({nullptr, 0.0f, 0.0f, true}), que
 
     //inizializzazione dell'API di Allegro
     if(!isValid) assert(initAllegro());
-    
-    ALLEGRO_DISPLAY_MODE data = getDispMode();
+
     //inizializzazione display:
+    ALLEGRO_DISPLAY_MODE data = getDispMode();
+
     al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
     al_set_new_display_refresh_rate(data.refresh_rate);
 
     display = al_create_display(data.width, data.height);
     assert(display != nullptr);
 
+    //inizializzazione buffer
     buffer.bitmap = al_create_bitmap(data.width, data.height);
     buffer.x = data.width;
     buffer.y = data.height;  
@@ -72,22 +74,24 @@ Graphics::~Graphics() {
 }
 
 void Graphics::push_image(ALLEGRO_BITMAP* b, float x, float y, Priority pr, bool is_p) {
-
     //priority va usata per l'inserimento in coda
     queue.push_back( {b, x, y, is_p} );
 }
 
 void Graphics::redraw() {
 
+    //operazioni di disegno sul buffer
     al_set_target_bitmap(buffer.bitmap);
     al_clear_to_color(al_map_rgb(0, 0, 0));
     for(const auto& it : queue)
         al_draw_bitmap(it.bitmap, it.x, it.y, 0);
     
+    //operazioni di disegno sul display
     al_set_target_backbuffer(display);
     al_clear_to_color(al_map_rgb(0, 0, 0));
     al_draw_scaled_bitmap(buffer.bitmap, 0, 0, buffer.x, buffer.y, scaleX, scaleY, scaleW, scaleH, 0);
     
+    //si eliminano dalla coda le immagini non permanenti
     remove_if(queue.begin(), queue.end(), 
     [&](const auto& it) -> bool { 
         return !it.is_permanent; 
