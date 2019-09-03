@@ -24,7 +24,7 @@ int main(int argv, char** argc) {
     //deallocazioni dinamiche delle risorse   
     cout << endl << "DEALLOCAZIONE: " << argc[0] << endl << endl;
     
-    delete l;    
+    delete l;
     delete m;
 
     //deallocazioni statiche delle risorse

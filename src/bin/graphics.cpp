@@ -31,7 +31,7 @@ ALLEGRO_DISPLAY* Graphics::get_display() {
     return display;
 }
 
-Graphics::Graphics(): display(nullptr) {
+Graphics::Graphics(): display(nullptr), queue() {
 
     //inizializzazione dell'API di Allegro
     if(!isValid) assert(initAllegro());
@@ -55,7 +55,20 @@ Graphics::Graphics(): display(nullptr) {
 
 Graphics::~Graphics() {
     
-    if(display     != nullptr) al_destroy_display(display);
+    if(display != nullptr) al_destroy_display(display);
 
     cout << "Graphics::~Graphics() " << this << endl;
+}
+
+void Graphics::push_image(ALLEGRO_BITMAP* b, float x, float y, unsigned pr, bool is_p) {
+
+}
+
+void Graphics::redraw() {
+
+}
+
+void Graphics::clear() {
+
+    queue.clear();
 }

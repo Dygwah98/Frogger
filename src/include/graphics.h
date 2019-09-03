@@ -9,6 +9,16 @@
         - se si, deve anche comunicare lo stop ai controlli?
 */
 
+struct Image {
+
+    ALLEGRO_BITMAP* bitmap;
+    float x;
+    float y;
+    unsigned priority; 
+    bool is_permanent;
+
+};
+
 class EventHandler;
 class Graphics {
 
@@ -21,11 +31,16 @@ class Graphics {
         static bool initAllegro();
 
         ALLEGRO_DISPLAY* display;
+        //bitmap d'appoggio, usata per la scalabilità
+        ALLEGRO_BITMAP* buffer;
         
+        vector<Image> queue;
+
         //restituisce i parametri adatti per l'inizializzazione del display
         ALLEGRO_DISPLAY_MODE getDispMode();
+        
         ALLEGRO_DISPLAY* get_display();
-
+        
     protected:
     
     public:
@@ -35,6 +50,12 @@ class Graphics {
         //Graphics(...)
         //dealloca le risorse di Allegro
         ~Graphics();
+        //aggiunge una bitmap alla queue
+        void push_image(ALLEGRO_BITMAP*, float, float, unsigned, bool);
+        //disegna gli elementi presenti nella queue, consumandoli se is_permanent = false
+        void redraw();
+        //elimina tutti gli elementi nella queue e resetta il buffer
+        void clear();
 };
 
 #endif

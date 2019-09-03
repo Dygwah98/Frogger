@@ -21,10 +21,9 @@ GameComponent::map_type Level::exec() {
     bool STOP = false;
 
     events.launch();
-    
     //alcune shortcut per rendere più leggibile il codice
-    const auto& is_player_on_a_line = [&]()->bool { return lines.find(player.get_position()) != lines.end(); };
-    const auto& player_does_collide = [&]()->bool { return lines.at(player.get_position()).check_for_collision(player); };
+    const auto& is_player_on_a_line = [&]() -> bool { return lines.find(player.get_position()) != lines.end(); };
+    const auto& player_does_collide = [&]() -> bool { return lines.at(player.get_position()).check_for_collision(player); };
 
     while(!STOP) {
 
@@ -35,7 +34,6 @@ GameComponent::map_type Level::exec() {
             break;
 
             case Event::Execute:
-                
                 //controlla se sono avvenute collisioni sulla linea sulla quale si trova il player
                 if(is_player_on_a_line() and player_does_collide()) {
                     
@@ -49,7 +47,6 @@ GameComponent::map_type Level::exec() {
                         player.reposition(0, 0.0f);
                     }
                 }
-                
                 //controlla se il player deve muoversi
                 if(!player.is_moving() and events.next_key() != Keys::nd) {
                     
@@ -60,7 +57,6 @@ GameComponent::map_type Level::exec() {
                     //se si: continua il movimento
                 
                 }
-                
                 //shifta ogni linea secondo la sua velocità
                 for(auto& it : lines)
                     it.second.shift_head();
@@ -68,9 +64,10 @@ GameComponent::map_type Level::exec() {
             break;
 
             case Event::Redraw:
-            
                 //call the graphic routines
-            
+                //graphics.push_image per ogni componente da rappresentare
+                graphics.redraw();
+
             break;
             
             default:

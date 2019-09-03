@@ -48,7 +48,9 @@ void EventHandler::launch() {
 void EventHandler::suspend() {
 
     if(!is_ready()) return;
-    
+    //è una buona idea?
+    g.clear();
+
     al_stop_timer(timer);
     al_flush_event_queue(event_queue);
     al_pause_event_queue(event_queue, true);
@@ -58,9 +60,15 @@ Event EventHandler::next_event() {
 
     Event ret = Event::nd;
     
+    if(redraw and al_is_event_queue_empty(event_queue)) {
+        redraw = false;
+        return Event::Redraw;
+    }
+
     ALLEGRO_EVENT ev;
     al_wait_for_event(event_queue, &ev);
-    
+    const int& key = ev.keyboard.keycode;
+
     switch(ev.type) {
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
             ret = Event::Exit;
@@ -68,8 +76,8 @@ Event EventHandler::next_event() {
 
         case ALLEGRO_EVENT_KEY_DOWN:
         
-            if(EventHandler::keymap.find(ev.keyboard.keycode) != EventHandler::keymap.end())
-                key_pressed = EventHandler::keymap.at(ev.keyboard.keycode);
+            if(EventHandler::keymap.find(key) != EventHandler::keymap.end())
+                key_pressed = EventHandler::keymap.at(key);
         
         break;
 
@@ -77,8 +85,9 @@ Event EventHandler::next_event() {
         
             if(ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
                     ret = Event::Exit;
-            else if(EventHandler::keymap.find(ev.keyboard.keycode) != EventHandler::keymap.end())
-                if(key_pressed == EventHandler::keymap.at(ev.keyboard.keycode))
+
+            else if(EventHandler::keymap.find(key) != EventHandler::keymap.end())
+                if(key_pressed == EventHandler::keymap.at(key))
                     key_pressed = Keys::nd;
         
         break;
@@ -87,11 +96,7 @@ Event EventHandler::next_event() {
         
             if(!redraw) {
                 ret = Event::Execute;
-                redraw = true;
-            
-            } else if(al_is_event_queue_empty(event_queue)) {
-                ret = Event::Redraw;
-                redraw = false;
+                redraw = true;        
             }
         
         break;
