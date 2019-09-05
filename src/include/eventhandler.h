@@ -3,9 +3,6 @@
 
 #include"graphics.h"
 
-enum struct Event : int { nd = -1, Exit = 0, Execute = 1, Redraw = 2 };
-enum struct Keys  : int { nd = -1, UP = 0, LEFT = 1, DOWN = 2, RIGHT = 3 };
-
 class EventHandler {
     
     private:

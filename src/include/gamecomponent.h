@@ -8,6 +8,7 @@ class GameComponent {
     private:
 
     protected:
+        
         GameComponent() { 
             cout << "GameComponent::GameComponent() " << this << endl;
         }
@@ -15,6 +16,7 @@ class GameComponent {
         inline static string types = "Eml";
 
     public:
+        
         using map_type = char;
 
         virtual ~GameComponent() { 
@@ -22,6 +24,7 @@ class GameComponent {
         }
 
         virtual map_type exec()     = 0;
+        
         virtual map_type get_type() = 0;
 
         static map_type exit_val() {

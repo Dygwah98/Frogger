@@ -7,7 +7,6 @@
     - dovrebbe gestire anche le animazioni?
         - se si, deve anche comunicare lo stop ai controlli?
 */
-enum struct Priority : int {BACK = 0, MIDDLE = 1, FRONT = 2};
 
 struct Image {
 

@@ -10,6 +10,12 @@ Level::~Level() {
     cout << "Level::~Level() " << this << endl;
 }
 
+bool Level::player_collides() const { 
+        return 
+            contains<int, Line>(lines, player.get_position()) and 
+            lines.at(player.get_position()).check_for_collision(player);
+};
+
 GameComponent::map_type Level::type() { return GameComponent::types[2]; }
 
 GameComponent::map_type Level::get_type() { return Level::type(); }
@@ -21,12 +27,6 @@ GameComponent::map_type Level::exec() {
     bool STOP = false;
 
     events.launch();
-    //alcune shortcut per rendere più leggibile il codice
-    const auto& player_collides = [&]() -> bool { 
-        return 
-            contains<int, Line>(lines, player.get_position()) and 
-            lines.at(player.get_position()).check_for_collision(player);
-    };
 
     while(!STOP) {
 
@@ -52,14 +52,15 @@ GameComponent::map_type Level::exec() {
                     }
                 }
                 //controlla se il player deve muoversi
+                //se è stato premuto un tasto: viene specificato al player che inizia il movimento
                 if(!player.is_moving() and events.next_key() != Keys::nd) {
                     
-                    //se si: attiva il movimento
-                
+                    player.set_dir(events.next_key());
+                    player.move();
+                //se si sta già movendo: continua (internamente gestirà il cambio del bool isMoving)
                 } else if(player.is_moving()) {
-                
-                    //se si: continua il movimento
-                
+                    
+                    player.move();
                 }
                 //shifta ogni linea secondo la sua velocità
                 for(auto& it : lines)

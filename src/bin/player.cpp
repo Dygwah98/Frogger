@@ -1,11 +1,13 @@
 #include"../include/player.h"
 
-Player::Player(): GameObject(), position(0), isMoving(false), lifes(3) {
+Player::Player(): 
+    GameObject(), position(0), speed(0.0f), isMoving(false), dir(Keys::nd), lifes(3) {
 
     cout << "Player::Player() " << this << endl;
 }
 
-Player::Player(const int& i, const float& f): GameObject(f), position(0), isMoving(false), lifes(3) {}
+Player::Player(const int& i, const float& f): 
+    GameObject(f), position(0), speed(0.0f), isMoving(false), dir(Keys::nd), lifes(3) {}
 
 Player::~Player() {
 
@@ -36,4 +38,18 @@ void Player::reposition(const int& i, const float& f) {
 
     position = i;
     set_coord(f);
+}
+
+void Player::set_dir(Keys key) {
+    
+    if(!isMoving) {
+    
+        isMoving = true;
+        dir = key;
+    }
+}
+
+void Player::move() {
+    
+    reposition( position + dpos.at(dir), get_coord() + dcord.at(dir)*speed );
 }

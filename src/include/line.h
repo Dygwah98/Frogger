@@ -20,7 +20,9 @@ class Line {
         static float dim;
         //offset sulle posizioni: in ogni momento, la posizione reale di ogni elemento sarà ( positions[i] + head ) % dim
         float head;
+        
         float speed;
+        
         float max_head_val;
     
         vector<GameObject> objects;
