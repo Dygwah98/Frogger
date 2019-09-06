@@ -50,12 +50,12 @@ Graphics::Graphics(): display(nullptr), buffer({nullptr, 0.0f, 0.0f, true}), que
     buffer.x = data.width;
     buffer.y = data.height;  
 
-    int scale = std::min(data.width/data.width, data.height/data.height);
+    int scale = std::min(al_get_display_width(display)/data.width, al_get_display_height(display)/data.height);
     
     scaleW = buffer.x * scale;
     scaleH = buffer.y * scale;
-    scaleX = (data.width - scaleW) / 2;    
-    scaleY = (data.width - scaleH) / 2;
+    scaleX = (al_get_display_width(display) - scaleW) / 2;    
+    scaleY = (al_get_display_height(display) - scaleH) / 2;
 
     al_clear_to_color(al_map_rgb(0, 0, 0));
     al_flip_display();
@@ -90,12 +90,18 @@ void Graphics::redraw() {
     al_set_target_backbuffer(display);
     al_clear_to_color(al_map_rgb(0, 0, 0));
     al_draw_scaled_bitmap(buffer.bitmap, 0, 0, buffer.x, buffer.y, scaleX, scaleY, scaleW, scaleH, 0);
+    al_flip_display();
     
     //si eliminano dalla coda le immagini non permanenti
-    remove_if(queue.begin(), queue.end(), 
-    [&](const auto& it) -> bool { 
-        return !it.is_permanent; 
-    });
+    auto it = queue.begin();
+    while(it != queue.end()) {
+        
+        if(!it->is_permanent) {
+            it = queue.erase(it);
+        } else {
+            ++it;
+        }
+    }
 }
 
 void Graphics::clear() {

@@ -46,7 +46,7 @@ void Player::set_dir(Keys key) {
     
         isMoving = true;
         dir = key;
-        counter = 120;
+        counter = 60;
     }
 }
 

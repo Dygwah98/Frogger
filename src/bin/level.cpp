@@ -28,6 +28,11 @@ GameComponent::map_type Level::exec() {
 
     events.launch();
 
+    ALLEGRO_BITMAP* btemp = al_create_bitmap(30, 30);
+    al_set_target_bitmap(btemp);
+    al_clear_to_color(al_map_rgb(255, 255, 255));
+    al_set_target_backbuffer(al_get_current_display());
+
     while(!STOP) {
 
         const Event& ev = events.next_event();
@@ -79,6 +84,7 @@ GameComponent::map_type Level::exec() {
             case Event::Redraw:
                 //call the graphic routines
                 //graphics.push_image per ogni componente da rappresentare
+                graphics.push_image(btemp, player.get_coord(), player.get_position(), Priority::FRONT, false);
                 graphics.redraw();
 
             break;
@@ -90,5 +96,7 @@ GameComponent::map_type Level::exec() {
     
     events.suspend();
     
+    al_destroy_bitmap(btemp);
+
     return ret;
 }
