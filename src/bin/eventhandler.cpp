@@ -1,6 +1,6 @@
 #include"../include/eventhandler.h"
 
-EventHandler::EventHandler(Graphics& g): g(g) {
+EventHandler::EventHandler(Graphics& g): g(g), redraw(false), key_pressed(Keys::nd) {
 
     //inizializzazione timer:
     timer = al_create_timer(1.0/g.getDispMode().refresh_rate);

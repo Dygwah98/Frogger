@@ -28,6 +28,8 @@ class Player: public GameObject {
         float speed;
         //true se il player è in movimento
         bool isMoving;
+        //numero di iterazioni necessarie a completare il movimento
+        unsigned counter;
         //attuale direzione di movimento
         Keys dir;
         //numero di vite del player
@@ -56,6 +58,8 @@ class Player: public GameObject {
         void set_dir(Keys);
 
         void move();
+
+        void print();
 };
 
 #endif

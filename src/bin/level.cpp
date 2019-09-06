@@ -55,8 +55,16 @@ GameComponent::map_type Level::exec() {
                 //se è stato premuto un tasto: viene specificato al player che inizia il movimento
                 if(!player.is_moving() and events.next_key() != Keys::nd) {
                     
+                    player.print();
+                    switch(events.next_key()) {
+                        case Keys::DOWN:  cout << "DOWN\n";  break;
+                        case Keys::LEFT:  cout << "LEFT\n";  break;
+                        case Keys::UP:    cout << "UP\n";    break;
+                        case Keys::RIGHT: cout << "RIGHT\n"; break;
+                    }
                     player.set_dir(events.next_key());
                     player.move();
+                    
                 //se si sta già movendo: continua (internamente gestirà il cambio del bool isMoving)
                 } else if(player.is_moving()) {
                     
