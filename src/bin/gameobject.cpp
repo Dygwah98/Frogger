@@ -14,12 +14,12 @@ GameObject::~GameObject() {
     cout << "GameObject::~GameObject() " << this << endl;
 }
 
-void GameObject::set_coord(const float& f) {
+inline void GameObject::set_coord(const float& f) {
 
     coord = f;
 }
 
-const float& GameObject::get_coord() const {
+inline const float& GameObject::get_coord() const {
 
     return coord;
 }

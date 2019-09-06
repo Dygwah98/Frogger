@@ -10,14 +10,14 @@ GameManager::~GameManager() {
     cout << "GameManager::~GameManager() " << this << endl;
 }
 
-bool GameManager::addAsRoot(GameComponent* c) {
+inline bool GameManager::addAsRoot(GameComponent* c) {
 
     components.push_back(c);
     root = c;
     return true;
 }
 
-bool GameManager::add(GameComponent* c) {
+inline bool GameManager::add(GameComponent* c) {
 
     components.push_back(c);
     return true;

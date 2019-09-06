@@ -16,9 +16,9 @@ bool Level::player_collides() const {
             lines.at(player.get_position()).check_for_collision(player);
 };
 
-GameComponent::map_type Level::type() { return GameComponent::types[2]; }
+inline GameComponent::map_type Level::type() { return GameComponent::types[2]; }
 
-GameComponent::map_type Level::get_type() { return Level::type(); }
+inline GameComponent::map_type Level::get_type() { return Level::type(); }
 
 GameComponent::map_type Level::exec() {
 
@@ -37,6 +37,7 @@ GameComponent::map_type Level::exec() {
 
         const Event& ev = events.next_event();
         switch(ev) {
+            
             case Event::Exit:        
                 STOP = true;
             break;
@@ -85,10 +86,8 @@ GameComponent::map_type Level::exec() {
             break;
 
             case Event::Redraw:
-                
+                //call the graphic routines
                 if(!is_stopped) {
-                    
-                    //call the graphic routines
                     //graphics.push_image per ogni componente da rappresentare
                     graphics.push_image(btemp, player.get_coord(), player.get_position(), Priority::FRONT, false);
                     graphics.redraw();

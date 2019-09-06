@@ -79,7 +79,7 @@ Graphics::~Graphics() {
     cout << "Graphics::~Graphics() " << this << endl;
 }
 
-void Graphics::push_image(ALLEGRO_BITMAP* b, float x, float y, Priority pr, bool is_p) {
+inline void Graphics::push_image(ALLEGRO_BITMAP* b, float x, float y, Priority pr, bool is_p) {
     //priority va usata per l'inserimento in coda
     queue.push_back( {b, x, y, is_p} );
 }
@@ -109,7 +109,7 @@ void Graphics::redraw() {
     }
 }
 
-void Graphics::clear() {
+inline void Graphics::clear() {
 
     queue.clear();
 }

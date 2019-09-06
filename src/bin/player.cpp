@@ -14,27 +14,27 @@ Player::~Player() {
     cout << "Player::~Player() " << this << endl;
 }
 
-float Player::get_position() const {
+inline float Player::get_position() const {
 
     return position;
 }
 
-bool Player::is_moving() const {
+inline bool Player::is_moving() const {
 
     return isMoving;
 }
 
-bool Player::is_dead() const {
+inline bool Player::is_dead() const {
 
     return lifes == 0;
 }
 
-void Player::lose_life() {
+inline void Player::lose_life() {
 
     if(lifes > 0) --lifes;
 }
 
-void Player::reposition(const int& i, const float& f) {
+inline void Player::reposition(const int& i, const float& f) {
 
     position = i;
     set_coord(f);
@@ -64,7 +64,7 @@ void Player::move() {
     }
 }
 
-void Player::print() {
+inline void Player::print() {
 
     cout << "(" << position << ", " << get_coord() << ")";
 }
