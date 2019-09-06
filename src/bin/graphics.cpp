@@ -88,7 +88,7 @@ void Graphics::redraw() {
 
     //operazioni di disegno sul buffer
     al_set_target_bitmap(buffer.bitmap);
-    al_clear_to_color(al_map_rgb(127, 127, 127));
+    al_clear_to_color(al_map_rgb(125, 125, 125));
     for(const auto& it : queue)
         al_draw_bitmap(it.bitmap, it.x, it.y, 0);
     
@@ -102,8 +102,10 @@ void Graphics::redraw() {
     //si eliminano dalla coda le immagini non permanenti
     auto it = queue.begin();
     while(it != queue.end()) {    
-        if(!it->is_permanent)   it = queue.erase(it);
-        else                    ++it;
+        if(!it->is_permanent)
+            it = queue.erase(it);
+        else
+            ++it;
     }
 }
 

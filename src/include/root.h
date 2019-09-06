@@ -11,7 +11,7 @@
 #include<allegro5/allegro_image.h>
 using namespace std;
 
-enum struct Event : int { nd = -1, Exit = 0, Execute = 1, Redraw = 2 };
+enum struct Event : int { nd = -1, Exit = 0, Execute = 1, Redraw = 2, Stop = 3 };
 enum struct Keys  : int { nd = -1, UP = 0, LEFT = 1, DOWN = 2, RIGHT = 3 };
 enum struct Priority : int {BACK = 0, MIDDLE = 1, FRONT = 2};
 

@@ -22,6 +22,8 @@ class Level : public GameComponent {
         
         Player player;
 
+        bool is_stopped;
+
         bool player_collides() const;
 
     protected:

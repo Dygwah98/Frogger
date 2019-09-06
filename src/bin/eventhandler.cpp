@@ -70,8 +70,18 @@ Event EventHandler::next_event() {
     const int& key = ev.keyboard.keycode;
 
     switch(ev.type) {
+        
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
+        
             ret = Event::Exit;
+        
+        break;
+        
+        case ALLEGRO_EVENT_DISPLAY_RESIZE:
+
+            al_acknowledge_resize(g.display);
+            g.calc_scale_factors();
+
         break;
 
         case ALLEGRO_EVENT_KEY_DOWN:
@@ -85,6 +95,9 @@ Event EventHandler::next_event() {
         
             if(ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
                     ret = Event::Exit;
+            
+            else if(ev.keyboard.keycode == ALLEGRO_KEY_SPACE)
+                    ret = Event::Stop;
 
             else if(contains<int, Keys>(keymap, key))
                 if(key_pressed == keymap.at(key))
@@ -99,13 +112,6 @@ Event EventHandler::next_event() {
                 redraw = true;        
             }
         
-        break;
-
-        case ALLEGRO_EVENT_DISPLAY_RESIZE:
-
-            al_acknowledge_resize(g.display);
-            g.calc_scale_factors();
-
         break;
 
         default:
