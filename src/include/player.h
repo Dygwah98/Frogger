@@ -45,13 +45,13 @@ class Player: public GameObject {
         
         virtual ~Player();
 
-        float get_position() const;
+        float get_position() const { return position; }
 
-        bool is_moving() const;
+        bool is_moving() const { return isMoving; }
 
-        bool is_dead() const;
+        bool is_dead() const { return lifes == 0; }
 
-        void lose_life();
+        void lose_life() { if(lifes > 0) --lifes; }
 
         void reposition(const int&, const float&);
 
@@ -59,7 +59,7 @@ class Player: public GameObject {
 
         void move();
 
-        void print();
+        void print() {  cout << "(" << position << ", " << get_coord() << ")"; }
 };
 
 #endif

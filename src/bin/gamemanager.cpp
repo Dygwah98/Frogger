@@ -10,19 +10,6 @@ GameManager::~GameManager() {
     cout << "GameManager::~GameManager() " << this << endl;
 }
 
-inline bool GameManager::addAsRoot(GameComponent* c) {
-
-    components.push_back(c);
-    root = c;
-    return true;
-}
-
-inline bool GameManager::add(GameComponent* c) {
-
-    components.push_back(c);
-    return true;
-}
-
 void GameManager::launchGame() {
 
     GameComponent::map_type temp = root->exec();

@@ -14,16 +14,6 @@ GameObject::~GameObject() {
     cout << "GameObject::~GameObject() " << this << endl;
 }
 
-inline void GameObject::set_coord(const float& f) {
-
-    coord = f;
-}
-
-inline const float& GameObject::get_coord() const {
-
-    return coord;
-}
-
 bool GameObject::collides(const GameObject& g) const {
     
     return false;

@@ -26,16 +26,6 @@ EventHandler::~EventHandler() {
     cout << "EventHandler::~EventHandler() " << this << endl;
 }
 
-inline Graphics& EventHandler::get_graphic_context() {
-
-    return g;
-}
-
-inline bool EventHandler::is_ready() const {
-
-    return g.isValid and al_get_timer_started(timer) and !al_is_event_queue_paused(event_queue);
-}
-
 void EventHandler::launch() {
 
     if(is_ready()) return;
@@ -119,9 +109,4 @@ Event EventHandler::next_event() {
     }
 
     return ret;
-}
-
-inline Keys EventHandler::next_key() {
-
-    return key_pressed;
 }

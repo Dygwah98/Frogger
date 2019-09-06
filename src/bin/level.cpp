@@ -16,10 +16,6 @@ bool Level::player_collides() const {
             lines.at(player.get_position()).check_for_collision(player);
 };
 
-inline GameComponent::map_type Level::type() { return GameComponent::types[2]; }
-
-inline GameComponent::map_type Level::get_type() { return Level::type(); }
-
 GameComponent::map_type Level::exec() {
 
     map_type ret = GameComponent::exit_val();

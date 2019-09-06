@@ -62,7 +62,7 @@ class Graphics {
         //disegna gli elementi presenti nella queue, consumandoli se is_permanent = false
         void redraw();
         //elimina tutti gli elementi nella queue e resetta il buffer
-        void clear();
+        void clear() { queue.clear(); }
 };
 
 #endif

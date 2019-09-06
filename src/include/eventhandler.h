@@ -28,9 +28,9 @@ class EventHandler {
         EventHandler(Graphics&);
         ~EventHandler();
 
-        Graphics& get_graphic_context();
+        Graphics& get_graphic_context() { return g; }
         //true se tutte le componenti sono valide per l'uso
-        bool is_ready() const;
+        bool is_ready() const { return g.isValid and al_get_timer_started(timer) and !al_is_event_queue_paused(event_queue); }
         //avvia il timer e la coda degli eventi
         void launch();
         //stoppa il timer e la coda degli eventi
@@ -38,7 +38,7 @@ class EventHandler {
 
         Event next_event();
 
-        Keys next_key();
+        Keys next_key() { return key_pressed; }
 
 };
 

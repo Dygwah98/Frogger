@@ -19,9 +19,9 @@ class GameObject {
         
         virtual ~GameObject();
 
-        void set_coord(const float&);
+        void set_coord(const float& f) { coord = f; }
 
-        const float& get_coord() const;
+        const float& get_coord() const { return coord; }
 
         bool collides(const GameObject&) const;
 };

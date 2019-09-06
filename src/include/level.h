@@ -34,9 +34,9 @@ class Level : public GameComponent {
         
         ~Level();
         
-        static map_type type();
+        static map_type type() { return GameComponent::types[2]; }
         
-        virtual map_type get_type() override;
+        virtual map_type get_type() override { return Level::type(); }
         
         virtual map_type exec() override;
 };

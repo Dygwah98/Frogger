@@ -24,9 +24,9 @@ class GameManager {
     
         ~GameManager();
     
-        bool addAsRoot(GameComponent*);
+        void addAsRoot(GameComponent* c) { components.push_back(c); root = c; }
     
-        bool add(GameComponent*);
+        void add(GameComponent* c) { components.push_back(c); }
     
         void launchGame();
 };
