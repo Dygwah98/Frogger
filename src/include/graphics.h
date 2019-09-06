@@ -45,8 +45,8 @@ class Graphics {
 
         //restituisce i parametri adatti per l'inizializzazione del display
         ALLEGRO_DISPLAY_MODE getDispMode();
-        //getter del display
-        ALLEGRO_DISPLAY* get_display();
+        //calcola i fattori di scala per questo particolare display
+        void calc_scale_factors();
 
     protected:
     

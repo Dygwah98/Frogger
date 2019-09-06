@@ -10,7 +10,7 @@ EventHandler::EventHandler(Graphics& g): g(g), redraw(false), key_pressed(Keys::
     event_queue = al_create_event_queue();
     assert(event_queue != nullptr);
 
-    al_register_event_source(event_queue, al_get_display_event_source(g.get_display()));
+    al_register_event_source(event_queue, al_get_display_event_source(g.display));
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_pause_event_queue(event_queue, true);
@@ -99,6 +99,13 @@ Event EventHandler::next_event() {
                 redraw = true;        
             }
         
+        break;
+
+        case ALLEGRO_EVENT_DISPLAY_RESIZE:
+
+            al_acknowledge_resize(g.display);
+            g.calc_scale_factors();
+
         break;
 
         default:

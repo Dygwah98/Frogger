@@ -56,10 +56,10 @@ void Player::move() {
     if(isMoving) {
 
         --counter;
-        if(counter <= 0) {
+        if(counter == 0) {
             isMoving = false;
-            dir = Keys::nd;
             counter = 0;
+            dir = Keys::nd;
         }
     }
 }

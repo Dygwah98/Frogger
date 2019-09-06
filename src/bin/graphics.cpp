@@ -26,9 +26,20 @@ ALLEGRO_DISPLAY_MODE Graphics::getDispMode() {
     return temp;
 }
 
-ALLEGRO_DISPLAY* Graphics::get_display() {
+void Graphics::calc_scale_factors() {
 
-    return display;
+    ALLEGRO_DISPLAY_MODE data = getDispMode();
+
+    int scale = std::min(
+        al_get_display_width(display)/data.width,
+        al_get_display_height(display)/data.height
+    );
+    
+    scaleW = buffer.x * scale;
+    scaleH = buffer.y * scale;
+    scaleX = (al_get_display_width(display) - scaleW) / 2;    
+    scaleY = (al_get_display_height(display) - scaleH) / 2;
+
 }
 
 Graphics::Graphics(): display(nullptr), buffer({nullptr, 0.0f, 0.0f, true}), queue() {
@@ -50,12 +61,7 @@ Graphics::Graphics(): display(nullptr), buffer({nullptr, 0.0f, 0.0f, true}), que
     buffer.x = data.width;
     buffer.y = data.height;  
 
-    int scale = std::min(al_get_display_width(display)/data.width, al_get_display_height(display)/data.height);
-    
-    scaleW = buffer.x * scale;
-    scaleH = buffer.y * scale;
-    scaleX = (al_get_display_width(display) - scaleW) / 2;    
-    scaleY = (al_get_display_height(display) - scaleH) / 2;
+    calc_scale_factors();
 
     al_clear_to_color(al_map_rgb(0, 0, 0));
     al_flip_display();
@@ -82,25 +88,22 @@ void Graphics::redraw() {
 
     //operazioni di disegno sul buffer
     al_set_target_bitmap(buffer.bitmap);
-    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_clear_to_color(al_map_rgb(127, 127, 127));
     for(const auto& it : queue)
         al_draw_bitmap(it.bitmap, it.x, it.y, 0);
     
     //operazioni di disegno sul display
     al_set_target_backbuffer(display);
     al_clear_to_color(al_map_rgb(0, 0, 0));
+    //qui i parametri .x e .y di Image vengono utilizzati impropriamente come width e height, per semplicità
     al_draw_scaled_bitmap(buffer.bitmap, 0, 0, buffer.x, buffer.y, scaleX, scaleY, scaleW, scaleH, 0);
     al_flip_display();
     
     //si eliminano dalla coda le immagini non permanenti
     auto it = queue.begin();
-    while(it != queue.end()) {
-        
-        if(!it->is_permanent) {
-            it = queue.erase(it);
-        } else {
-            ++it;
-        }
+    while(it != queue.end()) {    
+        if(!it->is_permanent)   it = queue.erase(it);
+        else                    ++it;
     }
 }
 
