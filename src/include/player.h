@@ -23,7 +23,7 @@ class Player: public GameObject {
             {Keys::RIGHT, 1.0f}
         };
         //posizione sulla mappa (linea)
-        int position;
+        float position;
         //velocità del player (costante)
         float speed;
         //true se il player è in movimento
@@ -45,7 +45,7 @@ class Player: public GameObject {
         
         virtual ~Player();
 
-        int get_position() const;
+        float get_position() const;
 
         bool is_moving() const;
 
