@@ -33,13 +33,13 @@ class Graphics {
         //bitmap d'appoggio, usata per la scalabilità
         Image buffer;
         //fattore di scala
-        int scaleW;
+        float scaleW;
         //fattore di scala
-        int scaleH;
+        float scaleH;
         //fattore di scala
-        int scaleX;    
+        float scaleX;    
         //fattore di scala
-        int scaleY;
+        float scaleY;
         //coda di immagini da disegnare sul buffer
         vector<Image> queue;
 

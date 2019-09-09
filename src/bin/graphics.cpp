@@ -28,11 +28,9 @@ ALLEGRO_DISPLAY_MODE Graphics::getDispMode() {
 
 void Graphics::calc_scale_factors() {
 
-    ALLEGRO_DISPLAY_MODE data = getDispMode();
-
-    int scale = std::min(
-        al_get_display_width(display)/data.width,
-        al_get_display_height(display)/data.height
+    float scale = std::min(
+        al_get_display_width(display)/buffer.x,
+        al_get_display_height(display)/buffer.y
     );
     
     scaleW = buffer.x * scale;
@@ -57,9 +55,9 @@ Graphics::Graphics(): display(nullptr), buffer({nullptr, 0.0f, 0.0f, true}), que
     assert(display != nullptr);
 
     //inizializzazione buffer
-    buffer.bitmap = al_create_bitmap(data.width, data.height);
-    buffer.x = data.width;
-    buffer.y = data.height;  
+    buffer.bitmap = al_create_bitmap(800, 600);
+    buffer.x = 800;
+    buffer.y = 600;  
 
     calc_scale_factors();
 

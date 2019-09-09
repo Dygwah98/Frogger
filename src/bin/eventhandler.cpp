@@ -57,7 +57,6 @@ Event EventHandler::next_event() {
 
     ALLEGRO_EVENT ev;
     al_wait_for_event(event_queue, &ev);
-    const int& key = ev.keyboard.keycode;
 
     switch(ev.type) {
         
@@ -76,8 +75,8 @@ Event EventHandler::next_event() {
 
         case ALLEGRO_EVENT_KEY_DOWN:
         
-            if(contains<int, Keys>(keymap, key))
-                key_pressed = keymap.at(key);
+            if(contains<int, Keys>(keymap, ev.keyboard.keycode))
+                key_pressed = keymap.at(ev.keyboard.keycode);
         
         break;
 
@@ -89,8 +88,8 @@ Event EventHandler::next_event() {
             else if(ev.keyboard.keycode == ALLEGRO_KEY_SPACE)
                     ret = Event::Stop;
 
-            else if(contains<int, Keys>(keymap, key))
-                if(key_pressed == keymap.at(key))
+            else if(contains<int, Keys>(keymap, ev.keyboard.keycode))
+                if(key_pressed == keymap.at(ev.keyboard.keycode))
                     key_pressed = Keys::nd;
         
         break;
