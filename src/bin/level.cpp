@@ -2,7 +2,7 @@
 
 Level::Level(EventHandler& eh): GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), player(), is_stopped(false) {
 
-    cout << "Level::Level() " << this << endl;
+    cout << "Level::Level()  " << this << endl;
 }
 
 Level::~Level() {
@@ -11,10 +11,10 @@ Level::~Level() {
 }
 
 bool Level::player_collides() const { 
-        return 
-            contains<int, Line>(lines, player.get_position()) and 
-            lines.at(player.get_position()).check_for_collision(player);
-};
+    return 
+        contains<int, Line>(lines, player.get_position()) and 
+        lines.at(player.get_position()).check_for_collision(player);
+}
 
 GameComponent::map_type Level::exec() {
 
@@ -24,9 +24,13 @@ GameComponent::map_type Level::exec() {
 
     events.launch();
 
+    //nella versione finale, da rimuovere
     ALLEGRO_BITMAP* btemp = al_create_bitmap(30, 30);
+    //nella versione finale, da rimuovere
     al_set_target_bitmap(btemp);
+    //nella versione finale, da rimuovere
     al_clear_to_color(al_map_rgb(255, 255, 255));
+    //nella versione finale, da rimuovere
     al_set_target_backbuffer(al_get_current_display());
 
     while(!STOP) {
@@ -66,8 +70,10 @@ GameComponent::map_type Level::exec() {
                             case Keys::UP:    cout << "UP\n";    break;
                             case Keys::RIGHT: cout << "RIGHT\n"; break;
                         }*/
-                        player.set_dir(events.next_key());
-                        player.move();
+                        if(player_in_area()) {
+                            player.set_dir(events.next_key());
+                            player.move();
+                        }
                     
                     //se si sta già movendo: continua (internamente gestirà il cambio del bool isMoving)
                     } else if(player.is_moving()) {
@@ -85,7 +91,9 @@ GameComponent::map_type Level::exec() {
                 //call the graphic routines
                 if(!is_stopped) {
                     //graphics.push_image per ogni componente da rappresentare
+                    //nella versione finale, da rimuovere
                     graphics.push_image(btemp, player.get_coord(), player.get_position(), Priority::FRONT, false);
+                    
                     graphics.redraw();
                 }
 
@@ -103,7 +111,7 @@ GameComponent::map_type Level::exec() {
     }
     
     events.suspend();
-    
+    //nella versione finale, da rimuovere
     al_destroy_bitmap(btemp);
 
     return ret;
