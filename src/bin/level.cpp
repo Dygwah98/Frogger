@@ -1,6 +1,7 @@
 #include"../include/level.h"
 
-Level::Level(EventHandler& eh): GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), player(), is_stopped(false) {
+Level::Level(EventHandler& eh): 
+    GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), player(), is_stopped(false) {
 
     cout << "Level::Level()  " << this << endl;
 }
@@ -11,9 +12,8 @@ Level::~Level() {
 }
 
 bool Level::player_collides() const { 
-    return 
-        contains<int, Line>(lines, player.get_position()) and 
-        lines.at(player.get_position()).check_for_collision(player);
+    
+    return contains<int, Line>(lines, player.get_position()) and lines.at(player.get_position()).check_for_collision(player);
 }
 
 GameComponent::map_type Level::exec() {
@@ -62,15 +62,8 @@ GameComponent::map_type Level::exec() {
                     //controlla se il player deve muoversi
                     //se è stato premuto un tasto: viene specificato al player che inizia il movimento
                     if(!player.is_moving() and events.next_key() != Keys::nd) {
-                        //stampe assolutamente di prova    
-                        /*player.print();
-                        switch(events.next_key()) {
-                            case Keys::DOWN:  cout << "DOWN\n";  break;
-                            case Keys::LEFT:  cout << "LEFT\n";  break;
-                            case Keys::UP:    cout << "UP\n";    break;
-                            case Keys::RIGHT: cout << "RIGHT\n"; break;
-                        }*/
-                        if(player_in_area()) {
+                        //if(player_in_area()) 
+                        {
                             player.set_dir(events.next_key());
                             player.move();
                         }
@@ -83,6 +76,10 @@ GameComponent::map_type Level::exec() {
                     //shifta ogni linea secondo la sua velocità
                     for(auto& it : lines)
                         it.second.shift_head();
+                    //condizioni speciali che potrebbero influire sul giocatore: un getter per cosa si trova in player.pos?
+                    //if(contains<int, Line>(lines, player.get_position()))
+                    //if(lines.at(player.get_position()).at(player.get_coord()).has_special_condition())
+                    //applica la special condition (che sarebbe una qualunque regola di gioco)
                 }
 
             break;
@@ -93,14 +90,14 @@ GameComponent::map_type Level::exec() {
                     //graphics.push_image per ogni componente da rappresentare
                     //nella versione finale, da rimuovere
                     graphics.push_image(btemp, player.get_coord(), player.get_position(), Priority::FRONT, false);
-                    
+                    //esegue il redraw vero e proprio
                     graphics.redraw();
                 }
 
             break;
 
             case Event::Stop:
-
+                //mette in pausa il gioco
                 is_stopped = !is_stopped;
 
             break;

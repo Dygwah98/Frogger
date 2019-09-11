@@ -93,7 +93,7 @@ void Graphics::redraw() {
     //operazioni di disegno sul display
     al_set_target_backbuffer(display);
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    //qui i parametri .x e .y di Image vengono utilizzati impropriamente come width e height, per semplicità
+    //i parametri .x e .y di Image vengono utilizzati come width e height, per semplicità
     al_draw_scaled_bitmap(buffer.bitmap, 0, 0, buffer.x, buffer.y, scaleX, scaleY, scaleW, scaleH, 0);
     al_flip_display();
     

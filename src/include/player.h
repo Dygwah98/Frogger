@@ -41,7 +41,7 @@ class Player: public GameObject {
         
         Player();
         
-        Player(const int&, const float&);
+        Player(const int&, const float&, const float&);
         
         virtual ~Player();
 
