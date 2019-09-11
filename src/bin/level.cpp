@@ -85,7 +85,7 @@ GameComponent::map_type Level::exec() {
                     //shifta ogni linea secondo la sua velocità
                     for(auto& it : lines)
                         it.second.shift_head();
-                    //
+                    //gestisce le regole non previste nelle schema di base (isola le condizioni particolari)
                     switch(special_condition()) {
                         //applica la special condition (che sarebbe una qualunque regola di gioco)
                         default: break;

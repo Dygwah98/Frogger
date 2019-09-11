@@ -27,6 +27,7 @@ bool Line::check_for_collision(const GameObject& g) const {
     
     for(const auto& it : objects)
     //va aggiunta una condizione che escluda le collisioni con entità benigne
+    //if(is_deadly(it) and it.collides(g))
      if(it.collides(g))
         return true;
     
