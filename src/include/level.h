@@ -24,12 +24,14 @@ class Level : public GameComponent {
 
         bool is_stopped;
 
-        bool player_collides() const;
-
         bool position_bound(float pos) const { return in_range<float>(0, pos, lines.size(), true, false); }
         bool coordinate_bound(float pos) const { return in_range<float>(0, pos, Line::getLineDimension()-pos); }
 
         bool player_in_area() const { return position_bound(player.next_pos()) and coordinate_bound(player.next_coord()); }
+
+        bool player_collides() const;
+        
+        auto special_condition() const;
 
     protected:
 

@@ -16,6 +16,16 @@ bool Level::player_collides() const {
     return contains<int, Line>(lines, player.get_position()) and lines.at(player.get_position()).check_for_collision(player);
 }
 
+auto Level::special_condition() const {
+
+    return false;
+    //condizioni speciali che potrebbero influire sul giocatore: un getter per cosa si trova in player.pos?
+    //return 
+    //(contains<int, Line>(lines, player.get_position()))
+    //? lines.at(player.get_position()).at(player.get_coord()).has_special_condition()
+    //: qualcosa;
+}
+
 GameComponent::map_type Level::exec() {
 
     map_type ret = GameComponent::exit_val();
@@ -67,7 +77,6 @@ GameComponent::map_type Level::exec() {
                             player.set_dir(events.next_key());
                             player.move();
                         }
-                    
                     //se si sta già movendo: continua (internamente gestirà il cambio del bool isMoving)
                     } else if(player.is_moving()) {
                     
@@ -76,10 +85,11 @@ GameComponent::map_type Level::exec() {
                     //shifta ogni linea secondo la sua velocità
                     for(auto& it : lines)
                         it.second.shift_head();
-                    //condizioni speciali che potrebbero influire sul giocatore: un getter per cosa si trova in player.pos?
-                    //if(contains<int, Line>(lines, player.get_position()))
-                    //if(lines.at(player.get_position()).at(player.get_coord()).has_special_condition())
-                    //applica la special condition (che sarebbe una qualunque regola di gioco)
+                    //
+                    switch(special_condition()) {
+                        //applica la special condition (che sarebbe una qualunque regola di gioco)
+                        default: break;
+                    }    
                 }
 
             break;
