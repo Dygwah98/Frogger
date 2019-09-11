@@ -47,10 +47,6 @@ GameComponent::map_type Level::exec() {
 
         const Event& ev = events.next_event();
         switch(ev) {
-            
-            case Event::Exit:        
-                STOP = true;
-            break;
 
             case Event::Execute:
                 
@@ -88,7 +84,8 @@ GameComponent::map_type Level::exec() {
                     //gestisce le regole non previste nelle schema di base (isola le condizioni particolari)
                     switch(special_condition()) {
                         //applica la special condition (che sarebbe una qualunque regola di gioco)
-                        default: break;
+                        default:
+                        break;
                     }    
                 }
 
@@ -104,6 +101,10 @@ GameComponent::map_type Level::exec() {
                     graphics.redraw();
                 }
 
+            break;
+
+            case Event::Exit:        
+                STOP = true;
             break;
 
             case Event::Stop:
