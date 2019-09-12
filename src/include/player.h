@@ -45,6 +45,10 @@ class Player: public GameObject {
         
         virtual ~Player();
 
+        void set_dir(Keys);
+
+        void move();
+
         float get_position() const { return position; }
 
         bool is_moving() const { return isMoving; }
@@ -55,13 +59,9 @@ class Player: public GameObject {
 
         void reposition(const int&, const float&);
 
-        void set_dir(Keys);
-
         float next_pos() const { return position + dpos.at(dir)*speed; }
 
         float next_coord() const { return get_coord() + dcord.at(dir)*speed; }
-
-        void move();
 
         void print() {  cout << "(" << position << ", " << get_coord() << ")"; }
 };

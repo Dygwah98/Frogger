@@ -39,6 +39,8 @@ class Line {
         
         Line(const Line&);
 
+        const GameObject& at(unsigned) const;
+
         void shift_head();
 
         bool check_for_collision(const GameObject&) const;

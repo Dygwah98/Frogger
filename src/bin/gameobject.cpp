@@ -1,20 +1,18 @@
 #include"../include/gameobject.h"
 
 GameObject::GameObject(): 
-    coord(0.0f), length(0.0f) {
+    coord(0.0f), length(0.0f), marker('_') {
 
     cout << "GameObject::GameObject() " << this << endl;
 }
 
-GameObject::GameObject(const float& f, const float& f2): 
-    coord(f), length(f2) {}
+GameObject::GameObject(float f, float f2, char m): 
+    coord(f), length(f2), marker(m) {
+
+    cout << "GameObject::GameObject(float, float) " << this << endl;
+}
 
 GameObject::~GameObject() {
 
     cout << "GameObject::~GameObject() " << this << endl;
-}
-
-bool GameObject::collides(const GameObject& g) const {
-    
-    return in_range<float>(coord, g.get_coord(), coord + length);
 }

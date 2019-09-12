@@ -9,7 +9,9 @@ class GameObject {
         //posizione nella linea (valore float -> pixel)
         float coord;
         //lunghezza sulla linea (valore float -> pixel)
-        float length;
+        const float length;
+        //definisce la "tipologia" di GameObject
+        const char marker;
 
     protected:
     
@@ -17,17 +19,19 @@ class GameObject {
         
         GameObject();
         
-        GameObject(const float&, const float&);
+        GameObject(float, float, char);
         
         virtual ~GameObject();
 
-        void set_coord(const float& f) { coord = f; }
+        void set_coord(float f) { coord = f; }
 
-        const float& get_coord() const { return coord; }
+        float get_coord() const { return coord; }
 
-        const float& get_length() const { return length; }
+        float get_length() const { return length; }
 
-        bool collides(const GameObject&) const;
+        char get_marker() const { return marker; }
+
+        bool collides(const GameObject& g) const { return in_range<float>(coord, g.coord, coord + length); }
 };
 
 #endif

@@ -104,13 +104,13 @@ GameComponent::map_type Level::exec() {
             break;
 
             case Event::Exit:        
+                //termina il loop di gioco e "chiude" il livello
                 STOP = true;
             break;
 
             case Event::Stop:
                 //mette in pausa il gioco
                 is_stopped = !is_stopped;
-
             break;
             
             default:
