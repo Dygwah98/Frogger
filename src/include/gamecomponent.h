@@ -17,17 +17,17 @@ class GameComponent {
 
     public:
         
-        using map_type = char;
+        using exec_type = char;
 
         virtual ~GameComponent() { 
             cout << "GameComponent::~GameComponent() " << this << endl;
         }
 
-        virtual map_type exec()     = 0;
+        virtual exec_type exec()     = 0;
         
-        virtual map_type get_type() = 0;
+        virtual exec_type get_type() = 0;
 
-        static map_type exit_val() {
+        static exec_type exit_val() {
             return types[0];
         }
 

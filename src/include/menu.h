@@ -20,11 +20,11 @@ class Menu : public GameComponent {
     
         ~Menu();
     
-        static map_type type() { return GameComponent::types[1]; }
+        static exec_type type() { return GameComponent::types[1]; }
     
-        virtual map_type get_type() override { return Menu::type(); }
+        virtual exec_type get_type() override { return Menu::type(); }
     
-        virtual map_type exec() override;
+        virtual exec_type exec() override;
 };
 
 #endif

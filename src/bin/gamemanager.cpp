@@ -12,7 +12,7 @@ GameManager::~GameManager() {
 
 void GameManager::launchGame() {
 
-    GameComponent::map_type temp = root->exec();
+    GameComponent::exec_type temp = root->exec();
     
     while(temp != GameComponent::exit_val()) {
         

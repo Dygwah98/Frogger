@@ -26,9 +26,9 @@ auto Level::special_condition() const {
     //: qualcosa;
 }
 
-GameComponent::map_type Level::exec() {
+GameComponent::exec_type Level::exec() {
 
-    map_type ret = GameComponent::exit_val();
+    GameComponent::exec_type ret = GameComponent::exit_val();
 
     bool STOP = false;
 

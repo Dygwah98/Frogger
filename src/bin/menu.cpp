@@ -10,7 +10,7 @@ Menu::~Menu() {
     cout << "Menu::~Menu() " << this << endl;
 }
 
-GameComponent::map_type Menu::exec() {
+GameComponent::exec_type Menu::exec() {
     
     return Level::type();
 }
