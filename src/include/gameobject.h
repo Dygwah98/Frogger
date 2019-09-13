@@ -16,7 +16,9 @@ class GameObject {
     protected:
     
     public:
-        
+        using gameobj_type = char;
+        inline static string types = "LDA";
+
         GameObject();
         
         GameObject(float, float, char);

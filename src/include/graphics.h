@@ -63,6 +63,9 @@ class Graphics {
         void redraw();
         //elimina tutti gli elementi nella queue e resetta il buffer
         void clear() { queue.clear(); }
+
+        float get_buffer_height() const { return buffer.y; }
+        float get_buffer_width() const { return buffer.x; }
 };
 
 #endif

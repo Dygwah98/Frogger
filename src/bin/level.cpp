@@ -3,7 +3,11 @@
 Level::Level(EventHandler& eh): 
     GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), player(), is_stopped(false) {
 
-    cout << "Level::Level()  " << this << endl;
+    Line::setLineDimension(graphics.get_buffer_width());
+
+    //for(unsigned i = 0; i < 11; ++i) lines[i] = Line();
+
+    cout << "Level::Level() " << this << endl;
 }
 
 Level::~Level() {
