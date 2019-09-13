@@ -9,6 +9,20 @@ Player::Player():
 Player::Player(int i, float f, float f2, char m): 
     GameObject(f, f2, m), position(0.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {}
 
+Player& Player::operator=(const Player& P) {
+    
+    if(this!=&P) {
+        GameObject::operator=(P);
+        position = P.position;
+        speed = P.speed;
+        isMoving = P.isMoving;
+        counter = P.counter;
+        dir = P.dir;
+        lifes = P.lifes;
+    }
+    return *this;
+}
+
 Player::~Player() {
 
     cout << "Player::~Player() " << this << endl;

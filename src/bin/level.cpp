@@ -5,7 +5,7 @@ Level::Level(EventHandler& eh):
 
     Line::setLineDimension(graphics.get_buffer_width());
 
-    //for(unsigned i = 0; i < 11; ++i) lines[i] = Line();
+    for(unsigned i = 0; i < 11; ++i) lines[i] = Line();
 
     cout << "Level::Level() " << this << endl;
 }
@@ -72,8 +72,7 @@ GameComponent::exec_type Level::exec() {
                     //controlla se il player deve muoversi
                     //se è stato premuto un tasto: viene specificato al player che inizia il movimento
                     if(!player.is_moving() and events.next_key() != Keys::nd) {
-                        //if(player_in_area()) 
-                        {
+                        if(player_in_area()) {
                             player.set_dir(events.next_key());
                             player.move();
                         }

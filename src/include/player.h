@@ -43,6 +43,8 @@ class Player: public GameObject {
         
         Player(int, float, float, char);
         
+        Player& operator=(const Player&);
+
         virtual ~Player();
 
         void set_dir(Keys);

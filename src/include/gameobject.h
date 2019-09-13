@@ -9,9 +9,9 @@ class GameObject {
         //posizione nella linea (valore float -> pixel)
         float coord;
         //lunghezza sulla linea (valore float -> pixel)
-        const float length;
+        float length;
         //definisce la "tipologia" di GameObject
-        const char marker;
+        char marker;
 
     protected:
     
@@ -22,6 +22,8 @@ class GameObject {
         GameObject();
         
         GameObject(float, float, char);
+
+        GameObject& operator=(const GameObject&);
         
         virtual ~GameObject();
 

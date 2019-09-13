@@ -39,6 +39,8 @@ class Line {
         
         Line(const Line&);
 
+        Line& operator=(const Line&);
+
         ~Line();
 
         const GameObject& at(unsigned) const;

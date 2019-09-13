@@ -24,6 +24,17 @@ Line::Line(const Line& l):
     cout << "Line::Line(const Line&) " << this << endl;
 }
 
+Line& Line::operator=(const Line& L) {
+    
+    if(this!=&L) {
+        head = L.head;
+        speed = L.speed;
+        max_head_val = L.max_head_val;
+        objects = L.objects;
+    }
+    return *this;
+}
+
 Line::~Line() {
 
     cout << "Line::~Line() " << this << endl;

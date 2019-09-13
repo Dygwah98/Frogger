@@ -12,6 +12,16 @@ GameObject::GameObject(float f, float f2, char m):
     cout << "GameObject::GameObject(float, float) " << this << endl;
 }
 
+GameObject& GameObject::operator=(const GameObject& G) {
+    
+    if(this!=&G) {
+        coord = G.coord;
+        length = G.length;
+        marker = G.marker;
+    }
+    return *this;
+}
+
 GameObject::~GameObject() {
 
     cout << "GameObject::~GameObject() " << this << endl;
