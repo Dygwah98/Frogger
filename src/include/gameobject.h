@@ -11,17 +11,16 @@ class GameObject {
         //lunghezza sulla linea (valore float -> pixel)
         float length;
         //definisce la "tipologia" di GameObject
-        char marker;
+        Collision marker;
 
     protected:
-    
+
     public:
-        using gameobj_type = char;
-        inline static string types = "LDA";
+        static Collision null_val() { return Collision::nd; }
 
         GameObject();
         
-        GameObject(float, float, char);
+        GameObject(float, float, Collision);
 
         GameObject& operator=(const GameObject&);
         
@@ -33,9 +32,7 @@ class GameObject {
 
         float get_length() const { return length; }
 
-        char get_marker() const { return marker; }
-
-        bool collides(const GameObject& g) const { return in_range<float>(coord, g.coord, coord + length); }
+        Collision collides(const GameObject&) const;
 };
 
 #endif

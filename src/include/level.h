@@ -29,19 +29,17 @@ class Level : public GameComponent {
 
         bool player_in_area() const { return position_bound(player.next_pos()) and coordinate_bound(player.next_coord()); }
 
-        bool player_collides() const;
-        
-        auto special_condition() const;
+        Collision player_collides() const;
 
     protected:
 
     public:
         
+        static exec_type type() { return 'L'; }
+
         Level(EventHandler&);
         
         ~Level();
-        
-        static exec_type type() { return GameComponent::types[2]; }
         
         virtual exec_type get_type() override { return Level::type(); }
         

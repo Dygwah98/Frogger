@@ -15,19 +15,12 @@ Level::~Level() {
     cout << "Level::~Level() " << this << endl;
 }
 
-bool Level::player_collides() const { 
+Collision Level::player_collides() const { 
     
-    return contains<int, Line>(lines, player.get_position()) and lines.at(player.get_position()).check_for_collision(player);
-}
-
-auto Level::special_condition() const {
-
-    return false;
-    //condizioni speciali che potrebbero influire sul giocatore: un getter per cosa si trova in player.pos?
-    //return 
-    //(contains<int, Line>(lines, player.get_position()))
-    //? lines.at(player.get_position()).at(player.get_coord()).has_special_condition()
-    //: qualcosa;
+    return 
+    (contains<int, Line>(lines, player.get_position()))
+    ? lines.at(player.get_position()).check_for_collision(player)
+    : GameObject::null_val();
 }
 
 GameComponent::exec_type Level::exec() {
@@ -56,40 +49,51 @@ GameComponent::exec_type Level::exec() {
                 
                 if(!is_stopped) {
                     //controlla se sono avvenute collisioni sulla linea sulla quale si trova il player
-                    if(player_collides()) {
-                        //se avviene: il player perde una vita
-                        player.lose_life();
-                        //se il player arriva a 0 vite: 
-                        if(player.is_dead()) {
-                            STOP = true;
-                            break;
-                        //altrimenti: viene riposizionato all'inizio del livello
-                        } else {
-                            //i valori esatti vanno ancora determinati
-                            player.reposition(0, 0.0f);
-                        }
-                    }
-                    //controlla se il player deve muoversi
-                    //se è stato premuto un tasto: viene specificato al player che inizia il movimento
-                    if(!player.is_moving() and events.next_key() != Keys::nd) {
-                        if(player_in_area()) {
-                            player.set_dir(events.next_key());
-                            player.move();
-                        }
-                    //se si sta già movendo: continua (internamente gestirà il cambio del bool isMoving)
-                    } else if(player.is_moving()) {
-                    
-                        player.move();
-                    }
-                    //shifta ogni linea secondo la sua velocità
-                    for(auto& it : lines)
-                        it.second.shift_head();
-                    //gestisce le regole non previste nelle schema di base (isola le condizioni particolari)
-                    switch(special_condition()) {
-                        //applica la special condition (che sarebbe una qualunque regola di gioco)
+                    switch(player_collides()) {
+                        //se la collisione è letale
+                        case Collision::DEADLY:
+                            //il player perde una vita
+                            player.lose_life();
+                            //se il player arriva a 0 vite: 
+                            if(player.is_dead()) {
+                                STOP = true;
+                            //altrimenti: viene riposizionato all'inizio del livello
+                            } else {
+                                //i valori esatti vanno ancora determinati
+                                player.reposition(0, 0.0f);
+                            }
+                        
+                        break;
+
+                        case Collision::ARRIVAL:
+
+                        break;
+
+                        case Collision::LOG:
+
+                        break;
+
                         default:
                         break;
-                    }    
+                    }
+                    //se il player è attivo
+                    if(!player.is_dead()) {
+                        //controlla se il player deve muoversi
+                        //se è stato premuto un tasto: viene specificato al player che inizia il movimento
+                        if(!player.is_moving() and events.next_key() != Keys::nd) {
+                            if(player_in_area()) {
+                                player.set_dir(events.next_key());
+                                player.move();
+                            }
+                        //se si sta già movendo: continua (internamente gestirà il cambio del bool isMoving)
+                        } else if(player.is_moving()) {
+                    
+                            player.move();
+                        }
+                    }   
+                    //shifta ogni linea secondo la sua velocità
+                    for(auto& it : lines)
+                        it.second.shift_head();    
                 }
 
             break;

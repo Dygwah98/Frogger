@@ -6,8 +6,8 @@ Player::Player():
     cout << "Player::Player() " << this << endl;
 }
 
-Player::Player(int i, float f, float f2, char m): 
-    GameObject(f, f2, m), position(0.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {}
+Player::Player(int i, float f, float f2): 
+    GameObject(f, f2, GameObject::null_val()), position(0.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {}
 
 Player& Player::operator=(const Player& P) {
     

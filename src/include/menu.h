@@ -16,11 +16,11 @@ class Menu : public GameComponent {
     
     public:
     
+        static exec_type type() { return 'M'; }
+
         Menu(EventHandler&);
     
         ~Menu();
-    
-        static exec_type type() { return GameComponent::types[1]; }
     
         virtual exec_type get_type() override { return Menu::type(); }
     

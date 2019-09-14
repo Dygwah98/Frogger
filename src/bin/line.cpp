@@ -53,13 +53,14 @@ void Line::shift_head() {
         head -= max_head_val;
 }
 
-bool Line::check_for_collision(const GameObject& g) const {
+Collision Line::check_for_collision(const GameObject& g) const {
     
-    for(const auto& it : objects)
-    //va aggiunta una condizione che escluda le collisioni con entità benigne
-    //if(is_deadly(it) and it.collides(g))
-     if(it.collides(g))
-        return true;
+    Collision temp = GameObject::null_val();
     
-    return false;
+    for(const auto& it : objects) {
+        temp = it.collides(g);
+        if(temp != GameObject::null_val())
+            return temp;
+    }
+    return temp;
 }

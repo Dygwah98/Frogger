@@ -47,7 +47,7 @@ class Line {
 
         void shift_head();
 
-        bool check_for_collision(const GameObject&) const;
+        Collision check_for_collision(const GameObject&) const;
 };
 
 #endif

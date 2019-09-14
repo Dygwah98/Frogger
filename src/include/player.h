@@ -41,7 +41,7 @@ class Player: public GameObject {
         
         Player();
         
-        Player(int, float, float, char);
+        Player(int, float, float);
         
         Player& operator=(const Player&);
 
