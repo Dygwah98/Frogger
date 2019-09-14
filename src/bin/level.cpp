@@ -44,7 +44,7 @@ bool Level::handle_collisions() {
         
         //se il player ha raggiunto il punto d'arrivo
         case Collision::ARRIVAL:
-
+            //il player viene riposizionato, e all'interno di level va registrata la nuova situazione
         break;
         
         //se il player si trova su una piattaforma mobile
