@@ -43,6 +43,8 @@ class Line {
 
         ~Line();
 
+        float get_speed() const { return speed; }
+
         const GameObject& at(unsigned) const;
 
         void shift_head();

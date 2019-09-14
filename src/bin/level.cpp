@@ -1,7 +1,7 @@
 #include"../include/level.h"
 
 Level::Level(EventHandler& eh): 
-    GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), player(), is_stopped(false) {
+    GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), player(), is_stopped(false), frogs_counter(0) {
 
     Line::setLineDimension(graphics.get_buffer_width());
 
@@ -19,7 +19,7 @@ Collision Level::player_collides() const {
 
     return 
     (contains<Line>(lines, player.get_position()))
-    ? lines.at(player.get_position()).check_for_collision(player)
+    ? player_line().check_for_collision(player)
     : GameObject::null_val();
 }
 
@@ -28,29 +28,31 @@ bool Level::handle_collisions() {
     switch(player_collides()) {
         
         //se la collisione è letale
-        case Collision::DEADLY:
+        case Collision::Deadly:
             //il player perde una vita
             player.lose_life();
             //se il player arriva a 0 vite: 
-            if(player.is_dead()) {
+            if(player.is_dead()) 
                 return true;
             //altrimenti: viene riposizionato all'inizio del livello
-            } else {
+            else 
                 //i valori esatti vanno ancora determinati
                 player.reposition(0, 0.0f);
-            }
                         
         break;
         
         //se il player ha raggiunto il punto d'arrivo
-        case Collision::ARRIVAL:
+        case Collision::Arrival:
             //il player viene riposizionato, e all'interno di level va registrata la nuova situazione
+            ++frogs_counter;
+            if(frogs_counter >= 5)
+                return true;
         break;
         
         //se il player si trova su una piattaforma mobile
-        case Collision::LOG:
+        case Collision::Log:
             //il player viene riposizionato a ogni iterazione, shiftandolo alla velocità della line 
-           //player.reposition(..., ...);
+            player.reposition(player.get_position(), player.get_coord() + player_line().get_speed());
         break;
 
         default:
@@ -61,7 +63,6 @@ bool Level::handle_collisions() {
 }
 
 void Level::update_player() {
-
     //controlla se il player deve muoversi
     //se è stato premuto un tasto: viene specificato al player che inizia il movimento
     if(!player.is_moving() and events.next_key() != Keys::nd/* and player_in_area()*/) {
@@ -142,6 +143,9 @@ GameComponent::exec_type Level::exec() {
             break;
         }
     }
+
+    //if frogs_counter >= 5 |=> victory_screen
+    //if player_lifes == 0  |=> defeat_screen 
     
     events.suspend();
     //nella versione finale, da rimuovere
