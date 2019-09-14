@@ -18,7 +18,7 @@ class Level : public GameComponent {
         
         EventHandler& events;
         
-        map<int, Line> lines;
+        vector<Line> lines;
         
         Player player;
 

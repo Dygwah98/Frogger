@@ -22,8 +22,13 @@ inline bool in_range(T lower, T val, T upper, bool loweq = true, bool upeq = tru
 }
 
 template<class K, class V>
-inline bool contains(map<K, V> map, K key) {
+inline bool contains(const map<K, V>& map, K key) {
     return map.find(key) != map.end();
+}
+
+template<class V>
+inline bool contains(const vector<V>& vec, int key) {
+    return in_range(0, key, (int)vec.size(), true, false);
 }
 
 #endif

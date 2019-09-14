@@ -5,7 +5,7 @@ Level::Level(EventHandler& eh):
 
     Line::setLineDimension(graphics.get_buffer_width());
 
-    for(unsigned i = 0; i < 11; ++i) lines[i] = Line();
+    for(unsigned i = 0; i < 11; ++i) lines.push_back({});
 
     cout << "Level::Level() " << this << endl;
 }
@@ -16,9 +16,9 @@ Level::~Level() {
 }
 
 Collision Level::player_collides() const { 
-    
+
     return 
-    (contains<int, Line>(lines, player.get_position()))
+    (contains<Line>(lines, player.get_position()))
     ? lines.at(player.get_position()).check_for_collision(player)
     : GameObject::null_val();
 }
@@ -76,8 +76,8 @@ void Level::update_player() {
 
 void Level::update_lines() {
     //shifta ogni linea secondo la sua velocità
-    for(auto& it : lines)
-        it.second.shift_head();        
+    for(Line& it : lines)
+        it.shift_head();        
 }
 
 GameComponent::exec_type Level::exec() {
@@ -103,14 +103,12 @@ GameComponent::exec_type Level::exec() {
         switch(ev) {
 
             case Event::Execute:
-
-                if(!is_stopped) {
-                    
+                
+                if(!is_stopped) {    
                     if(!player.is_dead()) {
                         STOP = handle_collisions();   
                         update_player();
                     } 
-
                     update_lines();
                 }
 
@@ -131,11 +129,13 @@ GameComponent::exec_type Level::exec() {
             case Event::Exit:        
                 //termina il loop di gioco e "chiude" il livello
                 STOP = true;
+
             break;
 
             case Event::Stop:
                 //mette in pausa il gioco
                 is_stopped = !is_stopped;
+            
             break;
             
             default:
