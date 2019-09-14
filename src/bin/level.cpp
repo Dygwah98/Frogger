@@ -23,6 +23,63 @@ Collision Level::player_collides() const {
     : GameObject::null_val();
 }
 
+bool Level::handle_collisions() {
+    //controlla se sono avvenute collisioni sulla linea sulla quale si trova il player
+    switch(player_collides()) {
+        
+        //se la collisione è letale
+        case Collision::DEADLY:
+            //il player perde una vita
+            player.lose_life();
+            //se il player arriva a 0 vite: 
+            if(player.is_dead()) {
+                return true;
+            //altrimenti: viene riposizionato all'inizio del livello
+            } else {
+                //i valori esatti vanno ancora determinati
+                player.reposition(0, 0.0f);
+            }
+                        
+        break;
+        
+        //se il player ha raggiunto il punto d'arrivo
+        case Collision::ARRIVAL:
+
+        break;
+        
+        //se il player si trova su una piattaforma mobile
+        case Collision::LOG:
+            //il player viene riposizionato a ogni iterazione, shiftandolo alla velocità della line 
+           //player.reposition(..., ...);
+        break;
+
+        default:
+        break;
+    }
+
+    return false;
+}
+
+void Level::update_player() {
+
+    //controlla se il player deve muoversi
+    //se è stato premuto un tasto: viene specificato al player che inizia il movimento
+    if(!player.is_moving() and events.next_key() != Keys::nd/* and player_in_area()*/) {
+        
+        player.set_dir(events.next_key());
+        player.move();
+    } 
+    //se si sta già movendo: continua (internamente gestirà il cambio del bool isMoving)
+    else if(player.is_moving()) 
+        player.move();
+}
+
+void Level::update_lines() {
+    //shifta ogni linea secondo la sua velocità
+    for(auto& it : lines)
+        it.second.shift_head();        
+}
+
 GameComponent::exec_type Level::exec() {
 
     GameComponent::exec_type ret = GameComponent::exit_val();
@@ -46,54 +103,15 @@ GameComponent::exec_type Level::exec() {
         switch(ev) {
 
             case Event::Execute:
-                
+
                 if(!is_stopped) {
-                    //controlla se sono avvenute collisioni sulla linea sulla quale si trova il player
-                    switch(player_collides()) {
-                        //se la collisione è letale
-                        case Collision::DEADLY:
-                            //il player perde una vita
-                            player.lose_life();
-                            //se il player arriva a 0 vite: 
-                            if(player.is_dead()) {
-                                STOP = true;
-                            //altrimenti: viene riposizionato all'inizio del livello
-                            } else {
-                                //i valori esatti vanno ancora determinati
-                                player.reposition(0, 0.0f);
-                            }
-                        
-                        break;
-
-                        case Collision::ARRIVAL:
-
-                        break;
-
-                        case Collision::LOG:
-
-                        break;
-
-                        default:
-                        break;
-                    }
-                    //se il player è attivo
-                    if(!player.is_dead()) {
-                        //controlla se il player deve muoversi
-                        //se è stato premuto un tasto: viene specificato al player che inizia il movimento
-                        if(!player.is_moving() and events.next_key() != Keys::nd) {
-                            if(player_in_area()) {
-                                player.set_dir(events.next_key());
-                                player.move();
-                            }
-                        //se si sta già movendo: continua (internamente gestirà il cambio del bool isMoving)
-                        } else if(player.is_moving()) {
                     
-                            player.move();
-                        }
-                    }   
-                    //shifta ogni linea secondo la sua velocità
-                    for(auto& it : lines)
-                        it.second.shift_head();    
+                    if(!player.is_dead()) {
+                        STOP = handle_collisions();   
+                        update_player();
+                    } 
+
+                    update_lines();
                 }
 
             break;

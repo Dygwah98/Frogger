@@ -31,6 +31,10 @@ class Level : public GameComponent {
 
         Collision player_collides() const;
 
+        bool handle_collisions();
+        void update_player();
+        void update_lines();
+
     protected:
 
     public:
