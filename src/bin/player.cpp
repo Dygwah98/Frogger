@@ -28,7 +28,7 @@ Player::~Player() {
     cout << "Player::~Player() " << this << endl;
 }
 
-void Player::reposition(const int& i, const float& f) {
+void Player::reposition(const float& i, const float& f) {
 
     position = i;
     set_coord(f);

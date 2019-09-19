@@ -7,6 +7,8 @@ Level::Level(EventHandler& eh):
 
     for(unsigned i = 0; i < 11; ++i) lines.push_back({});
 
+    player.set_speed(1.0f);
+
     cout << "Level::Level() " << this << endl;
 }
 
@@ -65,7 +67,7 @@ bool Level::handle_collisions() {
 void Level::update_player() {
     //controlla se il player deve muoversi
     //se è stato premuto un tasto: viene specificato al player che inizia il movimento
-    if(!player.is_moving() and events.next_key() != Keys::nd/* and player_in_area()*/) {
+    if(!player.is_moving() and events.next_key() != Keys::nd and player_in_area()) {
         
         player.set_dir(events.next_key());
         player.move();
@@ -120,7 +122,8 @@ GameComponent::exec_type Level::exec() {
                 if(!is_stopped) {
                     //graphics.push_image per ogni componente da rappresentare
                     //nella versione finale, da rimuovere
-                    graphics.push_image(btemp, player.get_coord(), player.get_position(), Priority::FRONT, false);
+                    graphics.push_image(btemp, player.get_coord(), 
+                        player.get_position() * graphics.get_buffer_height()/(float)lines.size(), Priority::FRONT, false);
                     //esegue il redraw vero e proprio
                     graphics.redraw();
                 }
@@ -144,8 +147,8 @@ GameComponent::exec_type Level::exec() {
         }
     }
 
-    //if frogs_counter >= 5 |=> victory_screen
-    //if player_lifes == 0  |=> defeat_screen 
+    //IF frogs_counter >= 5 THEN victory_screen
+    //IF player_lifes  == 0 THEN defeat_screen 
     
     events.suspend();
     //nella versione finale, da rimuovere

@@ -7,20 +7,20 @@ class Player: public GameObject {
 
     private:
 
-        inline static map<Keys, int> dpos = {
-            {Keys::nd, 0},
-            {Keys::UP, -1},
-            {Keys::LEFT, 0},
-            {Keys::DOWN, +1},
-            {Keys::RIGHT, 0}
+        inline static map<Keys, float> dpos = {
+            {Keys::nd, 0.0f},
+            {Keys::UP, -1.0f},
+            {Keys::LEFT, 0.0f},
+            {Keys::DOWN, +1.0f},
+            {Keys::RIGHT, 0.0f}
         };
 
         inline static map<Keys, float> dcord = {
             {Keys::nd, 0.0f},
             {Keys::UP, 0.0f}, 
-            {Keys::LEFT, -1.0f}, 
+            {Keys::LEFT, -60.0f}, 
             {Keys::DOWN, 0.0f}, 
-            {Keys::RIGHT, 1.0f}
+            {Keys::RIGHT, 60.0f}
         };
         //posizione sulla mappa (linea)
         float position;
@@ -47,6 +47,8 @@ class Player: public GameObject {
 
         virtual ~Player();
 
+        void set_speed(float s) { speed = s/60.0f; }
+
         void set_dir(Keys);
 
         void move();
@@ -59,7 +61,7 @@ class Player: public GameObject {
 
         void lose_life() { if(lifes > 0) --lifes; }
 
-        void reposition(const int&, const float&);
+        void reposition(const float&, const float&);
 
         float next_pos() const { return position + dpos.at(dir)*speed; }
 

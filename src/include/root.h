@@ -2,6 +2,7 @@
 #define ROOT_H
 
 #include<iostream>
+#include<cmath>
 #include<cassert>
 #include<vector>
 #include<map>
