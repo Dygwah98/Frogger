@@ -1,13 +1,18 @@
 #include"../include/player.h"
 
 Player::Player(): 
-    GameObject(), position(0.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
+    GameObject(0.0f, 30.0f, GameObject::null_val()), 
+    position(0.0f), vert_dim(30.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
 
     cout << "Player::Player() " << this << endl;
 }
 
-Player::Player(int i, float f, float f2): 
-    GameObject(f, f2, GameObject::null_val()), position(0.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {}
+Player::Player(int i, float f): 
+    GameObject(f, 30.0f, GameObject::null_val()), 
+    position(i), vert_dim(30.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
+
+    cout << "Player::Player(int, float) " << this << endl;
+}
 
 Player& Player::operator=(const Player& P) {
     
@@ -44,16 +49,19 @@ void Player::set_dir(Keys key) {
     }
 }
 
+void Player::set_still() {
+
+    isMoving = false;
+    counter = 0;
+}
+
 void Player::move() {
     
-    reposition( position + dpos.at(dir)*speed, get_coord() + dcord.at(dir)*speed );
     if(isMoving) {
 
+        reposition( position + dpos.at(dir)*speed, get_coord() + dcord.at(dir)*speed );
         --counter;
-        if(counter == 0) {
-            isMoving = false;
-            counter = 0;
-            dir = Keys::nd;
-        }
+        if(counter == 0)
+            set_still();
     }
 }
