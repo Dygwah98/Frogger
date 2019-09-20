@@ -93,7 +93,7 @@ GameComponent::exec_type Level::exec() {
     bool STOP = false;
     
     graphics.set_component(get_type());                
-    graphics.push_image(0, 0.0f, 0.0f, Priority::FRONT, true);
+    graphics.push_permanent_image(0, 0.0f, 0.0f);
 
     events.launch();
 
@@ -120,7 +120,7 @@ GameComponent::exec_type Level::exec() {
                     //graphics.push_image per ogni componente da rappresentare
                     //nella versione finale, da rimuovere
                     graphics.push_image(player.get_gindex(), player.get_coord() + 5.0f, 
-                        player.get_position() * graphics.get_buffer_height()/(float)lines.size() +15.0f, Priority::FRONT, false);
+                        player.get_position() * graphics.get_buffer_height()/(float)lines.size() +15.0f);
                     //esegue il redraw vero e proprio
                     graphics.redraw();
                 }

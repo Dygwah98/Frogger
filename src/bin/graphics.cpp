@@ -37,7 +37,6 @@ void Graphics::calc_scale_factors() {
     scale[1] = buffer.y * ratio;
     scale[2] = (al_get_display_width(display) - scale[0]) / 2;    
     scale[3] = (al_get_display_height(display) - scale[1]) / 2;
-
 }
 
 Graphics::Graphics():
@@ -91,12 +90,27 @@ Graphics::~Graphics() {
     cout << "Graphics::~Graphics() " << this << endl;
 }
 
-void Graphics::push_image(int element, float x, float y, Priority pr, bool is_p) {
+void Graphics::push_image(int element, float x, float y) {
     
     //priority va usata per l'inserimento in coda
     assert(in_range<int>(0, row, bitmaps.size(), true, false));
     assert(in_range<int>(0, element, bitmaps[row].size(), true, false));
-    queue.push_back( {bitmaps[row][element], x, y, is_p} );
+    queue.push_back( {bitmaps[row][element], x, y, false} );
+}
+
+void Graphics::push_permanent_image(int element, float x, float y) {
+
+    //priority va usata per l'inserimento in coda
+    assert(in_range<int>(0, row, bitmaps.size(), true, false));
+    assert(in_range<int>(0, element, bitmaps[row].size(), true, false));
+    queue.push_back( {bitmaps[row][element], x, y, true} );
+}
+
+void Graphics::push_shifted_image(int element, float x, float y, float offset) {
+
+    //da implementare
+    //genera automaticamente due bitmap, corrispondenti alle due porzioni
+    //dell'immagine originale, per simulare uno shift "circolare"
 }
 
 void Graphics::redraw() {
@@ -116,9 +130,7 @@ void Graphics::redraw() {
     //si eliminano dalla coda le immagini non permanenti
     auto it = queue.begin();
     while(it != queue.end()) {    
-        if(!it->is_permanent)
-            it = queue.erase(it);
-        else
-            ++it;
+        if(!it->is_permanent) it = queue.erase(it);
+        else                  it = it + 1;
     }
 }

@@ -59,7 +59,9 @@ class Graphics {
         //imposta quale GameComponent sta venendo disegnata
         void set_component(int index) { row = index; } 
         //aggiunge una bitmap alla queue prendendola da backgrounds
-        void push_image(int, float, float, Priority, bool);
+        void push_image(int, float, float);
+        void push_permanent_image(int, float, float);
+        void push_shifted_image(int, float, float, float);
         //disegna gli elementi presenti nella queue, consumandoli se is_permanent = false
         void redraw();
         //elimina tutti gli elementi nella queue e resetta il buffer
