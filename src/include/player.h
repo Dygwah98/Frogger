@@ -76,7 +76,7 @@ class Player: public GameObject {
             ? position
             : (dir == Keys::UP) 
                 ? floor(position + dpos.at(dir)*speed)
-                : ceil(position + dpos.at(dir)*speed + 1.0f); 
+                : position + dpos.at(dir)*speed + 1.0f; 
         }
 
         float next_coord() const { 

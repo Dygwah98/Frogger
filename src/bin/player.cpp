@@ -2,16 +2,20 @@
 
 Player::Player(): 
     GameObject(0.0f, 30.0f, GameObject::null_val()), 
-    position(0.0f), vert_dim(30.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
+    position(0.0f), vert_dim(30.0f), speed(0.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
 
     cout << "Player::Player() " << this << endl;
+
+    set_speed(1.0f);
 }
 
 Player::Player(int i, float f): 
     GameObject(f, 30.0f, GameObject::null_val()), 
-    position(i), vert_dim(30.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
+    position(i), vert_dim(30.0f), speed(0.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
 
     cout << "Player::Player(int, float) " << this << endl;
+
+    set_speed(1.0f);
 }
 
 Player& Player::operator=(const Player& P) {

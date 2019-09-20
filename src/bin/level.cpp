@@ -7,8 +7,6 @@ Level::Level(EventHandler& eh):
 
     for(unsigned i = 0; i < 11; ++i) lines.push_back({});
 
-    player.set_speed(1.0f);
-
     cout << "Level::Level() " << this << endl;
 }
 

@@ -27,7 +27,7 @@ class Level : public GameComponent {
         int frogs_counter;
 
         bool position_bound(float pos) const { return in_range<int>(0, pos, lines.size(), true, false); }
-        bool coordinate_bound(float pos) const { return in_range<float>(0, pos, graphics.get_buffer_width(), true, false); }
+        bool coordinate_bound(float pos) const { return in_range<float>(0, pos, 440.0f, true, false); }
         bool player_in_area() const { return position_bound(player.next_pos()) and coordinate_bound(player.next_coord()); }
 
         Line& player_line() { return lines.at(player.get_position()); }
