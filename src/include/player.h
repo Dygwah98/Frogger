@@ -43,7 +43,7 @@ class Player: public GameObject {
         
         Player();
         
-        Player(int, float);
+        Player(int, int, float);
         
         Player& operator=(const Player&);
 
@@ -66,6 +66,8 @@ class Player: public GameObject {
         bool is_dead() const { return lifes == 0; }
 
         void lose_life() { if(lifes > 0) --lifes; }
+
+        int get_lifes() const { return lifes; }
 
         void reposition(const float&, const float&);
 

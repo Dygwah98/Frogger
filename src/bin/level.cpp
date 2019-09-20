@@ -119,7 +119,7 @@ GameComponent::exec_type Level::exec() {
                 if(!is_stopped) {
                     //graphics.push_image per ogni componente da rappresentare
                     //nella versione finale, da rimuovere
-                    graphics.push_image(1, player.get_coord() + 5.0f, 
+                    graphics.push_image(player.get_gindex(), player.get_coord() + 5.0f, 
                         player.get_position() * graphics.get_buffer_height()/(float)lines.size() +15.0f, Priority::FRONT, false);
                     //esegue il redraw vero e proprio
                     graphics.redraw();
@@ -144,9 +144,15 @@ GameComponent::exec_type Level::exec() {
         }
     }
 
-    //IF frogs_counter >= 5 THEN victory_screen
-    //IF player_lifes  == 0 THEN defeat_screen 
-    
+/*blocco da rimuovere nella versione finale*/
+    if(player.get_lifes() == 0)
+        cout << "Sconfitta!\n";
+    else if(frogs_counter >= 5)
+        cout << "Vittoria!\n";
+    else
+        cout << "ERROR\n";
+/*blocco da rimuovere nella versione finale*/
+
     events.suspend();
 
     return ret;
