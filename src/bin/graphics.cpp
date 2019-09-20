@@ -28,19 +28,21 @@ ALLEGRO_DISPLAY_MODE Graphics::getDispMode() {
 
 void Graphics::calc_scale_factors() {
 
-    float scale = std::min(
+    float ratio = std::min(
         al_get_display_width(display)/buffer.x,
         al_get_display_height(display)/buffer.y
     );
     
-    scaleW = buffer.x * scale;
-    scaleH = buffer.y * scale;
-    scaleX = (al_get_display_width(display) - scaleW) / 2;    
-    scaleY = (al_get_display_height(display) - scaleH) / 2;
+    scale[0] = buffer.x * ratio;
+    scale[1] = buffer.y * ratio;
+    scale[2] = (al_get_display_width(display) - scale[0]) / 2;    
+    scale[3] = (al_get_display_height(display) - scale[1]) / 2;
 
 }
 
-Graphics::Graphics(): display(nullptr), buffer({nullptr, 0.0f, 0.0f, true}), queue() {
+Graphics::Graphics():
+    display(nullptr), buffer({nullptr, 0.0f, 0.0f, true}), 
+    backgrounds(), atlases(), queue() {
 
     //inizializzazione dell'API di Allegro
     if(!isValid) assert(initAllegro());
@@ -84,13 +86,17 @@ void Graphics::push_image(ALLEGRO_BITMAP* b, float x, float y, Priority pr, bool
 
 void Graphics::redraw() {
 
+    //da rimuovere nella versione finale:
     ALLEGRO_BITMAP* temp = al_create_bitmap(460, 600);
+    //da rimuovere nella versione finale:
     al_set_target_bitmap(temp);
+    //da rimuovere nella versione finale:
     al_clear_to_color(al_map_rgb(175, 175, 175));
 
     //operazioni di disegno sul buffer
     al_set_target_bitmap(buffer.bitmap);
     al_clear_to_color(al_map_rgb(125, 125, 125));
+    //da rimuovere nella versione finale:
     al_draw_bitmap(temp, 0, 0, 0);
     for(const auto& it : queue)
         al_draw_bitmap(it.bitmap, it.x, it.y, 0);
@@ -99,7 +105,7 @@ void Graphics::redraw() {
     al_set_target_backbuffer(display);
     al_clear_to_color(al_map_rgb(0, 0, 0));
     //i parametri .x e .y di Image vengono utilizzati come width e height, per semplicità
-    al_draw_scaled_bitmap(buffer.bitmap, 0, 0, buffer.x, buffer.y, scaleX, scaleY, scaleW, scaleH, 0);
+    al_draw_scaled_bitmap(buffer.bitmap, 0, 0, buffer.x, buffer.y, scale[2], scale[3], scale[0], scale[1], 0);
     al_flip_display();
     
     //si eliminano dalla coda le immagini non permanenti
@@ -110,6 +116,7 @@ void Graphics::redraw() {
         else
             ++it;
     }
-
+    
+    //da rimuovere nella versione finale:
     al_destroy_bitmap(temp);
 }

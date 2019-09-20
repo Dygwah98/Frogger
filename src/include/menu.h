@@ -16,7 +16,7 @@ class Menu : public GameComponent {
     
     public:
     
-        static exec_type type() { return 'M'; }
+        static exec_type type() { return 0; }
 
         Menu(EventHandler&);
     

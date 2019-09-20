@@ -15,9 +15,9 @@ class GameComponent {
 
     public:
         
-        using exec_type = char;
+        using exec_type = int;
 
-        static exec_type exit_val() { return '_'; }
+        static exec_type exit_val() { return -1; }
         
         virtual ~GameComponent() { 
             cout << "GameComponent::~GameComponent() " << this << endl;

@@ -32,14 +32,12 @@ class Graphics {
         ALLEGRO_DISPLAY* display;
         //bitmap d'appoggio, usata per la scalabilità
         Image buffer;
-        //fattore di scala
-        float scaleW;
-        //fattore di scala
-        float scaleH;
-        //fattore di scala
-        float scaleX;    
-        //fattore di scala
-        float scaleY;
+        //fattori di scala (usati per ridimensionare il buffer)
+        float scale[4];
+        //per ogni GameComponent, contiene le immagini che compongono backgrounds e simili
+        vector<vector<ALLEGRO_BITMAP*> > backgrounds;
+        //per ogni GameComponent, contiene gli atlas di immagini 
+        vector<vector<ALLEGRO_BITMAP*> > atlases;
         //coda di immagini da disegnare sul buffer
         vector<Image> queue;
 

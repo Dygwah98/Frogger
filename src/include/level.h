@@ -43,7 +43,7 @@ class Level : public GameComponent {
 
     public:
         
-        static exec_type type() { return 'L'; }
+        static exec_type type() { return 1; }
 
         Level(EventHandler&);
         
