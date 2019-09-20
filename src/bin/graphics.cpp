@@ -11,8 +11,6 @@ bool Graphics::initAllegro() {
 
 ALLEGRO_DISPLAY_MODE Graphics::getDispMode() {
 
-    cout << "Graphics::getDispMode() " << this << endl;
-
     ALLEGRO_DISPLAY_MODE temp;
     al_get_display_mode(0, &temp);
 
@@ -22,6 +20,8 @@ ALLEGRO_DISPLAY_MODE Graphics::getDispMode() {
         if(in_range<int>(750, temp.width, 850) and in_range<int>(550, temp.height, 650))
             return temp;
     }
+
+    cout << "Graphics::getDispMode() " << this << endl;
 
     return temp;
 }
@@ -94,7 +94,7 @@ Graphics::~Graphics() {
 void Graphics::push_image(int element, float x, float y, Priority pr, bool is_p) {
     
     //priority va usata per l'inserimento in coda
-    assert(row != -1);
+    assert(in_range<int>(row, 0, 2, true, false));
     queue.push_back( {bitmaps[row][element], x, y, is_p} );
 }
 
