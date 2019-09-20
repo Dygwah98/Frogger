@@ -84,9 +84,14 @@ void Graphics::push_image(ALLEGRO_BITMAP* b, float x, float y, Priority pr, bool
 
 void Graphics::redraw() {
 
+    ALLEGRO_BITMAP* temp = al_create_bitmap(460, 600);
+    al_set_target_bitmap(temp);
+    al_clear_to_color(al_map_rgb(175, 175, 175));
+
     //operazioni di disegno sul buffer
     al_set_target_bitmap(buffer.bitmap);
     al_clear_to_color(al_map_rgb(125, 125, 125));
+    al_draw_bitmap(temp, 0, 0, 0);
     for(const auto& it : queue)
         al_draw_bitmap(it.bitmap, it.x, it.y, 0);
     
@@ -105,4 +110,6 @@ void Graphics::redraw() {
         else
             ++it;
     }
+
+    al_destroy_bitmap(temp);
 }

@@ -3,7 +3,7 @@
 Level::Level(EventHandler& eh): 
     GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), player(), is_stopped(false), frogs_counter(0) {
 
-    Line::setLineDimension(graphics.get_buffer_width());
+    Line::setLineDimension(460.0f);
 
     for(unsigned i = 0; i < 11; ++i) lines.push_back({});
 
@@ -123,8 +123,8 @@ GameComponent::exec_type Level::exec() {
                 if(!is_stopped) {
                     //graphics.push_image per ogni componente da rappresentare
                     //nella versione finale, da rimuovere
-                    graphics.push_image(btemp, player.get_coord(), 
-                        player.get_position() * graphics.get_buffer_height()/(float)lines.size(), Priority::FRONT, false);
+                    graphics.push_image(btemp, player.get_coord() + 5.0f, 
+                        player.get_position() * graphics.get_buffer_height()/(float)lines.size() +15.0f, Priority::FRONT, false);
                     //esegue il redraw vero e proprio
                     graphics.redraw();
                 }
