@@ -14,6 +14,8 @@ void GameManager::launchGame() {
 
     GameComponent::exec_type temp = root->exec();
     
+    cout << "GameManager::launchGame() " << this << endl;
+
     while(temp != GameComponent::exit_val()) {
         
         for(auto& it : components)

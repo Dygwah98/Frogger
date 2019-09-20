@@ -34,10 +34,10 @@ class Graphics {
         Image buffer;
         //fattori di scala (usati per ridimensionare il buffer)
         float scale[4];
+
+        int row;
         //per ogni GameComponent, contiene le immagini che compongono backgrounds e simili
-        vector<vector<ALLEGRO_BITMAP*> > backgrounds;
-        //per ogni GameComponent, contiene gli atlas di immagini 
-        vector<vector<ALLEGRO_BITMAP*> > atlases;
+        vector<vector<ALLEGRO_BITMAP*> > bitmaps;
         //coda di immagini da disegnare sul buffer
         vector<Image> queue;
 
@@ -55,8 +55,11 @@ class Graphics {
         //Graphics(...)
         //dealloca le risorse di Allegro
         ~Graphics();
-        //aggiunge una bitmap alla queue
-        void push_image(ALLEGRO_BITMAP*, float, float, Priority, bool);
+
+        //imposta quale GameComponent sta venendo disegnata
+        void set_component(int index) { row = index; } 
+        //aggiunge una bitmap alla queue prendendola da backgrounds
+        void push_image(int, float, float, Priority, bool);
         //disegna gli elementi presenti nella queue, consumandoli se is_permanent = false
         void redraw();
         //elimina tutti gli elementi nella queue e resetta il buffer

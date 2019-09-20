@@ -12,5 +12,7 @@ Menu::~Menu() {
 
 GameComponent::exec_type Menu::exec() {
     
+    cout << "Menu::exec() " << this << endl;
+
     return Level::type();
 }

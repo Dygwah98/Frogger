@@ -88,18 +88,14 @@ GameComponent::exec_type Level::exec() {
 
     GameComponent::exec_type ret = GameComponent::exit_val();
 
+    cout << "Level::exec() " << this << endl;
+
     bool STOP = false;
+    
+    graphics.set_component(get_type());                
+    graphics.push_image(0, 0.0f, 0.0f, Priority::FRONT, true);
 
     events.launch();
-
-    //nella versione finale, da rimuovere
-    ALLEGRO_BITMAP* btemp = al_create_bitmap(30, 30);
-    //nella versione finale, da rimuovere
-    al_set_target_bitmap(btemp);
-    //nella versione finale, da rimuovere
-    al_clear_to_color(al_map_rgb(255, 255, 255));
-    //nella versione finale, da rimuovere
-    al_set_target_backbuffer(al_get_current_display());
 
     while(!STOP) {
 
@@ -123,7 +119,7 @@ GameComponent::exec_type Level::exec() {
                 if(!is_stopped) {
                     //graphics.push_image per ogni componente da rappresentare
                     //nella versione finale, da rimuovere
-                    graphics.push_image(btemp, player.get_coord() + 5.0f, 
+                    graphics.push_image(1, player.get_coord() + 5.0f, 
                         player.get_position() * graphics.get_buffer_height()/(float)lines.size() +15.0f, Priority::FRONT, false);
                     //esegue il redraw vero e proprio
                     graphics.redraw();
@@ -152,8 +148,6 @@ GameComponent::exec_type Level::exec() {
     //IF player_lifes  == 0 THEN defeat_screen 
     
     events.suspend();
-    //nella versione finale, da rimuovere
-    al_destroy_bitmap(btemp);
 
     return ret;
 }

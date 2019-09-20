@@ -42,7 +42,7 @@ void Graphics::calc_scale_factors() {
 
 Graphics::Graphics():
     display(nullptr), buffer({nullptr, 0.0f, 0.0f, true}), 
-    backgrounds(), atlases(), queue() {
+    bitmaps(), queue() {
 
     //inizializzazione dell'API di Allegro
     if(!isValid) assert(initAllegro());
@@ -63,8 +63,16 @@ Graphics::Graphics():
 
     calc_scale_factors();
 
-    al_clear_to_color(al_map_rgb(0, 0, 0));
-    al_flip_display();
+    bitmaps.push_back({});
+    bitmaps.push_back({});
+    
+    bitmaps[1].push_back(al_create_bitmap(460, 600));
+    al_set_target_bitmap(bitmaps[1][0]);
+    al_clear_to_color(al_map_rgb(175, 175, 175));
+
+    bitmaps[1].push_back(al_create_bitmap(30, 30));
+    al_set_target_bitmap(bitmaps[1][1]);
+    al_clear_to_color(al_map_rgb(255, 255, 255));
 
     cout << "Graphics::Graphics() " << this << endl;
 }
@@ -76,35 +84,29 @@ Graphics::~Graphics() {
     if(buffer.bitmap != nullptr)
         al_destroy_bitmap(buffer.bitmap);
 
+    for(const auto& vec : bitmaps)
+        for(const auto& el : vec)
+            al_destroy_bitmap(el);
+
     cout << "Graphics::~Graphics() " << this << endl;
 }
 
-void Graphics::push_image(ALLEGRO_BITMAP* b, float x, float y, Priority pr, bool is_p) {
+void Graphics::push_image(int element, float x, float y, Priority pr, bool is_p) {
     //priority va usata per l'inserimento in coda
-    queue.push_back( {b, x, y, is_p} );
+    queue.push_back( {bitmaps[row][element], x, y, is_p} );
 }
 
 void Graphics::redraw() {
 
-    //da rimuovere nella versione finale:
-    ALLEGRO_BITMAP* temp = al_create_bitmap(460, 600);
-    //da rimuovere nella versione finale:
-    al_set_target_bitmap(temp);
-    //da rimuovere nella versione finale:
-    al_clear_to_color(al_map_rgb(175, 175, 175));
-
     //operazioni di disegno sul buffer
     al_set_target_bitmap(buffer.bitmap);
     al_clear_to_color(al_map_rgb(125, 125, 125));
-    //da rimuovere nella versione finale:
-    al_draw_bitmap(temp, 0, 0, 0);
     for(const auto& it : queue)
         al_draw_bitmap(it.bitmap, it.x, it.y, 0);
     
     //operazioni di disegno sul display
     al_set_target_backbuffer(display);
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    //i parametri .x e .y di Image vengono utilizzati come width e height, per semplicità
     al_draw_scaled_bitmap(buffer.bitmap, 0, 0, buffer.x, buffer.y, scale[2], scale[3], scale[0], scale[1], 0);
     al_flip_display();
     
@@ -116,7 +118,4 @@ void Graphics::redraw() {
         else
             ++it;
     }
-    
-    //da rimuovere nella versione finale:
-    al_destroy_bitmap(temp);
 }
