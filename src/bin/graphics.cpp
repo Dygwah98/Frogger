@@ -94,7 +94,7 @@ Graphics::~Graphics() {
 void Graphics::push_image(int element, float x, float y, Priority pr, bool is_p) {
     
     //priority va usata per l'inserimento in coda
-    assert(in_range<int>(row, 0, 2, true, false));
+    assert(in_range<int>(0, row, 2, true, false));
     queue.push_back( {bitmaps[row][element], x, y, is_p} );
 }
 
