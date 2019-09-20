@@ -42,7 +42,7 @@ void Graphics::calc_scale_factors() {
 
 Graphics::Graphics():
     display(nullptr), buffer({nullptr, 0.0f, 0.0f, true}), 
-    bitmaps(), queue() {
+    row(-1), bitmaps(), queue() {
 
     //inizializzazione dell'API di Allegro
     if(!isValid) assert(initAllegro());
@@ -92,7 +92,9 @@ Graphics::~Graphics() {
 }
 
 void Graphics::push_image(int element, float x, float y, Priority pr, bool is_p) {
+    
     //priority va usata per l'inserimento in coda
+    assert(row != -1);
     queue.push_back( {bitmaps[row][element], x, y, is_p} );
 }
 
