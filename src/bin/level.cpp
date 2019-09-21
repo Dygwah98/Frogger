@@ -118,7 +118,8 @@ GameComponent::exec_type Level::exec() {
                 //call the graphic routines
                 if(!is_stopped) {
                     //graphics.push_image per ogni Line da rappresentare
-                    graphics.push_shifted_image(2, 0, 0, lines[0].get_head());
+                    for(int i = 0; i < 11; ++i)
+                        graphics.push_shifted_image(2+i, 0, (graphics.get_buffer_height()/(float)lines.size())*i, lines[i].get_head());
                     //nella versione finale, da rimuovere
                     graphics.push_image(player.get_gindex(), player.get_coord() + 5.0f, 
                         player.get_position() * graphics.get_buffer_height()/(float)lines.size() +15.0f);
