@@ -22,6 +22,9 @@ class Player: public GameObject {
             {Keys::DOWN, 0.0f}, 
             {Keys::RIGHT, 60.0f}
         };
+
+        //mappa quest'oggetto con la bitmap corrispondente (in Graphics)
+        int graphic_index;
         //posizione sulla mappa (linea)
         float position;
         //lunghezza sulla mappa (pixel)
@@ -49,13 +52,17 @@ class Player: public GameObject {
 
         virtual ~Player();
 
+        void move();
+
         void set_speed(float s) { speed = s/60.0f; }
 
         void set_dir(Keys);
 
         void set_still();
+        
+        void set_gindex(int i) { graphic_index = i; }
 
-        void move();
+        int get_gindex() const { return graphic_index; }
 
         float get_position() const { return position; }
 

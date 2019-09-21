@@ -18,12 +18,12 @@ class Line {
     private:
         //pixel length of a Line on screen
         static float dim;
+
+        int graphic_index;
         //offset sulle posizioni: in ogni momento, la posizione reale di ogni elemento sarà ( positions[i] + head ) % dim
         float head;
         
         float speed;
-        
-        float max_head_val;
     
         vector<GameObject> objects;
     
@@ -43,13 +43,19 @@ class Line {
 
         ~Line();
 
-        float get_speed() const { return speed; }
-
-        const GameObject& at(unsigned) const;
-
         void shift_head();
 
         Collision check_for_collision(const GameObject&) const;
+
+        void set_gindex(int i) { graphic_index = i; }
+
+        int get_gindex() const { return graphic_index; }
+
+        float get_speed() const { return speed; }
+
+        float get_head() const { return head; }
+
+        const GameObject& at(unsigned) const;
 };
 
 #endif

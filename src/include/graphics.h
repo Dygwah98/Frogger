@@ -14,7 +14,7 @@ struct Image {
     float x;
     float y;
     bool is_permanent;
-
+    bool needs_freeing;
 };
 
 class EventHandler;

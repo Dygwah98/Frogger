@@ -73,6 +73,11 @@ Graphics::Graphics():
     al_set_target_bitmap(bitmaps[1][1]);
     al_clear_to_color(al_map_rgb(255, 255, 255));
 
+    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    al_set_target_bitmap(bitmaps[1][2]);
+    al_clear_to_color(al_map_rgb(125, 175, 255));
+    al_put_pixel(230, 300/11+1, al_map_rgb(255, 255, 255));
+
     cout << "Graphics::Graphics() " << this << endl;
 }
 
@@ -95,7 +100,7 @@ void Graphics::push_image(int element, float x, float y) {
     //priority va usata per l'inserimento in coda
     assert(in_range<int>(0, row, bitmaps.size(), true, false));
     assert(in_range<int>(0, element, bitmaps[row].size(), true, false));
-    queue.push_back( {bitmaps[row][element], x, y, false} );
+    queue.push_back( {bitmaps[row][element], x, y, false, false} );
 }
 
 void Graphics::push_permanent_image(int element, float x, float y) {
@@ -103,7 +108,7 @@ void Graphics::push_permanent_image(int element, float x, float y) {
     //priority va usata per l'inserimento in coda
     assert(in_range<int>(0, row, bitmaps.size(), true, false));
     assert(in_range<int>(0, element, bitmaps[row].size(), true, false));
-    queue.push_back( {bitmaps[row][element], x, y, true} );
+    queue.push_back( {bitmaps[row][element], x, y, true, false} );
 }
 
 void Graphics::push_shifted_image(int element, float x, float y, float offset) {
@@ -111,6 +116,15 @@ void Graphics::push_shifted_image(int element, float x, float y, float offset) {
     //da implementare
     //genera automaticamente due bitmap, corrispondenti alle due porzioni
     //dell'immagine originale, per simulare uno shift "circolare"
+    ALLEGRO_BITMAP* pic = bitmaps[row][element];
+    float picH = al_get_bitmap_height(pic);
+    float picW = al_get_bitmap_width(pic);
+    
+    ALLEGRO_BITMAP* left = al_create_sub_bitmap(pic, 0, 0, offset, picH);
+    queue.push_back({left, x + (picW - offset), y, false, true});
+
+    ALLEGRO_BITMAP* right = al_create_sub_bitmap(pic, offset, 0, picW - offset, picH);
+    queue.push_back({right, x, y, false, true});
 }
 
 void Graphics::redraw() {
@@ -126,7 +140,12 @@ void Graphics::redraw() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
     al_draw_scaled_bitmap(buffer.bitmap, 0, 0, buffer.x, buffer.y, scale[2], scale[3], scale[0], scale[1], 0);
     al_flip_display();
-    
+
+    //si deallocano le bitmap temporanee create ad hoc
+    for(auto& it : queue)
+     if(it.needs_freeing)
+        al_destroy_bitmap(it.bitmap);
+
     //si eliminano dalla coda le immagini non permanenti
     auto it = queue.begin();
     while(it != queue.end()) {    

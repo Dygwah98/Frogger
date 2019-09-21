@@ -1,8 +1,8 @@
 #include"../include/player.h"
 
 Player::Player(): 
-    GameObject(1, 0.0f, 30.0f, GameObject::null_val()), 
-    position(0.0f), vert_dim(30.0f), speed(0.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
+    GameObject(0.0f, 30.0f, GameObject::null_val()), 
+    graphic_index(1), position(0.0f), vert_dim(30.0f), speed(0.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
 
     cout << "Player::Player() " << this << endl;
 
@@ -10,8 +10,8 @@ Player::Player():
 }
 
 Player::Player(int ind, int i, float f): 
-    GameObject(ind, f, 30.0f, GameObject::null_val()), 
-    position(i), vert_dim(30.0f), speed(0.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
+    GameObject(f, 30.0f, GameObject::null_val()), 
+    graphic_index(ind), position(i), vert_dim(30.0f), speed(0.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
 
     cout << "Player::Player(int, float) " << this << endl;
 

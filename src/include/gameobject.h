@@ -6,8 +6,6 @@
 class GameObject {
 
     private:
-        //quest'oggetto con la bitmap corrispondente (in Graphics)
-        int graphic_index;
         //posizione nella linea (valore float -> pixel)
         float coord;
         //lunghezza sulla linea (valore float -> pixel)
@@ -22,15 +20,11 @@ class GameObject {
 
         GameObject();
         
-        GameObject(int, float, float, Collision);
+        GameObject(float, float, Collision);
 
         GameObject& operator=(const GameObject&);
         
         virtual ~GameObject();
-
-        void set_gindex(int i) { graphic_index = i; }
-
-        int get_gindex() const { return graphic_index; }
 
         void set_coord(float f) { coord = f; }
 

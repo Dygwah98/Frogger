@@ -1,13 +1,13 @@
 #include"../include/gameobject.h"
 
 GameObject::GameObject(): 
-    graphic_index(-1), coord(0.0f), length(0.0f), marker(GameObject::null_val()) {
+    coord(0.0f), length(0.0f), marker(GameObject::null_val()) {
 
     cout << "GameObject::GameObject() " << this << endl;
 }
 
-GameObject::GameObject(int ind, float f, float f2, Collision m): 
-    graphic_index(ind), coord(f), length(f2), marker(m) {
+GameObject::GameObject(float f, float f2, Collision m): 
+     coord(f), length(f2), marker(m) {
 
     cout << "GameObject::GameObject(float, float) " << this << endl;
 }
