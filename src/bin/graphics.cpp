@@ -161,7 +161,6 @@ void Graphics::push_permanent_image(int element, float x, float y) {
 
 void Graphics::push_shifted_image(int element, float x, float y, float offset) {
 
-    //da implementare
     //genera automaticamente due bitmap, corrispondenti alle due porzioni
     //dell'immagine originale, per simulare uno shift "circolare"
     ALLEGRO_BITMAP* pic = bitmaps[row][element];
@@ -194,7 +193,7 @@ void Graphics::redraw() {
      if(it.needs_freeing)
         al_destroy_bitmap(it.bitmap);
 
-    //si eliminano dalla coda le immagini non permanenti
+    //si eliminano dalla coda le Image non permanenti
     auto it = queue.begin();
     while(it != queue.end()) {    
         if(!it->is_permanent) it = queue.erase(it);

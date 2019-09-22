@@ -33,6 +33,9 @@ class Level : public GameComponent {
         Line& player_line() { return lines.at(player.get_position()); }
         const Line& player_line() const { return lines.at(player.get_position()); }
 
+        float line_height() const { return graphics.get_buffer_height()/(float)lines.size(); }
+        float player_gpos() const { return player.get_position() * line_height() + (line_height() - player.get_dim())/2; }
+
         Collision player_collides() const;
 
         bool handle_collisions();
