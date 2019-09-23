@@ -3,7 +3,7 @@
 Level::Level(EventHandler& eh): 
     GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), player(), is_stopped(false), frogs_counter(0) {
 
-    Line::setLineDimension(460.0f);
+    Line::setLineDimension(520.0f);
 
     for(unsigned i = 0; i < 11; ++i) lines.push_back({});
 
@@ -17,16 +17,19 @@ Level::~Level() {
 
 Collision Level::player_collides() const { 
 
-    return 
-    (contains<Line>(lines, player.get_position()))
-    ? player_line().check_for_collision(player)
-    : GameObject::null_val();
+    Collision ret = GameObject::null_val();
+    
+    if(contains<Line>(lines, player.get_position()))
+        ret = player_line().check_for_collision(player);
+
+    return ret;
 }
 
 bool Level::handle_collisions() {
+
     //controlla se sono avvenute collisioni sulla linea sulla quale si trova il player
     switch(player_collides()) {
-        
+
         //se la collisione è letale
         case Collision::Deadly:
             //il player perde una vita
@@ -64,24 +67,20 @@ bool Level::handle_collisions() {
 
 void Level::update_player() {
     //controlla se il player deve muoversi
-    //se è stato premuto un tasto: viene specificato al player che inizia il movimento
-    if(!player.is_moving() and events.next_key() != Keys::nd) {
-        
+    //se è stato premuto un tasto: 
+    if(!player.is_moving() and events.next_key() != Keys::nd)
+        //viene specificato al player che inizia il movimento
         player.set_dir(events.next_key());
-        if(player_in_area())
-            player.move();
-        else
-            player.set_still();
-    } 
-    //se si sta già movendo: continua (internamente gestirà il cambio del bool isMoving)
-    else if(player.is_moving()) 
-        player.move();
+
+    if(player_in_area()) player.move();
+    else                 player.set_still();
 }
 
 void Level::update_lines() {
+
     //shifta ogni linea secondo la sua velocità
-    for(auto it = lines.begin(); it != lines.end(); it=it+1)
-        it->shift_head();        
+    for(Line& it : lines)
+        it.shift_head();        
 }
 
 GameComponent::exec_type Level::exec() {

@@ -69,3 +69,23 @@ void Player::move() {
             set_still();
     }
 }
+
+float Player::next_pos() const { 
+        
+    return 
+    (dir != Keys::UP and dir != Keys::DOWN) 
+    ? position
+    : (dir == Keys::UP) 
+        ? floor(position + dpos.at(dir)*speed)
+        : ceil(position + dpos.at(dir)*speed + speed); 
+}
+
+float Player::next_coord() const { 
+            
+    return 
+    (dir != Keys::LEFT and dir != Keys::RIGHT)
+    ? get_coord()
+    : (dir == Keys::LEFT)
+        ? get_coord() + dcord.at(dir)*speed
+        : ceil(get_coord() + dcord.at(dir)*speed + get_length());
+}

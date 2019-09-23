@@ -29,5 +29,5 @@ GameObject::~GameObject() {
 
 Collision GameObject::collides(const GameObject& g) const { 
     
-    return (in_range<float>(coord, g.coord, coord + length)) ? marker : GameObject::null_val(); 
+    return in_range<float>(coord, g.coord, coord + length) ? marker : GameObject::null_val(); 
 }

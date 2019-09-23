@@ -65,7 +65,9 @@ Graphics::Graphics():
     bitmaps.push_back({});
     bitmaps.push_back({});
     
-    bitmaps[1].push_back(al_create_bitmap(460, 600));
+    int val = 520;
+
+    bitmaps[1].push_back(al_create_bitmap(val, 600));
     al_set_target_bitmap(bitmaps[1][0]);
     al_clear_to_color(al_map_rgb(175, 175, 175));
 
@@ -74,55 +76,55 @@ Graphics::Graphics():
     al_clear_to_color(al_map_rgb(255, 255, 255));
 
 //LINES TEMPORANEE
-    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    bitmaps[1].push_back(al_create_bitmap(val, 600/11+1));
     al_set_target_bitmap(bitmaps[1][2]);
     al_clear_to_color(al_map_rgb(150, 150, 150));
 //
-    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    bitmaps[1].push_back(al_create_bitmap(val, 600/11+1));
     al_set_target_bitmap(bitmaps[1][3]);
     al_clear_to_color(al_map_rgb(125, 175, 255));
-    al_put_pixel(230, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(val/2, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    bitmaps[1].push_back(al_create_bitmap(val, 600/11+1));
     al_set_target_bitmap(bitmaps[1][4]);
     al_clear_to_color(al_map_rgb(125, 255, 175));
-    al_put_pixel(250, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(val/2+20, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    bitmaps[1].push_back(al_create_bitmap(val, 600/11+1));
     al_set_target_bitmap(bitmaps[1][5]);
     al_clear_to_color(al_map_rgb(255, 175, 125));
-    al_put_pixel(270, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(val/2+40, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    bitmaps[1].push_back(al_create_bitmap(val, 600/11+1));
     al_set_target_bitmap(bitmaps[1][6]);
     al_clear_to_color(al_map_rgb(255, 125, 175));
-    al_put_pixel(300, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(val/2+60, 300/11+1, al_map_rgb(255, 255, 255));
 //
-    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    bitmaps[1].push_back(al_create_bitmap(val, 600/11+1));
     al_set_target_bitmap(bitmaps[1][7]);
     al_clear_to_color(al_map_rgb(150, 150, 150));
 //
-    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    bitmaps[1].push_back(al_create_bitmap(val, 600/11+1));
     al_set_target_bitmap(bitmaps[1][8]);
     al_clear_to_color(al_map_rgb(125, 175, 255));
-    al_put_pixel(230, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(val/2, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    bitmaps[1].push_back(al_create_bitmap(val, 600/11+1));
     al_set_target_bitmap(bitmaps[1][9]);
     al_clear_to_color(al_map_rgb(125, 255, 175));
-    al_put_pixel(250, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(val/2+20, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    bitmaps[1].push_back(al_create_bitmap(val, 600/11+1));
     al_set_target_bitmap(bitmaps[1][10]);
     al_clear_to_color(al_map_rgb(255, 175, 125));
-    al_put_pixel(270, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(val/2+40, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    bitmaps[1].push_back(al_create_bitmap(val, 600/11+1));
     al_set_target_bitmap(bitmaps[1][11]);
     al_clear_to_color(al_map_rgb(255, 125, 175));
-    al_put_pixel(300, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(val/2+60, 300/11+1, al_map_rgb(255, 255, 255));
 //
-    bitmaps[1].push_back(al_create_bitmap(460, 600/11+1));
+    bitmaps[1].push_back(al_create_bitmap(val, 600/11+1));
     al_set_target_bitmap(bitmaps[1][12]);
     al_clear_to_color(al_map_rgb(150, 150, 150));
 

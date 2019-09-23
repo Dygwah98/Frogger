@@ -78,25 +78,9 @@ class Player: public GameObject {
 
         void reposition(const float&, const float&);
 
-        float next_pos() const { 
-        
-            return 
-            (dir != Keys::UP and dir != Keys::DOWN) 
-            ? position
-            : (dir == Keys::UP) 
-                ? floor(position + dpos.at(dir)*speed)
-                : position + dpos.at(dir)*speed + 1.0f; 
-        }
+        float next_pos() const;
 
-        float next_coord() const { 
-            
-            return 
-            (dir != Keys::LEFT and dir != Keys::RIGHT)
-            ? get_coord()
-            : (dir == Keys::LEFT)
-                ? get_coord() + dcord.at(dir)*speed
-                : get_coord() + dcord.at(dir)*speed + get_length(); 
-        }
+        float next_coord() const;
 
         void print() {  cout << "(" << position << ", " << get_coord() << ")"; }
 };
