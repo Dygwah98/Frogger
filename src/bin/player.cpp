@@ -1,17 +1,14 @@
 #include"../include/player.h"
 
-Player::Player(): 
-    GameObject(0.0f, 30.0f, GameObject::null_val()), 
-    graphic_index(1), position(0.0f), vert_dim(30.0f), speed(0.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
+unsigned Player::max_counter() const {
 
-    cout << "Player::Player() " << this << endl;
-
-    set_speed(1.0f);
+    return 60*(60/graphic_context.get_refresh_rate());
 }
 
-Player::Player(int ind, int i, float f): 
-    GameObject(f, 30.0f, GameObject::null_val()), 
-    graphic_index(ind), position(i), vert_dim(30.0f), speed(0.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
+Player::Player(Graphics& g, int ind, int i, float f): 
+    GameObject(g, f, 30.0f, GameObject::null_val()), 
+    graphic_index(ind), position(i), vert_dim(30.0f), speed(0.0f), 
+    isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
 
     cout << "Player::Player(int, float) " << this << endl;
 
@@ -49,7 +46,7 @@ void Player::set_dir(Keys key) {
     
         isMoving = true;
         dir = key;
-        counter = 60;
+        counter = max_counter();
     }
 }
 
@@ -76,8 +73,8 @@ float Player::next_pos() const {
     (dir != Keys::UP and dir != Keys::DOWN) 
     ? position
     : (dir == Keys::UP)
-        ? floor(position + dpos.at(dir)*speed*60)
-        : position + dpos.at(dir)*speed*60 + speed; 
+        ? floor(position + dpos.at(dir)*speed*max_counter())
+        : position + dpos.at(dir)*speed*max_counter() + speed; 
 }
 
 float Player::next_coord() const { 
@@ -86,6 +83,6 @@ float Player::next_coord() const {
     (dir != Keys::LEFT and dir != Keys::RIGHT)
     ? get_coord()
     : (dir == Keys::LEFT)
-        ? floor(get_coord() + dcord.at(dir)*speed*60)
-        : get_coord() + dcord.at(dir)*speed*60 + get_length();
+        ? floor(get_coord() + dcord.at(dir)*speed*max_counter())
+        : get_coord() + dcord.at(dir)*speed*max_counter() + get_length();
 }

@@ -42,7 +42,7 @@ class Graphics {
         vector<Image> queue;
 
         //restituisce i parametri adatti per l'inizializzazione del display
-        ALLEGRO_DISPLAY_MODE getDispMode();
+        ALLEGRO_DISPLAY_MODE getDispMode() const;
         //calcola i fattori di scala per questo particolare display
         void calc_scale_factors();
 
@@ -69,6 +69,7 @@ class Graphics {
 
         float get_buffer_height() const { return buffer.y; }
         float get_buffer_width() const { return buffer.x; }
+        unsigned get_refresh_rate() const { return getDispMode().refresh_rate; }
 };
 
 #endif

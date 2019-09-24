@@ -40,13 +40,13 @@ class Player: public GameObject {
         //numero di vite del player
         int lifes;
 
+        unsigned max_counter() const;
+
     protected:
     
     public:
         
-        Player();
-        
-        Player(int, int, float);
+        Player(Graphics&, int, int, float);
         
         Player& operator=(const Player&);
 

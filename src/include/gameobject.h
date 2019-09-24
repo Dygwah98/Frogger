@@ -1,11 +1,11 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include"root.h"
+#include"graphics.h"
 
 class GameObject {
 
-    private:
+    private:    
         //posizione nella linea (valore float -> pixel)
         float coord;
         //lunghezza sulla linea (valore float -> pixel)
@@ -14,13 +14,12 @@ class GameObject {
         Collision marker;
 
     protected:
-
+        Graphics& graphic_context;
+    
     public:
         static Collision null_val() { return Collision::nd; }
 
-        GameObject();
-        
-        GameObject(float, float, Collision);
+        GameObject(Graphics&, float, float, Collision);
 
         GameObject& operator=(const GameObject&);
         

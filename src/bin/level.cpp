@@ -1,7 +1,8 @@
 #include"../include/level.h"
 
 Level::Level(EventHandler& eh): 
-    GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), player(), is_stopped(false), frogs_counter(0) {
+    GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), 
+    player(eh.get_graphic_context(), 1, 0, 0.0f), is_stopped(false), frogs_counter(0) {
 
     Line::setLineDimension(520.0f);
 

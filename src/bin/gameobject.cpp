@@ -1,13 +1,7 @@
 #include"../include/gameobject.h"
 
-GameObject::GameObject(): 
-    coord(0.0f), length(0.0f), marker(GameObject::null_val()) {
-
-    cout << "GameObject::GameObject() " << this << endl;
-}
-
-GameObject::GameObject(float f, float f2, Collision m): 
-     coord(f), length(f2), marker(m) {
+GameObject::GameObject(Graphics& g, float f, float f2, Collision m): 
+    coord(f), length(f2), marker(m), graphic_context(g) {
 
     cout << "GameObject::GameObject(float, float) " << this << endl;
 }
@@ -29,5 +23,8 @@ GameObject::~GameObject() {
 
 Collision GameObject::collides(const GameObject& g) const { 
     
-    return in_range<float>(coord, g.coord, coord + length) ? marker : GameObject::null_val(); 
+    return 
+    in_range<float>(coord, g.coord, coord + length) 
+        ? marker 
+        : GameObject::null_val(); 
 }

@@ -9,7 +9,7 @@ bool Graphics::initAllegro() {
     return isValid;
 }
 
-ALLEGRO_DISPLAY_MODE Graphics::getDispMode() {
+ALLEGRO_DISPLAY_MODE Graphics::getDispMode() const {
 
     ALLEGRO_DISPLAY_MODE temp;
     al_get_display_mode(0, &temp);
