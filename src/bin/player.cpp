@@ -75,9 +75,9 @@ float Player::next_pos() const {
     return 
     (dir != Keys::UP and dir != Keys::DOWN) 
     ? position
-    : (dir == Keys::UP) 
-        ? floor(position + dpos.at(dir)*speed)
-        : ceil(position + dpos.at(dir)*speed + speed); 
+    : (dir == Keys::UP)
+        ? floor(position + dpos.at(dir)*speed*60)
+        : position + dpos.at(dir)*speed*60 + speed; 
 }
 
 float Player::next_coord() const { 
@@ -86,6 +86,6 @@ float Player::next_coord() const {
     (dir != Keys::LEFT and dir != Keys::RIGHT)
     ? get_coord()
     : (dir == Keys::LEFT)
-        ? get_coord() + dcord.at(dir)*speed
-        : ceil(get_coord() + dcord.at(dir)*speed + get_length());
+        ? floor(get_coord() + dcord.at(dir)*speed*60)
+        : get_coord() + dcord.at(dir)*speed*60 + get_length();
 }

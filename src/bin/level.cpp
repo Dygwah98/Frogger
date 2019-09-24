@@ -68,12 +68,18 @@ bool Level::handle_collisions() {
 void Level::update_player() {
     //controlla se il player deve muoversi
     //se è stato premuto un tasto: 
-    if(!player.is_moving() and events.next_key() != Keys::nd)
-        //viene specificato al player che inizia il movimento
-        player.set_dir(events.next_key());
-
-    if(player_in_area()) player.move();
-    else                 player.set_still();
+    if(!player.is_moving()) {
+        
+        if(events.next_key() != Keys::nd)
+            //viene specificato al player che inizia il movimento
+            player.set_dir(events.next_key());
+        
+        if(player_in_area()) 
+            player.move();
+        else                 
+            player.set_still();   
+    }
+    else player.move();
 }
 
 void Level::update_lines() {
