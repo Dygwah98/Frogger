@@ -2,6 +2,7 @@
 
 unsigned Player::max_counter() const {
 
+    assert(graphic_context.get_refresh_rate() != 0);
     return 60*(60/graphic_context.get_refresh_rate());
 }
 
@@ -10,23 +11,9 @@ Player::Player(Graphics& g, int ind, int i, float f):
     graphic_index(ind), position(i), vert_dim(30.0f), speed(0.0f), 
     isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
 
-    cout << "Player::Player(int, float) " << this << endl;
+    cout << "Player::Player(Graphics&, int, int, float) " << this << endl;
 
     set_speed(1.0f);
-}
-
-Player& Player::operator=(const Player& P) {
-    
-    if(this!=&P) {
-        GameObject::operator=(P);
-        position = P.position;
-        speed = P.speed;
-        isMoving = P.isMoving;
-        counter = P.counter;
-        dir = P.dir;
-        lifes = P.lifes;
-    }
-    return *this;
 }
 
 Player::~Player() {

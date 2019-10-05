@@ -48,8 +48,6 @@ class Player: public GameObject {
         
         Player(Graphics&, int, int, float);
         
-        Player& operator=(const Player&);
-
         virtual ~Player();
 
         void move();

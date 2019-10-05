@@ -6,14 +6,14 @@ Level::Level(EventHandler& eh):
 
     Line::setLineDimension(520.0f);
 
-    for(unsigned i = 0; i < 11; ++i) lines.push_back({});
+    for(unsigned i = 0; i < 11; ++i) lines.emplace_back(graphics);
 
-    cout << "Level::Level() " << this << endl;
+    std::cout << "Level::Level() " << this << endl;
 }
 
 Level::~Level() {
 
-    cout << "Level::~Level() " << this << endl;
+    std::cout << "Level::~Level() " << this << endl;
 }
 
 Collision Level::player_collides() const { 
@@ -94,7 +94,7 @@ GameComponent::exec_type Level::exec() {
 
     GameComponent::exec_type ret = GameComponent::exit_val();
 
-    cout << "Level::exec() " << this << endl;
+    std::cout << "Level::exec() " << this << endl;
 
     bool STOP = false;
     
@@ -151,14 +151,14 @@ GameComponent::exec_type Level::exec() {
         }
     }
 
-/*blocco da rimuovere nella versione finale*/
+//blocco da rimuovere nella versione finale
     if(player.get_lifes() == 0)
-        cout << "Sconfitta!\n";
+        std::cout << "Sconfitta!\n";
     else if(frogs_counter >= 5)
-        cout << "Vittoria!\n";
+        std::cout << "Vittoria!\n";
     else
-        cout << "FORCED EXIT\n";
-/*blocco da rimuovere nella versione finale*/
+        std::cout << "FORCED EXIT\n";
+//blocco da rimuovere nella versione finale
 
     events.suspend();
 

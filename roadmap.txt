@@ -5,9 +5,9 @@ c. miscellaneous
 -a//
 
 1. controls
-1.1. 4 directions, fixed speed
-1.2. game pause option
-1.3. game exit option (or back-to-menu option)
+DONE 1.1. 4 directions, fixed speed 
+DONE 1.2. game pause option
+DONE 1.3. game exit option (or back-to-menu option)
 
 2. position detection and management (either through collision or underlying matrices)
 

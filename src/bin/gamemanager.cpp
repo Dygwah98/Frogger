@@ -12,6 +12,8 @@ GameManager::~GameManager() {
 
 void GameManager::launchGame() {
 
+    assert(root != nullptr);
+    
     GameComponent::exec_type temp = root->exec();
     
     cout << "GameManager::launchGame() " << this << endl;

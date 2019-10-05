@@ -19,6 +19,8 @@ class Line {
         //pixel length of a Line on screen
         static float dim;
 
+        Graphics& graphics;
+
         int graphic_index;
         //offset sulle posizioni: in ogni momento, la posizione reale di ogni elemento sarà ( positions[i] + head ) % dim
         float head;
@@ -35,7 +37,7 @@ class Line {
         //setter for the length of a line
         static void setLineDimension(const float&);
         
-        Line();
+        Line(Graphics&);
         
         Line(const Line&);
 
@@ -43,9 +45,13 @@ class Line {
 
         ~Line();
 
+        const GameObject& at(float) const;
+
         void shift_head();
 
         Collision check_for_collision(const GameObject&) const;
+
+        void place(float, float, Collision);
 
         void set_gindex(int i) { graphic_index = i; }
 
@@ -54,8 +60,6 @@ class Line {
         float get_speed() const { return speed; }
 
         float get_head() const { return head; }
-
-        const GameObject& at(unsigned) const;
 };
 
 #endif
