@@ -5,15 +5,13 @@
 #include"eventhandler.h"
 #include"line.h"
 #include"player.h"
-/*
-    rappresenta l'intera istanza (solo logica?) di un livello
 
-    vab, quantomeno l'handle alla grafica? O viceversa
-*/
 class Level : public GameComponent {
 
     private:
         
+        inline static int ret_val = 1;
+
         Graphics& graphics;
         
         EventHandler& events;
@@ -45,19 +43,19 @@ class Level : public GameComponent {
         void update_player();
         void update_lines();
 
+        virtual int type() override { return at(ret_val); }
+
     protected:
 
     public:
         
-        static exec_type type() { return 1; }
+        static int get_type() { return at(ret_val); }
 
         Level(EventHandler&);
         
         ~Level();
         
-        virtual exec_type get_type() override { return Level::type(); }
-        
-        virtual exec_type exec() override;
+        virtual int exec() override;
 };
 
 #endif

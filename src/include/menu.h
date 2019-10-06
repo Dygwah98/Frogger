@@ -8,23 +8,25 @@ class Menu : public GameComponent {
 
     private:
         
+        inline static int ret_val = 0;
+
         Graphics& graphics;
         
         EventHandler& events;
     
+        virtual int type() override {return at(ret_val); }
+
     protected:
     
     public:
     
-        static exec_type type() { return 0; }
+        static int get_type() { return at(ret_val); }
 
         Menu(EventHandler&);
     
         ~Menu();
     
-        virtual exec_type get_type() override { return Menu::type(); }
-    
-        virtual exec_type exec() override;
+        virtual int exec() override;
 };
 
 #endif

@@ -8,6 +8,7 @@
 #include<map>
 #include<string>
 #include<algorithm>
+#include<memory>
 #include<allegro5/allegro.h>
 #include<allegro5/allegro_image.h>
 using namespace std;

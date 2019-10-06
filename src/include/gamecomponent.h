@@ -7,25 +7,36 @@ class GameComponent {
 
     private:
 
+        static decltype(make_unique<map<int,int> >()) init_map();
+
+        static unique_ptr<map<int, int> > exec_ret;
+
+        virtual int type() = 0;
+
     protected:
-        
-        GameComponent() { 
+
+        static int at(int key) { return exec_ret->at(key); }
+
+        GameComponent(int ret_val) {
+
+            assert( !(contains<int, int>(*exec_ret, ret_val)) );
+            
+            (*exec_ret)[ret_val] = ret_val;
+
             cout << "GameComponent::GameComponent() " << this << endl;
         }
 
     public:
-        
-        using exec_type = int;
+    
+        static int exit_val() { return exec_ret->at(-1); }
+    
+        int get_type() { return this->type(); };
 
-        static exec_type exit_val() { return -1; }
-        
         virtual ~GameComponent() { 
             cout << "GameComponent::~GameComponent() " << this << endl;
         }
 
-        virtual exec_type exec() = 0;
-        
-        virtual exec_type get_type() = 0;
+        virtual int exec() = 0;
 };
 
 #endif

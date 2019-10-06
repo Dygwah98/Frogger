@@ -1,7 +1,7 @@
 #include"../include/level.h"
 
 Level::Level(EventHandler& eh): 
-    GameComponent(), graphics(eh.get_graphic_context()), events(eh), lines(), 
+    GameComponent(ret_val), graphics(eh.get_graphic_context()), events(eh), lines(), 
     player(eh.get_graphic_context(), 1, 0, 0.0f), is_stopped(false), frogs_counter(0) {
 
     Line::setLineDimension(520.0f);
@@ -90,9 +90,9 @@ void Level::update_lines() {
         it.shift_head();        
 }
 
-GameComponent::exec_type Level::exec() {
+int Level::exec() {
 
-    GameComponent::exec_type ret = GameComponent::exit_val();
+    int ret = GameComponent::exit_val();
 
     std::cout << "Level::exec() " << this << endl;
 
@@ -153,11 +153,11 @@ GameComponent::exec_type Level::exec() {
 
 //blocco da rimuovere nella versione finale
     if(player.get_lifes() == 0)
-        std::cout << "Sconfitta!\n";
+        std::cout << "Sconfitta!\n"; //Loss::type()
     else if(frogs_counter >= 5)
-        std::cout << "Vittoria!\n";
+        std::cout << "Vittoria!\n"; //Victory::type()
     else
-        std::cout << "FORCED EXIT\n";
+        std::cout << "FORCED EXIT\n"; //abort of sorts
 //blocco da rimuovere nella versione finale
 
     events.suspend();

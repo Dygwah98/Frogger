@@ -1,6 +1,6 @@
 #include"../include/menu.h"
 
-Menu::Menu(EventHandler& eh): GameComponent(), graphics(eh.get_graphic_context()), events(eh) {
+Menu::Menu(EventHandler& eh): GameComponent(ret_val), graphics(eh.get_graphic_context()), events(eh) {
 
     cout << "Menu::Menu() " << this << endl;
 }
@@ -10,9 +10,9 @@ Menu::~Menu() {
     cout << "Menu::~Menu() " << this << endl;
 }
 
-GameComponent::exec_type Menu::exec() {
+int Menu::exec() {
     
     cout << "Menu::exec() " << this << endl;
 
-    return Level::type();
+    return Level::get_type();
 }
