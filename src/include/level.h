@@ -10,7 +10,7 @@ class Level : public GameComponent {
 
     private:
         
-        inline static int ret_val = 1;
+        static int ret_val() { return 1; };
 
         Graphics& graphics;
         
@@ -43,13 +43,13 @@ class Level : public GameComponent {
         void update_player();
         void update_lines();
 
-        virtual int type() override { return at(ret_val); }
+        virtual int type() override { return at(ret_val()); }
 
     protected:
 
     public:
         
-        static int get_type() { return at(ret_val); }
+        static int get_type() { return at(ret_val()); }
 
         Level(EventHandler&);
         
