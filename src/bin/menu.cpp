@@ -1,18 +1,23 @@
-#include"../include/menu.h"
+#include"../include/menu.hpp"
 
-Menu::Menu(EventHandler& eh): GameComponent(ret_val()), graphics(eh.get_graphic_context()), events(eh) {
+int Menu::type() {
 
-    cout << "Menu::Menu() " << this << endl;
+    return int(PanelType::MENU);
 }
 
-Menu::~Menu() {
+int Menu::body() {
 
-    cout << "Menu::~Menu() " << this << endl;
+    PanelType ret = PanelType::MENU;
+    while(ret != PanelType::EXIT) {
+        //run menu screen
+            //based on user choice, launch anoter Panel
+    }
 }
 
-int Menu::exec() {
-    
-    cout << "Menu::exec() " << this << endl;
+Menu::Menu(): Panel(), panels() {
 
-    return Level::get_type();
+    panels[PanelType::OPTIONS] = Options();
+    panels[PanelType::LEVEL]   = Level();
+    panels[PanelType::WIN]     = WinScreen();
+    panels[PanelType::LOSS]    = LossScreen();
 }

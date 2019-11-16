@@ -7,9 +7,12 @@ class GameComponent {
 
     private:
 
-        static decltype(make_unique<map<int,int> >()) init_map();
+        typedef map<int, int> type_table;
+        typedef unique_ptr<type_table> table_ptr; 
 
-        static unique_ptr<map<int, int> > exec_ret;
+        static table_ptr init_map();
+
+        static table_ptr exec_ret;
 
         virtual int type() = 0;
 
@@ -21,7 +24,7 @@ class GameComponent {
 
             assert( !(contains<int, int>(*exec_ret, ret_val)) );
             
-            (*exec_ret)[ret_val] = ret_val;
+            exec_ret->insert({ret_val, ret_val});
 
             cout << "GameComponent::GameComponent() " << this << endl;
         }
@@ -30,11 +33,11 @@ class GameComponent {
     
         static int exit_val() { return exec_ret->at(-1); }
     
-        int get_type() { return this->type(); };
-
         virtual ~GameComponent() { 
             cout << "GameComponent::~GameComponent() " << this << endl;
         }
+
+        int get_type() { return this->type(); };
 
         virtual int exec() = 0;
 };

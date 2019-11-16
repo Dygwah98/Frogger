@@ -1,33 +1,10 @@
-#include"../include/gamemanager.h"
-#include<allegro5/allegro.h>
+#include"../include/menu.hpp"
 
-int main(int argv, char** argc) {
+int main(int argv, char* argc) {
 
-    //allocazioni delle risorse    
-    cout << endl << "ALLOCAZIONE: " << argc[0] << endl << endl;
+    Menu m;
 
-    Graphics g;
-    EventHandler ev(g);
-    GameManager gm(ev);
+    m.execute();
 
-    GameComponent* m = new Menu(ev);
-    gm.addAsRoot(m);
-    
-    GameComponent* l = new Level(ev);
-    gm.add(l);
-
-    //avvio del gioco       
-    cout << endl << "ESECUZIONE: " << argc[0] << endl << endl;
-
-    gm.launchGame();
-
-    //deallocazioni dinamiche delle risorse   
-    cout << endl << "DEALLOCAZIONE: " << argc[0] << endl << endl;
-    
-    delete l;
-    delete m;
-
-    //deallocazioni statiche delle risorse
-    cout << endl;
     return 0;
 }
