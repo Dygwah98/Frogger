@@ -1,10 +1,10 @@
 #include"../include/menu.hpp"
 
-int main(int argv, char* argc) {
+int main(int argv, char** argc) {
 
     Menu m;
 
-    m.execute();
+    m.launchGame();
 
     return 0;
 }

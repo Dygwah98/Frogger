@@ -10,17 +10,17 @@ class Panel {
     protected:        
         enum struct PanelType : int {EXIT = -2, MENU = -1, OPTIONS = 0, LEVEL = 1, WIN = 2, LOSS = 3};
 
-        virtual int type() = 0;
-        virtual int body() = 0;
+        virtual PanelType type() = 0;
+        virtual PanelType body(PanelType) = 0;
 
     public:
         virtual ~Panel() {}
 
-        inline std::pair<int, int> execute() {
+        inline std::pair<PanelType, PanelType> execute(PanelType caller) {
 
-            std::pair<int, int> ret;
+            std::pair<PanelType, PanelType> ret;
             ret.first  = this->type();
-            ret.second = this->body();
+            ret.second = this->body(caller);
             
             return ret;
         }

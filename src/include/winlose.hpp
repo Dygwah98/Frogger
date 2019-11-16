@@ -6,16 +6,22 @@
 class WinScreen : public Panel {
 
     protected:
-        int type() override;
-        int body() override;
+        PanelType type() override;
+        PanelType body(PanelType) override;
+    
+    public:
+        WinScreen();
 
 };
 
 class LossScreen : public Panel {
 
     protected:
-        int type() override;
-        int body() override;
+        PanelType type() override;
+        PanelType body(PanelType) override;
+
+    public:
+        LossScreen();
 };
 
 #endif

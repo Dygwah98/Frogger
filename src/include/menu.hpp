@@ -6,17 +6,20 @@
 #include"winlose.hpp"
 
 //Composite root node, Mediator
-class Menu : public Panel {
+class Menu : protected Panel {
 
     private:
-        std::map<PanelType, Panel> panels;
+        std::map<PanelType, Panel*> panels;
 
     protected:
-        int type() override;
-        int body() override;
+        PanelType type() override;
+        PanelType body(PanelType) override;
 
     public:
         Menu();
+        ~Menu();
+        
+        void launchGame();
 };
 
 #endif

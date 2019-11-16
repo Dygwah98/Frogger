@@ -6,8 +6,11 @@
 class Options: public Panel {
 
     protected:
-        int type() override;
-        int body() override;
+        PanelType type() override;
+        PanelType body(PanelType) override;
+    
+    public:
+        Options();
 };
 
 #endif
