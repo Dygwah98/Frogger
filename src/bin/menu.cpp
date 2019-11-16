@@ -1,5 +1,9 @@
 #include"../include/menu.hpp"
 
+Panel::PanelType Menu::runMenuScreen() {
+    
+}
+
 Panel::PanelType Menu::type() {
 
     return PanelType::MENU;
@@ -8,8 +12,9 @@ Panel::PanelType Menu::type() {
 Panel::PanelType Menu::body(PanelType ret) {
 
     while(ret != PanelType::EXIT) {
-        //run menu screen
-            //based on user choice, launch anoter Panel
+        
+        ret = runMenuScreen();
+        ret = panels.at(ret)->execute(Menu::type());
     }
 
     return ret;

@@ -11,6 +11,8 @@ class Menu : protected Panel {
     private:
         std::map<PanelType, Panel*> panels;
 
+        PanelType runMenuScreen();
+
     protected:
         PanelType type() override;
         PanelType body(PanelType) override;

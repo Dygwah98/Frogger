@@ -16,13 +16,9 @@ class Panel {
     public:
         virtual ~Panel() {}
 
-        inline std::pair<PanelType, PanelType> execute(PanelType caller) {
+        inline PanelType execute(PanelType caller) {
 
-            std::pair<PanelType, PanelType> ret;
-            ret.first  = this->type();
-            ret.second = this->body(caller);
-            
-            return ret;
+            return this->body(caller);
         }
 };
 

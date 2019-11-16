@@ -11,6 +11,8 @@ Panel::PanelType WinScreen::body(PanelType caller) {
 
 WinScreen::WinScreen(): Panel() {}
 
+//LossScreen methods
+
 Panel::PanelType LossScreen::type() {
 
     return PanelType::LOSS;
