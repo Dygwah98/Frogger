@@ -12,7 +12,7 @@
 #include<allegro5/allegro.h>
 #include<allegro5/allegro_image.h>
 
-enum struct Event : int { nd = -1, Exit = 0, Execute = 1, Redraw = 2, Stop = 3 };
+enum struct Event : int { nd = -1, Exit = 0, Execute = 1, Redraw = 2, Pause = 3 };
 enum struct Keys : int { nd = -1, UP = 0, LEFT = 1, DOWN = 2, RIGHT = 3 };
 enum struct Collision : int { nd = -1, Log = 0, Deadly = 1, Arrival = 2 };
 

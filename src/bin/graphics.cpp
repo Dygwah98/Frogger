@@ -9,6 +9,22 @@ bool Graphics::initAllegro() {
     return isValid;
 }
 
+Graphics* Graphics::instance = nullptr;
+
+Graphics* Graphics::getInstance() {
+
+    if(instance == nullptr)
+        instance = new Graphics();
+    
+    return instance;
+}
+
+void Graphics::delInstance() {
+    if(instance != nullptr)
+        delete instance;
+    instance = nullptr;
+}
+
 ALLEGRO_DISPLAY_MODE Graphics::getDispMode() const {
 
     ALLEGRO_DISPLAY_MODE temp;
@@ -35,8 +51,8 @@ void Graphics::calc_scale_factors() {
     
     scale[0] = buffer.x * ratio;
     scale[1] = buffer.y * ratio;
-    scale[2] = (al_get_display_width(display) - scale[0]) / 2;    
-    scale[3] = (al_get_display_height(display) - scale[1]) / 2;
+    scale[2] = (al_get_display_width(display) - scale[0]) / 2.0f;    
+    scale[3] = (al_get_display_height(display) - scale[1]) / 2.0f;
 }
 
 Graphics::Graphics():
@@ -147,7 +163,6 @@ Graphics::~Graphics() {
 
 void Graphics::push_image(int element, float x, float y) {
     
-    //priority va usata per l'inserimento in coda
     assert(in_range<int>(0, row, bitmaps.size(), true, false));
     assert(in_range<int>(0, element, bitmaps[row].size(), true, false));
     queue.push_back( {bitmaps[row][element], x, y, false, false} );
@@ -155,16 +170,15 @@ void Graphics::push_image(int element, float x, float y) {
 
 void Graphics::push_permanent_image(int element, float x, float y) {
 
-    //priority va usata per l'inserimento in coda
     assert(in_range<int>(0, row, bitmaps.size(), true, false));
     assert(in_range<int>(0, element, bitmaps[row].size(), true, false));
     queue.push_back( {bitmaps[row][element], x, y, true, false} );
 }
 
+//genera automaticamente due bitmap, corrispondenti alle due porzioni
+//dell'immagine originale, per simulare uno shift "circolare"    
 void Graphics::push_shifted_image(int element, float x, float y, float offset) {
 
-    //genera automaticamente due bitmap, corrispondenti alle due porzioni
-    //dell'immagine originale, per simulare uno shift "circolare"
     ALLEGRO_BITMAP* pic = bitmaps[row][element];
     float picH = al_get_bitmap_height(pic);
     float picW = al_get_bitmap_width(pic);
@@ -198,7 +212,9 @@ void Graphics::redraw() {
     //si eliminano dalla coda le Image non permanenti
     auto it = queue.begin();
     while(it != queue.end()) {    
-        if(!it->is_permanent) it = queue.erase(it);
-        else                  it = it + 1;
+        if(!it->is_permanent)
+            it = queue.erase(it);
+        else
+            it = it + 1;
     }
 }

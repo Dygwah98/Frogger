@@ -3,6 +3,8 @@
 
 #include<utility>
 #include<map>
+#include"eventhandler.hpp"
+#include"graphics.hpp"
 
 //Composite base class
 class Panel {

@@ -1,7 +1,23 @@
 #include"../include/eventhandler.hpp"
 
-EventHandler::EventHandler(Graphics& g): g(g), redraw(false), key_pressed(Keys::nd) {
+EventHandler* EventHandler::instance = nullptr;
 
+EventHandler* EventHandler::getInstance() {
+    if(instance == nullptr)
+        instance = new EventHandler();
+    
+    return instance;
+}
+
+void EventHandler::delInstance() {
+    if(instance != nullptr)
+        delete instance;
+    instance = nullptr;
+}
+
+EventHandler::EventHandler(): redraw(false), key_pressed(Keys::nd) {
+
+    Graphics& g = *(Graphics::getInstance());
     //inizializzazione timer:
     timer = al_create_timer(1.0/g.getDispMode().refresh_rate);
     assert(timer != nullptr);
@@ -38,9 +54,8 @@ void EventHandler::launch() {
 void EventHandler::suspend() {
 
     if(!is_ready()) return;
-    //è una buona idea?
-    g.clear();
-
+    
+    Graphics::getInstance()->clear();
     al_stop_timer(timer);
     al_flush_event_queue(event_queue);
     al_pause_event_queue(event_queue, true);
@@ -51,6 +66,7 @@ Event EventHandler::next_event() {
     Event ret = Event::nd;
     
     if(redraw and al_is_event_queue_empty(event_queue)) {
+        
         redraw = false;
         return Event::Redraw;
     }
@@ -68,8 +84,8 @@ Event EventHandler::next_event() {
         
         case ALLEGRO_EVENT_DISPLAY_RESIZE:
 
-            al_acknowledge_resize(g.display);
-            g.calc_scale_factors();
+            al_acknowledge_resize(Graphics::getInstance()->display);
+            Graphics::getInstance()->calc_scale_factors();
 
         break;
 
@@ -86,7 +102,7 @@ Event EventHandler::next_event() {
                     ret = Event::Exit;
             
             else if(ev.keyboard.keycode == ALLEGRO_KEY_SPACE)
-                    ret = Event::Stop;
+                    ret = Event::Pause;
 
             else if(contains<int, Keys>(keymap, ev.keyboard.keycode))
                 if(key_pressed == keymap.at(ev.keyboard.keycode))

@@ -1,7 +1,8 @@
 #include"../include/menu.hpp"
 
 Panel::PanelType Menu::runMenuScreen() {
-    
+
+    return PanelType::LEVEL;
 }
 
 Panel::PanelType Menu::type() {
@@ -11,10 +12,12 @@ Panel::PanelType Menu::type() {
 
 Panel::PanelType Menu::body(PanelType ret) {
 
+    Panel* next;
     while(ret != PanelType::EXIT) {
         
-        ret = runMenuScreen();
-        ret = panels.at(ret)->execute(Menu::type());
+        ret  = runMenuScreen();
+        next = panels.at(ret);
+        ret  = next->execute(Menu::type());
     }
 
     return ret;
@@ -37,4 +40,6 @@ Menu::~Menu() {
 void Menu::launchGame() {
 
     this->execute(PanelType::MENU);
+    Graphics::delInstance();
+    EventHandler::delInstance();
 }

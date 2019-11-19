@@ -28,6 +28,7 @@ class Graphics {
         //funzione che inizializza le componenti interne di Allegro
         static bool initAllegro();
 
+        static Graphics* instance;
         //struttura di Allegro per il disegno su schermo
         ALLEGRO_DISPLAY* display;
         //bitmap d'appoggio, usata per la scalabilità
@@ -46,13 +47,12 @@ class Graphics {
         //calcola i fattori di scala per questo particolare display
         void calc_scale_factors();
 
-    protected:
-    
-    public:
-        //funzione che si occupa di inizializzare le componenti grafiche
         Graphics();
-        //?? costruttore con parametri (magari per l'inizializzazione del display) ??//
-        //Graphics(...)
+
+    public:
+        static Graphics* getInstance();
+
+        static void delInstance();
         //dealloca le risorse di Allegro
         ~Graphics();
 
@@ -64,7 +64,7 @@ class Graphics {
         void push_shifted_image(int, float, float, float);
         //disegna gli elementi presenti nella queue, consumandoli se is_permanent = false
         void redraw();
-        //elimina tutti gli elementi nella queue e resetta il buffer
+        //elimina tutti gli elementi nella queue e (al momento) NON resetta il buffer
         void clear() { queue.clear(); }
 
         float get_buffer_height() const { return buffer.y; }
