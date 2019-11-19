@@ -9,7 +9,13 @@ class Level : public Panel {
         bool exit;
         bool pause;
 
+        Player player;
+        //le lines le cambio o non le cambio?
+
         void update_game_state();
+        void reset_game_state();
+
+        void redraw_game();
 
     protected:
         PanelType type() override;

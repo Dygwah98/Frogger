@@ -2,6 +2,21 @@
 
 void Level::update_game_state() {
 
+    player.update_state();
+    //update lines
+}
+
+void Level::reset_game_state() {
+
+    //reset player
+    //reset lines
+}
+
+void Level::redraw_game() {
+
+    //redraw delle lines
+    player.redraw();
+    Graphics::getInstance()->redraw();
 }
 
 Panel::PanelType Level::type() {
@@ -11,12 +26,11 @@ Panel::PanelType Level::type() {
 
 Panel::PanelType Level::body(PanelType caller) {
 
-    //imposta la row da cui prendere le bitmaps
-    Graphics* g      = Graphics::getInstance();
-    EventHandler* eh = EventHandler::getInstance();
-    
-    g->set_component(int(this->type()));
-    eh->launch();
+    reset_game_state();
+
+    //imposta la row da cui prendere le bitmap
+    Graphics::getInstance()->set_component(int(this->type()));
+    EventHandler::getInstance()->launch();
 
     while(!exit) {
 
@@ -26,23 +40,15 @@ Panel::PanelType Level::body(PanelType caller) {
             case Event::Exit:   exit = true;    break;
             case Event::Pause:  pause = !pause; break;
 
-            case Event::Execute:
-
-                if(!pause) {
-                    
-                    //eventuali singole modifiche vanno fatte qui
-                    update_game_state();
-                }
+            case Event::Execute: 
+                
+                if(!pause) update_game_state();
 
                 break;
 
             case Event::Redraw:
 
-                if(!pause) {
-                    
-                    //qua vanno le chiamate di disegno del livello
-                    g->redraw();
-                }
+                if(!pause) redraw_game();
 
                 break;
 
@@ -54,9 +60,9 @@ Panel::PanelType Level::body(PanelType caller) {
         }
     }
 
-    eh->suspend();
+    EventHandler::getInstance()->suspend();
 
     return PanelType::EXIT;
 }
 
-Level::Level(): Panel() {}
+Level::Level(): Panel(), exit(false), pause(false) {}
