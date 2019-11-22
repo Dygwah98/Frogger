@@ -10,7 +10,7 @@
 class Panel {
 
     protected:        
-        enum struct PanelType : int {EXIT = -2, MENU = -1, OPTIONS = 0, LEVEL = 1, WIN = 2, LOSS = 3};
+        enum struct PanelType : int {EXIT = -1, MENU = 0, LEVEL = 1, OPTIONS = 2, WIN = 3, LOSS = 4};
 
         virtual PanelType type() = 0;
         virtual PanelType body(PanelType) = 0;

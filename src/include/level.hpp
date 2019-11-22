@@ -2,6 +2,7 @@
 #define LEVEL_HPP
 
 #include"panel.hpp"
+#include"player.h"
 
 class Level : public Panel {
 

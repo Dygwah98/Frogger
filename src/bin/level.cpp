@@ -2,13 +2,12 @@
 
 void Level::update_game_state() {
 
-    player.update_state();
     //update lines
 }
 
 void Level::reset_game_state() {
 
-    //reset player
+    player.reset();
     //reset lines
 }
 
@@ -28,7 +27,6 @@ Panel::PanelType Level::body(PanelType caller) {
 
     reset_game_state();
 
-    //imposta la row da cui prendere le bitmap
     Graphics::getInstance()->set_component(int(this->type()));
     EventHandler::getInstance()->launch();
 
@@ -37,25 +35,24 @@ Panel::PanelType Level::body(PanelType caller) {
         Event e = EventHandler::getInstance()->next_event();
         switch(e) {
             
-            case Event::Exit:   exit = true;    break;
-            case Event::Pause:  pause = !pause; break;
+            case Event::Exit:          
+                exit = true;    
+                break;
+            
+            case Event::Pause:  
+                pause = !pause; 
+                break;
 
             case Event::Execute: 
-                
                 if(!pause) update_game_state();
-
                 break;
 
             case Event::Redraw:
-
                 if(!pause) redraw_game();
-
                 break;
 
             default:
-
                 std::cout << "UNHANDLED EVENT\n";
-            
                 break;
         }
     }
@@ -65,4 +62,4 @@ Panel::PanelType Level::body(PanelType caller) {
     return PanelType::EXIT;
 }
 
-Level::Level(): Panel(), exit(false), pause(false) {}
+Level::Level(): Panel(), exit(false), pause(false), player() {}
