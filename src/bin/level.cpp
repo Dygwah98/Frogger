@@ -2,6 +2,7 @@
 
 void Level::update_game_state() {
 
+    //update player (manually)
     //update lines
 }
 
@@ -18,16 +19,16 @@ void Level::redraw_game() {
     Graphics::getInstance()->redraw();
 }
 
-Panel::PanelType Level::type() {
+PanelType Level::type() {
 
     return PanelType::LEVEL;
 }
 
-Panel::PanelType Level::body(PanelType caller) {
+PanelType Level::body(PanelType caller) {
 
     reset_game_state();
 
-    Graphics::getInstance()->set_component(int(this->type()));
+    Graphics::getInstance()->set_component(this->type());
     EventHandler::getInstance()->launch();
 
     while(!exit) {

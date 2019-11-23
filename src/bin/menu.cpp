@@ -1,16 +1,16 @@
 #include"../include/menu.hpp"
 
-Panel::PanelType Menu::runMenuScreen() {
+PanelType Menu::runMenuScreen() {
 
     return PanelType::LEVEL;
 }
 
-Panel::PanelType Menu::type() {
+PanelType Menu::type() {
 
     return PanelType::MENU;
 }
 
-Panel::PanelType Menu::body(PanelType ret) {
+PanelType Menu::body(PanelType ret) {
 
     Panel* next;
     while(ret != PanelType::EXIT) {

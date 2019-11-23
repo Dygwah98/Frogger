@@ -36,9 +36,9 @@ class Graphics {
         //fattori di scala (usati per ridimensionare il buffer)
         float scale[4];
 
-        int row;
+        PanelType row;
         //per ogni GameComponent, contiene le immagini che compongono backgrounds e simili
-        std::vector<std::vector<ALLEGRO_BITMAP*> > bitmaps;
+        std::map<PanelType, std::vector<ALLEGRO_BITMAP*> > bitmaps;
         //coda di immagini da disegnare sul buffer
         std::vector<Image> queue;
 
@@ -57,7 +57,7 @@ class Graphics {
         ~Graphics();
 
         //imposta quale GameComponent sta venendo disegnata
-        void set_component(int index) { row = index; } 
+        void set_component(PanelType index) { row = index; } 
         //aggiunge una bitmap alla queue prendendola da backgrounds
         void push_image(int, float, float);
         void push_permanent_image(int, float, float);

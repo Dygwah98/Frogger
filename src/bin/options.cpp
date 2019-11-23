@@ -1,11 +1,11 @@
 #include"../include/options.hpp"
 
-Panel::PanelType Options::type() {
+PanelType Options::type() {
 
     return PanelType::OPTIONS;
 }
 
-Panel::PanelType Options::body(PanelType caller) {
+PanelType Options::body(PanelType caller) {
     
 }
 

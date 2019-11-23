@@ -8,7 +8,7 @@ unsigned Player::max_counter() const {
 
 Player::Player(): 
     GameObject(1.0f, 30.0f, GameObject::null_val()), 
-    graphic_index(0), position(0), vert_dim(30.0f), speed(0.0f), 
+    graphic_index(1), position(0), vert_dim(30.0f), speed(0.0f), 
     isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
 
     std::cout << "Player::Player(int, int, float) " << this << std::endl;
@@ -76,7 +76,7 @@ float Player::next_coord() const {
 
 void Player::reset() {
 
-    graphic_index = 0;
+    graphic_index = 1;
     position = 0;
     vert_dim = 30.0f;
     speed = 0.0f;
@@ -87,5 +87,5 @@ void Player::reset() {
 }
 
 void Player::redraw() {
-    Graphics::getInstance()->push_image(get_gindex(), get_coord() + 5.0f, 10.0f);
+    Graphics::getInstance()->push_image(get_gindex(), get_coord() + 5.0f, 12.27f);
 }

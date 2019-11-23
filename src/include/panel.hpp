@@ -9,9 +9,7 @@
 //Composite base class
 class Panel {
 
-    protected:        
-        enum struct PanelType : int {EXIT = -1, MENU = 0, LEVEL = 1, OPTIONS = 2, WIN = 3, LOSS = 4};
-
+    protected:
         virtual PanelType type() = 0;
         virtual PanelType body(PanelType) = 0;
 

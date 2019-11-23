@@ -4,8 +4,9 @@ OPTIONS = -Wall -std=c++17
 SOURCE = src/bin/*.cpp
 LINKING = -lallegro_monolith
 TARGET = frogger
+C_TARGET = frogger
 
-cleanrun: $(TARGET)
+run: $(TARGET)
 
 $(TARGET) : $(SOURCE)
 	@$(CC) $(OPTIONS) -o $(TARGET) $(SOURCE) $(LINKING)
