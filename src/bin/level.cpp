@@ -1,5 +1,13 @@
 #include"../include/level.hpp"
 
+Collision player_collides() {
+
+}
+
+bool player_in_area() {
+
+}
+
 void Level::update_game_state() {
 
     switch(player_collides()) {
@@ -21,11 +29,11 @@ void Level::update_game_state() {
             break;
 
         default:
-            std::cout << "UNHANDLED COLLISION\n";
+            std::cout << "UNHANDLED OR NO COLLISION\n";
             break;
     }
 
-    if(!player.is_dead) {
+    if(!player.is_dead()) {
         if(!player.is_moving()) {
         
             Keys temp = EventHandler::getInstance()->next_key();

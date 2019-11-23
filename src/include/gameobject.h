@@ -16,8 +16,6 @@ class GameObject {
     protected:
     
     public:
-        static Collision null_val() { return Collision::nd; }
-
         GameObject(float, float, Collision);
         GameObject& operator=(const GameObject&);
         

@@ -1,30 +1,28 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include"gameobject.h"
+#include"animatedobj.hpp"
 
-class Player: public GameObject {
+class Player: public AnimatedGameObject {
 
     private:
 
         inline static std::map<Keys, float> dpos = {
-            {Keys::nd, 0.0f},
-            {Keys::UP, -1.0f},
-            {Keys::LEFT, 0.0f},
+            {Keys::nd,    0.0f},
+            {Keys::UP,   -1.0f},
+            {Keys::LEFT,  0.0f},
             {Keys::DOWN, +1.0f},
             {Keys::RIGHT, 0.0f}
         };
 
         inline static std::map<Keys, float> dcord = {
-            {Keys::nd, 0.0f},
-            {Keys::UP, 0.0f}, 
+            {Keys::nd,     0.0f},
+            {Keys::UP,     0.0f}, 
             {Keys::LEFT, -60.0f}, 
-            {Keys::DOWN, 0.0f}, 
+            {Keys::DOWN,   0.0f}, 
             {Keys::RIGHT, 60.0f}
         };
 
-        //mappa quest'oggetto con la bitmap corrispondente (in Graphics)
-        int graphic_index;
         //posizione sulla mappa (linea)
         float position;
         //lunghezza sulla mappa (pixel)
@@ -49,6 +47,8 @@ class Player: public GameObject {
         Player();
         ~Player();
 
+        void update_gindex() override;
+
         void move();
 
         void set_speed(float s) { speed = s/60.0f; }
@@ -56,10 +56,6 @@ class Player: public GameObject {
         void set_dir(Keys);
 
         void set_still();
-        
-        void set_gindex(int i) { graphic_index = i; }
-
-        int get_gindex() const { return graphic_index; }
 
         float get_position() const { return position; }
 

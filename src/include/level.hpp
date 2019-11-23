@@ -14,6 +14,9 @@ class Level : public Panel {
         unsigned frogs_counter;
         //le lines le cambio o non le cambio?
 
+        Collision player_collides();
+        bool player_in_area();
+
         void update_game_state();
         void reset_game_state();
 

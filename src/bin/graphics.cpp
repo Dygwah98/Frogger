@@ -44,20 +44,23 @@ ALLEGRO_DISPLAY_MODE Graphics::getDispMode() const {
 
 void Graphics::calc_scale_factors() {
 
+    float dw = get_display_width();
+    float dh = get_display_height();
+
     float ratio = std::min(
-        al_get_display_width(display)/buffer.x,
-        al_get_display_height(display)/buffer.y
+        dw / buffer.get_x(),
+        dh / buffer.get_y()
     );
     
-    scale[0] = buffer.x * ratio;
-    scale[1] = buffer.y * ratio;
-    scale[2] = (al_get_display_width(display) - scale[0]) / 2.0f;    
-    scale[3] = (al_get_display_height(display) - scale[1]) / 2.0f;
+    buffer.scale[0] = buffer.get_x() * ratio;
+    buffer.scale[1] = buffer.get_y() * ratio;
+    buffer.scale[2] = (dw - buffer.scale[0]) / 2.0f;    
+    buffer.scale[3] = (dh - buffer.scale[1]) / 2.0f;
 }
 
 Graphics::Graphics():
     display(nullptr), buffer({nullptr, 0.0f, 0.0f, true}), 
-    row(PanelType::EXIT), bitmaps(), queue() {
+    row(PanelType::EXIT), bitmaps(), queue(), line_dim(520.0f) {
 
     //inizializzazione dell'API di Allegro
     if(!isValid) assert(initAllegro());
@@ -72,17 +75,12 @@ Graphics::Graphics():
     assert(display != nullptr);
 
     //inizializzazione buffer
-    buffer.bitmap = al_create_bitmap(800, 600);
-    buffer.x = 800;
-    buffer.y = 600;  
-
+    buffer.set_bitmap(800, 600);
     calc_scale_factors();
 
     bitmaps.insert({PanelType::LEVEL, {}});
 
-    int val = 520;
-
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][0]);
     al_clear_to_color(al_map_rgb(175, 175, 175));
 
@@ -91,55 +89,55 @@ Graphics::Graphics():
     al_clear_to_color(al_map_rgb(255, 255, 255));
 
 //LINES TEMPORANEE
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600/11+1));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][2]);
     al_clear_to_color(al_map_rgb(150, 150, 150));
 //
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600/11+1));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][3]);
     al_clear_to_color(al_map_rgb(125, 175, 255));
-    al_put_pixel(val/2, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(line_dim/2, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600/11+1));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][4]);
     al_clear_to_color(al_map_rgb(125, 255, 175));
-    al_put_pixel(val/2+20, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(line_dim/2+20, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600/11+1));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][5]);
     al_clear_to_color(al_map_rgb(255, 175, 125));
-    al_put_pixel(val/2+40, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(line_dim/2+40, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600/11+1));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][6]);
     al_clear_to_color(al_map_rgb(255, 125, 175));
-    al_put_pixel(val/2+60, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(line_dim/2+60, 300/11+1, al_map_rgb(255, 255, 255));
 //
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600/11+1));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][7]);
     al_clear_to_color(al_map_rgb(150, 150, 150));
 //
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600/11+1));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][8]);
     al_clear_to_color(al_map_rgb(125, 175, 255));
-    al_put_pixel(val/2, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(line_dim/2, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600/11+1));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][9]);
     al_clear_to_color(al_map_rgb(125, 255, 175));
-    al_put_pixel(val/2+20, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(line_dim/2+20, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600/11+1));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][10]);
     al_clear_to_color(al_map_rgb(255, 175, 125));
-    al_put_pixel(val/2+40, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(line_dim/2+40, 300/11+1, al_map_rgb(255, 255, 255));
 
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600/11+1));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][11]);
     al_clear_to_color(al_map_rgb(255, 125, 175));
-    al_put_pixel(val/2+60, 300/11+1, al_map_rgb(255, 255, 255));
+    al_put_pixel(line_dim/2+60, 300/11+1, al_map_rgb(255, 255, 255));
 //
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(val, 600/11+1));
+    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][12]);
     al_clear_to_color(al_map_rgb(150, 150, 150));
 
@@ -150,8 +148,6 @@ Graphics::~Graphics() {
     
     if(display != nullptr)
         al_destroy_display(display);
-    if(buffer.bitmap != nullptr)
-        al_destroy_bitmap(buffer.bitmap);
 
     for(const auto& vec : bitmaps)
         for(const auto& el : vec.second)
@@ -167,12 +163,11 @@ void Graphics::set_component(PanelType index) {
     row = index;
 }
 
-void Graphics::push_image(int element, float x, float y) {
+void Graphics::push_image(Image* img) {
     
-    assert(in_range<int>(0, element, bitmaps[row].size(), true, false));
-    queue.push_back( {bitmaps[row][element], x, y, false, false} );
+    queue.push_back(img);
 }
-
+/*
 void Graphics::push_permanent_image(int element, float x, float y) {
 
     assert(in_range<int>(0, element, bitmaps[row].size(), true, false));
@@ -193,30 +188,31 @@ void Graphics::push_shifted_image(int element, float x, float y, float offset) {
     ALLEGRO_BITMAP* right = al_create_sub_bitmap(pic, offset, 0, picW - offset, picH);
     queue.push_back({right, x, y, false, true});
 }
+*/
 
 void Graphics::redraw() {
 
     //operazioni di disegno sul buffer
-    al_set_target_bitmap(buffer.bitmap);
+    buffer.as_target();
     al_clear_to_color(al_map_rgb(125, 125, 125));
     for(const auto& it : queue)
-        al_draw_bitmap(it.bitmap, it.x, it.y, 0);
+        it->draw();
     
     //operazioni di disegno sul display
     al_set_target_backbuffer(display);
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    al_draw_scaled_bitmap(buffer.bitmap, 0, 0, buffer.x, buffer.y, scale[2], scale[3], scale[0], scale[1], 0);
+    buffer.draw();
     al_flip_display();
 
     //si deallocano le bitmap temporanee create ad hoc
     for(auto& it : queue)
-     if(it.needs_freeing)
-        al_destroy_bitmap(it.bitmap);
+     if(it->needs_freeing())
+        delete it;
 
     //si eliminano dalla coda le Image non permanenti
     auto it = queue.begin();
     while(it != queue.end()) {    
-        if(!it->is_permanent)
+        if(!(**it).is_permanent())
             it = queue.erase(it);
         else
             it = it + 1;
