@@ -57,7 +57,7 @@ class Graphics {
         ~Graphics();
 
         //imposta quale GameComponent sta venendo disegnata
-        void set_component(PanelType index) { row = index; } 
+        void set_component(PanelType index);
         //aggiunge una bitmap alla queue prendendola da backgrounds
         void push_image(int, float, float);
         void push_permanent_image(int, float, float);

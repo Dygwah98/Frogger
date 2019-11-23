@@ -11,6 +11,7 @@ class Level : public Panel {
         bool pause;
 
         Player player;
+        unsigned frogs_counter;
         //le lines le cambio o non le cambio?
 
         void update_game_state();

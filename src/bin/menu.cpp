@@ -2,6 +2,8 @@
 
 PanelType Menu::runMenuScreen() {
 
+    Graphics::getInstance()->set_component(this->type());
+    
     return PanelType::LEVEL;
 }
 

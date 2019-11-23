@@ -160,20 +160,21 @@ Graphics::~Graphics() {
     std::cout << "Graphics::~Graphics() " << this << std::endl;
 }
 
+void Graphics::set_component(PanelType index) {
+
+    auto f = contains<PanelType, std::vector<ALLEGRO_BITMAP*>>;
+    assert(f(bitmaps, index));
+    row = index;
+}
+
 void Graphics::push_image(int element, float x, float y) {
     
-    auto f = contains<PanelType, std::vector<ALLEGRO_BITMAP*>>;
-
-    assert(f(bitmaps, row));
     assert(in_range<int>(0, element, bitmaps[row].size(), true, false));
     queue.push_back( {bitmaps[row][element], x, y, false, false} );
 }
 
 void Graphics::push_permanent_image(int element, float x, float y) {
 
-    auto f = contains<PanelType, std::vector<ALLEGRO_BITMAP*>>;
-
-    assert(f(bitmaps, row));
     assert(in_range<int>(0, element, bitmaps[row].size(), true, false));
     queue.push_back( {bitmaps[row][element], x, y, true, false} );
 }

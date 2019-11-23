@@ -7,6 +7,9 @@ PanelType WinScreen::type() {
 
 PanelType WinScreen::body(PanelType caller) {
 
+    Graphics::getInstance()->set_component(this->type());
+    
+    return PanelType::EXIT;
 }
 
 WinScreen::WinScreen(): Panel() {}
@@ -20,6 +23,9 @@ PanelType LossScreen::type() {
 
 PanelType LossScreen::body(PanelType caller) {
     
+    Graphics::getInstance()->set_component(this->type());
+    
+    return PanelType::EXIT;
 }
 
 LossScreen::LossScreen(): Panel() {}
