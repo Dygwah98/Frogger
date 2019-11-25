@@ -7,6 +7,10 @@ Collision Level::player_collides() {
 
 bool Level::player_in_area() {
 
+    return 
+        in_range<float>(0.0f, player.get_position(), (float)lines.size(), true, false) 
+    and
+        in_range<float>(0.0f, player.get_position(), Graphics::getInstance()->get_line_width(), true, false);
 }
 
 Line* Level::player_line() {
@@ -15,6 +19,8 @@ Line* Level::player_line() {
 }
 
 void Level::update_game_state() {
+
+    //std::cout << "\nLevel::update_game_state() called... \n";
 
     switch(player_collides()) {
 
@@ -35,7 +41,7 @@ void Level::update_game_state() {
             break;
 
         default:
-            std::cout << "UNHANDLED OR NO COLLISION\n";
+            //std::cout << "UNHANDLED OR NO COLLISION\n";
             break;
     }
 
@@ -60,6 +66,8 @@ void Level::update_game_state() {
 
 void Level::reset_game_state() {
 
+    //std::cout << "Level::reset_game_state()... \n";
+
     exit = false;
     pause = false;
     frogs_counter = 0;
@@ -69,6 +77,8 @@ void Level::reset_game_state() {
 }
 
 void Level::redraw_game() {
+
+    //std::cout << "Level::redraw_game() called... \n";
 
     for(auto it : lines)
         it->redraw();
@@ -83,9 +93,10 @@ PanelType Level::type() {
 
 PanelType Level::body(PanelType caller) {
 
+    std::cout << "\nLevel::body() called... \n";
+
     reset_game_state();
 
-    Graphics::getInstance()->set_component(this->type());
     EventHandler::getInstance()->launch();
 
     while(!exit) {
@@ -94,23 +105,27 @@ PanelType Level::body(PanelType caller) {
         switch(e) {
             
             case Event::Exit:          
+                //std::cout << "EXIT EVENT\n"; 
                 exit = true;    
                 break;
             
             case Event::Pause:  
+                //std::cout << "PAUSE EVENT\n";
                 pause = !pause; 
                 break;
 
             case Event::Execute: 
+                //std::cout << "EXECUTE EVENT\n";
                 if(!pause) update_game_state();
                 break;
 
             case Event::Redraw:
+                //std::cout << "REDRAW EVENT\n";
                 if(!pause) redraw_game();
                 break;
 
             default:
-                std::cout << "UNHANDLED EVENT\n";
+                //std::cout << "UNHANDLED EVENT\n";
                 break;
         }
     }
@@ -119,8 +134,20 @@ PanelType Level::body(PanelType caller) {
 
     if(player.get_lifes() == 0) return PanelType::LOSS;
     else if(frogs_counter >= 5) return PanelType::WIN;
-    return PanelType::MENU;
+
+    return PanelType::EXIT;
 }
 
 Level::Level(): 
-    Panel(), exit(false), pause(false), player(), frogs_counter(0) {}
+Panel(), exit(false), pause(false), player(), lines(), frogs_counter(0) {
+
+    for(int i = 0; i < 11; ++i) {
+        lines.push_back(new Line());
+    }
+}
+
+Level::~Level() {
+
+    for(auto it : lines)
+        delete it;
+}

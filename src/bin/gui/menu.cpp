@@ -2,8 +2,6 @@
 
 PanelType Menu::runMenuScreen() {
 
-    Graphics::getInstance()->set_component(this->type());
-    
     return PanelType::LEVEL;
 }
 
@@ -12,20 +10,28 @@ PanelType Menu::type() {
     return PanelType::MENU;
 }
 
-PanelType Menu::body(PanelType ret) {
+PanelType Menu::body(PanelType caller) {
 
-    Panel* next;
-    while(ret != PanelType::EXIT) {
-        
-        ret  = runMenuScreen();
-        next = panels.at(ret);
-        ret  = next->execute(Menu::type());
+    PanelType executor = PanelType::MENU;
+    PanelType swap = caller;
+    while(executor != PanelType::EXIT) {
+    
+        if(executor == PanelType::MENU)
+            caller = runMenuScreen();
+        else
+            caller = panels.at(executor)->execute(caller);
+
+        swap = executor;
+        executor = caller;
+        caller = swap;
     }
 
-    return ret;
+    return executor;
 }
 
 Menu::Menu(): Panel(), panels() {
+
+    std::cout << "\nMenu initialization... ";
 
     Graphics::getInstance();
     EventHandler::getInstance();
@@ -33,17 +39,23 @@ Menu::Menu(): Panel(), panels() {
     panels[PanelType::LEVEL]   = new Level();
     panels[PanelType::WIN]     = new WinScreen();
     panels[PanelType::LOSS]    = new LossScreen();
+
+    std::cout << "Menu initalization done.\n";
 }
 
 Menu::~Menu() {
 
-    for(auto& it : panels)
+    for(auto it : panels)
         delete it.second;
 }
 
 void Menu::launchGame() {
 
+    std::cout << "\nMenu::launchGame() called... ";
+
     this->execute(PanelType::MENU);
     Graphics::delInstance();
     EventHandler::delInstance();
+
+    std::cout << "Menu::launchGame() done.\n";
 }

@@ -2,8 +2,6 @@
 
 GameObject::GameObject(float f, float f2, Collision m): 
     coord(f), length(f2), marker(m) {
-
-   std::cout << "GameObject::GameObject(float, float) " << this << std::endl;
 }
 
 GameObject& GameObject::operator=(const GameObject& G) {
@@ -18,7 +16,18 @@ GameObject& GameObject::operator=(const GameObject& G) {
 
 GameObject::~GameObject() {
 
-    std::cout << "GameObject::~GameObject() " << this << std::endl;
+}
+
+void GameObject::update() {
+
+}
+
+void GameObject::redraw() {
+
+}
+
+void GameObject::reset() {
+    
 }
 
 Collision GameObject::collides(const GameObject& g) const { 

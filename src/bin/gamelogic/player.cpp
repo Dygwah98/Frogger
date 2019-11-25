@@ -10,13 +10,10 @@ unsigned Player::max_counter() const {
 Player::Player(): 
     GameObject(1.0f, 30.0f, Collision::nd), 
     position(0), vert_dim(30.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
-
-    std::cout << "Player::Player(int, int, float) " << this << std::endl;
 }
 
 Player::~Player() {
 
-    std::cout << "Player::~Player() " << this << std::endl;
 }
 
 void Player::reposition(const float& i, const float& f) {

@@ -8,8 +8,7 @@ class Line {
     private:
         LineImage* img;
         std::vector<GameObject*> objects;
-        int position;
-
+        float position;
         float speed;
 
     protected:

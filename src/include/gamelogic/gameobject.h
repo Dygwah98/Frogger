@@ -22,9 +22,9 @@ class GameObject {
         GameObject& operator=(const GameObject&);
         
         virtual ~GameObject();
-        virtual void update() = 0;
-        virtual void redraw() = 0;
-        virtual void reset()  = 0;
+        virtual void update();
+        virtual void redraw();
+        virtual void reset();
 
         void set_coord(float f) { coord = f; }
         float get_coord() const { return coord; }

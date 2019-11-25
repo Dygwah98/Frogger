@@ -30,6 +30,7 @@ class Level : public Panel {
     
     public:
         Level();
+        ~Level() override;
 };
 
 #endif

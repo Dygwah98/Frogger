@@ -43,6 +43,7 @@ class Graphics {
         unsigned get_refresh_rate() const { return getDispMode().refresh_rate; }
         float get_display_width() const { return al_get_display_width(display); }
         float get_display_height() const { return al_get_display_height(display); }
+        float get_line_width() const { return buffer.get_line_width(); }
 };
 
 #endif

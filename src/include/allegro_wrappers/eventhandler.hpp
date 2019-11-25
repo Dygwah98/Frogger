@@ -32,7 +32,7 @@ class EventHandler {
         //true se tutte le componenti sono valide per l'uso
         bool is_ready() const { 
         
-            return Graphics::getInstance()->isValid and 
+            return Graphics::getInstance()->initAllegro() and 
                 al_get_timer_started(timer) and 
                 !al_is_event_queue_paused(event_queue); 
         }

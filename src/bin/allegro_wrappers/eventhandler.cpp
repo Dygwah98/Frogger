@@ -3,20 +3,26 @@
 EventHandler* EventHandler::instance = nullptr;
 
 EventHandler* EventHandler::getInstance() {
-    if(instance == nullptr)
-        instance = new EventHandler();
     
-    return instance;
+    if(EventHandler::instance == nullptr)
+        EventHandler::instance = new EventHandler();
+    
+    return EventHandler::instance;
 }
 
 void EventHandler::delInstance() {
-    if(instance != nullptr)
-        delete instance;
-    instance = nullptr;
+    
+    if(EventHandler::instance != nullptr)
+        delete EventHandler::instance;
+    EventHandler::instance = nullptr;
+
+    std::cout << "\nEventHandler::delInstance() ...\n";
 }
 
 EventHandler::EventHandler(): 
-    timer(nullptr), event_queue(nullptr), redraw(false), key_pressed(Keys::nd) {
+    timer(nullptr), event_queue(nullptr), redraw(true), key_pressed(Keys::nd) {
+
+    std::cout << "\nEventHandler initialization... ";
 
     Graphics* g = Graphics::getInstance();
     //inizializzazione timer:
@@ -32,7 +38,7 @@ EventHandler::EventHandler():
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_pause_event_queue(event_queue, true);
 
-    std::cout << "EventHandler::EventHandler() " << this << std::endl;
+    std::cout << "EventHandler initialization done.\n";
 }
 
 EventHandler::~EventHandler() {

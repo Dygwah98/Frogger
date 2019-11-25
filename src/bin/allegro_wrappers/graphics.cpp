@@ -4,25 +4,32 @@ Graphics* Graphics::instance = nullptr;
 
 Graphics* Graphics::getInstance() {
 
-    if(instance == nullptr)
-        instance = new Graphics();
-    
-    return instance;
+    if(Graphics::instance == nullptr) {
+
+        assert(initAllegro());
+        Graphics::instance = new Graphics();
+    }
+    return Graphics::instance;
 }
 
 void Graphics::delInstance() {
-    if(instance != nullptr)
-        delete instance;
-    instance = nullptr;
+    
+    if(Graphics::instance != nullptr)
+        delete Graphics::instance;
+    Graphics::instance = nullptr;
+
+    std::cout << "\nGraphics::delInstance() ...\n";
 }
 
 bool Graphics::isValid = false;
 
 bool Graphics::initAllegro() {
 
-    isValid = 
-        al_init() and 
-        al_install_keyboard();
+    if(!isValid) {
+        isValid = 
+            al_init() and 
+            al_install_keyboard();
+    }
 
     return isValid;
 }
@@ -38,8 +45,6 @@ ALLEGRO_DISPLAY_MODE Graphics::getDispMode() const {
         if(in_range<int>(750, temp.width, 850) and in_range<int>(550, temp.height, 650))
             return temp;
     }
-
-    std::cout << "Graphics::getDispMode() " << this << std::endl;
 
     return temp;
 }
@@ -63,9 +68,8 @@ void Graphics::calc_scale_factors() {
 Graphics::Graphics():
     display(nullptr), buffer() {
 
-    //inizializzazione dell'API di Allegro
-    if(!isValid) assert(initAllegro());
-
+    std::cout << "\nGraphics initialization... ";
+    
     buffer.init(0.0f, 0.0f, true, true);    
     buffer.set_bitmap(800, 600);
 
@@ -81,7 +85,7 @@ Graphics::Graphics():
     //inizializzazione buffer
     calc_scale_factors();
     
-    std::cout << "Graphics::Graphics() " << this << std::endl;
+    std::cout << "Graphics initialization done.\n";
 }
 
 Graphics::~Graphics() {
