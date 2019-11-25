@@ -1,4 +1,4 @@
-#include"../include/level.hpp"
+#include"../../include/gamelogic/level.hpp"
 
 Collision player_collides() {
 
@@ -108,7 +108,9 @@ PanelType Level::body(PanelType caller) {
 
     EventHandler::getInstance()->suspend();
 
-    return PanelType::EXIT;
+    if(player.get_lifes() == 0) return PanelType::LOSS;
+    else if(frogs_counter >= 5) return PanelType::WIN;
+    return PanelType::MENU;
 }
 
 Level::Level(): 

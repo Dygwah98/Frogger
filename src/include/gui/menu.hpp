@@ -1,7 +1,7 @@
 #ifndef MENU_HPP
 #define MENU_HPP
 
-#include"level.hpp"
+#include"../gamelogic/level.hpp"
 #include"options.hpp"
 #include"winlose.hpp"
 

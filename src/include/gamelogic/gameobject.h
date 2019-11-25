@@ -1,7 +1,7 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include"graphics.hpp"
+#include"../allegro_wrappers/graphics.hpp"
 
 class GameObject {
 

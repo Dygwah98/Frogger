@@ -1,10 +1,7 @@
 #ifndef PANEL_HPP
 #define PANEL_HPP
 
-#include<utility>
-#include<map>
-#include"eventhandler.hpp"
-#include"graphics.hpp"
+#include"../allegro_wrappers/eventhandler.hpp"
 
 //Composite base class
 class Panel {

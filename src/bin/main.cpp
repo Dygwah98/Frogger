@@ -1,4 +1,4 @@
-#include"../include/menu.hpp"
+#include"../include/gui/menu.hpp"
 
 int main(int argv, char** argc) {
 

@@ -1,4 +1,4 @@
-#include"../include/winlose.hpp"
+#include"../../include/gui/winlose.hpp"
 
 PanelType WinScreen::type() {
 

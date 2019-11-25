@@ -1,7 +1,7 @@
 #ifndef LEVEL_HPP
 #define LEVEL_HPP
 
-#include"panel.hpp"
+#include"../gui/panel.hpp"
 #include"player.h"
 
 class Level : public Panel {
@@ -11,8 +11,8 @@ class Level : public Panel {
         bool pause;
 
         Player player;
+        //Line* lines;
         unsigned frogs_counter;
-        //le lines le cambio o non le cambio?
 
         Collision player_collides();
         bool player_in_area();

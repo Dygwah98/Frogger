@@ -1,4 +1,4 @@
-#include"../include/eventhandler.hpp"
+#include"../../include/allegro_wrappers/eventhandler.hpp"
 
 EventHandler* EventHandler::instance = nullptr;
 
@@ -15,18 +15,19 @@ void EventHandler::delInstance() {
     instance = nullptr;
 }
 
-EventHandler::EventHandler(): redraw(false), key_pressed(Keys::nd) {
+EventHandler::EventHandler(): 
+    timer(nullptr), event_queue(nullptr), redraw(false), key_pressed(Keys::nd) {
 
-    Graphics& g = *(Graphics::getInstance());
+    Graphics* g = Graphics::getInstance();
     //inizializzazione timer:
-    timer = al_create_timer(1.0/g.getDispMode().refresh_rate);
+    timer = al_create_timer(1.0/g->getDispMode().refresh_rate);
     assert(timer != nullptr);
 
     //inizializzazione coda degli eventi:
     event_queue = al_create_event_queue();
     assert(event_queue != nullptr);
 
-    al_register_event_source(event_queue, al_get_display_event_source(g.display));
+    al_register_event_source(event_queue, al_get_display_event_source(g->display));
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_pause_event_queue(event_queue, true);

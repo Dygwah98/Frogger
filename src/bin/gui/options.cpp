@@ -1,4 +1,4 @@
-#include"../include/options.hpp"
+#include"../../include/gui/options.hpp"
 
 PanelType Options::type() {
 

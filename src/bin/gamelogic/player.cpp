@@ -1,4 +1,4 @@
-#include"../include/player.h"
+#include"../../include/gamelogic/player.h"
 
 unsigned Player::max_counter() const {
 
@@ -8,7 +8,7 @@ unsigned Player::max_counter() const {
 }
 
 Player::Player(): 
-    AnimatedGameObject(1.0f, 30.0f, Collision::nd, {1}), 
+    GameObject(1.0f, 30.0f, Collision::nd), 
     position(0), vert_dim(30.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
 
     std::cout << "Player::Player(int, int, float) " << this << std::endl;
@@ -39,15 +39,15 @@ void Player::set_still() {
 
     isMoving = false;
     counter = 0;
-    reset_gindex();
+    //reset_gindex();
 }
-
+/*
 void Player::update_gindex() {
 
     if(isMoving)
         AnimatedGameObject::update_gindex();
 }
-
+*/
 void Player::move() {
     
     if(isMoving) {
@@ -56,8 +56,8 @@ void Player::move() {
         --counter;
         if(counter == 0) {
             set_still();
-        } else 
-            update_gindex();
+        } else {} 
+            //update_gindex();
     }
 }
 
@@ -83,7 +83,7 @@ float Player::next_coord() const {
 
 void Player::reset() {
 
-    reset_gindex();
+    //reset_gindex();
     position = 0;
     vert_dim = 30.0f;
     speed = 0.0f;
@@ -93,7 +93,9 @@ void Player::reset() {
     lifes = 3;
 }
 
+//get_gindex(), get_coord() + 5.0f, 12.27f
+
 void Player::redraw() {
     
-    Graphics::getInstance()->push_image(get_gindex(), get_coord() + 5.0f, 12.27f);
+    //Graphics::getInstance()->push_image();
 }

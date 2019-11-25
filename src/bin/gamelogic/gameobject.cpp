@@ -1,4 +1,4 @@
-#include"../include/gameobject.h"
+#include"../../include/gamelogic/gameobject.h"
 
 GameObject::GameObject(float f, float f2, Collision m): 
     coord(f), length(f2), marker(m) {

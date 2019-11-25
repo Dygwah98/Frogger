@@ -1,9 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include"animatedobj.hpp"
+#include"gameobject.h"
 
-class Player: public AnimatedGameObject {
+class Player: public GameObject {
 
     private:
 
@@ -42,43 +42,32 @@ class Player: public AnimatedGameObject {
 
     protected:
     
-    public:
-        
+    public:        
         Player();
         ~Player();
 
-        void update_gindex() override;
-
         void move();
-
+        void reset();
+        void redraw();
+        
         void set_speed(float s) { speed = s/60.0f; }
-
         void set_dir(Keys);
-
         void set_still();
 
         float get_position() const { return position; }
-
         float get_dim() const { return vert_dim; }
 
         bool is_moving() const { return isMoving; }
-
         bool is_dead() const { return lifes == 0; }
 
         void lose_life() { if(lifes > 0) --lifes; }
-
         int get_lifes() const { return lifes; }
 
         void reposition(const float&, const float&);
-
         float next_pos() const;
-
         float next_coord() const;
 
         void print() {  std::cout << "(" << position << ", " << get_coord() << ")"; }
-
-        void reset();
-        void redraw();
 };
 
 #endif

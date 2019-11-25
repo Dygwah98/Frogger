@@ -1,4 +1,4 @@
-#include"../include/menu.hpp"
+#include"../../include/gui/menu.hpp"
 
 PanelType Menu::runMenuScreen() {
 
@@ -27,6 +27,8 @@ PanelType Menu::body(PanelType ret) {
 
 Menu::Menu(): Panel(), panels() {
 
+    Graphics::getInstance();
+    EventHandler::getInstance();
     panels[PanelType::OPTIONS] = new Options();
     panels[PanelType::LEVEL]   = new Level();
     panels[PanelType::WIN]     = new WinScreen();
