@@ -1,5 +1,36 @@
 #include"../../include/allegro_wrappers/image.hpp"
 
+//IMAGE METHODS
+
+Image::Image() {
+
+}
+
+Image::Image(ALLEGRO_BITMAP*, float, float, bool, bool) {
+
+}
+
+Image::Image(const Image&) {
+
+}
+
+Image& Image::operator=(const Image&) {
+
+}
+
+Image::~Image() {
+
+}
+
+void Image::draw() {
+
+}
+
+bool Image::is_permanent() const { return permanent; }
+bool Image::needs_freeing() const { return deletable; }
+float Image::get_x() const { return x; }
+float Image::get_y() const { return y; }
+
 void Image::set_bitmap(int w, int h) {
 
     if(bitmap != nullptr) al_destroy_bitmap(bitmap);
@@ -17,6 +48,26 @@ void Image::set_bitmap(std::string&& s) {
     x = al_get_bitmap_width(bitmap);
     y = al_get_bitmap_height(bitmap);
 }
+
+void Image::set_permanent(bool p) { permanent = p; }
+void Image::set_deletable(bool d) { deletable = d; }
+void Image::set_coordinates(float nx, float ny) { x = nx; y = ny; } 
+void Image::set_x(float nx) { x = nx; }
+void Image::set_y(float ny) { y = ny; }
+
+//LINE-IMAGE METHODS
+
+LineImage::LineImage() {}
+LineImage::LineImage(ALLEGRO_BITMAP*, float, float, bool, bool) {}
+LineImage::LineImage(const LineImage&) {}
+LineImage& LineImage::operator=(const LineImage&) {}
+LineImage::~LineImage() {}
+
+void LineImage::draw() {}
+void LineImage::add(Image*) {}
+
+
+//BUFFER METHODS
 
 Buffer::Buffer() {
 

@@ -46,9 +46,9 @@ class Player: public GameObject {
         Player();
         ~Player();
 
-        void move();
-        void reset();
-        void redraw();
+        void update() override;
+        void redraw() override;
+        void reset() override;
         
         void set_speed(float s) { speed = s/60.0f; }
         void set_dir(Keys);

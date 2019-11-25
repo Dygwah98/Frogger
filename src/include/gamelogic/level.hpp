@@ -3,6 +3,7 @@
 
 #include"../gui/panel.hpp"
 #include"player.h"
+#include"line.hpp"
 
 class Level : public Panel {
 
@@ -11,11 +12,12 @@ class Level : public Panel {
         bool pause;
 
         Player player;
-        //Line* lines;
+        std::vector<Line*> lines;
         unsigned frogs_counter;
 
         Collision player_collides();
         bool player_in_area();
+        Line* player_line();
 
         void update_game_state();
         void reset_game_state();

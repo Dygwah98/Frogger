@@ -48,7 +48,7 @@ void Player::update_gindex() {
         AnimatedGameObject::update_gindex();
 }
 */
-void Player::move() {
+void Player::update() {
     
     if(isMoving) {
 

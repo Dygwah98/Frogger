@@ -37,6 +37,24 @@ class Image {
         void set_y(float);
 };
 
+class LineImage: public Image {
+    
+    private:
+        std::vector<Image*> subImages;
+
+    protected:
+
+    public:
+        LineImage();
+        LineImage(ALLEGRO_BITMAP*, float, float, bool, bool);
+        LineImage(const LineImage&);
+        LineImage& operator=(const LineImage&);
+        ~LineImage() override;
+
+        void draw() override;
+        void add(Image*);
+};
+
 class AnimatedImage: public Image {
 
     private:
@@ -53,9 +71,10 @@ class AnimatedImage: public Image {
         ~AnimatedImage() override;
 
         void draw() override;
+        void add(int, Image*);
 
         void reset_gindex();
-        virtual void update_gindex();
+        void update_gindex();
         int get_gindex() const;
 };
 

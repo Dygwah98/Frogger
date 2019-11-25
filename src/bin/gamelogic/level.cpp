@@ -1,11 +1,17 @@
 #include"../../include/gamelogic/level.hpp"
 
-Collision player_collides() {
+Collision Level::player_collides() {
+
+    return player_line()->collides(player);
+}
+
+bool Level::player_in_area() {
 
 }
 
-bool player_in_area() {
+Line* Level::player_line() {
 
+    return lines.at(player.get_position());
 }
 
 void Level::update_game_state() {
@@ -25,7 +31,7 @@ void Level::update_game_state() {
             break;
         
         case Collision::Log:
-            player.reposition(player.get_position(), player.get_coord() + player_line().get_speed());
+            player.reposition(player.get_position(), player.get_coord() + player_line()->get_speed());
             break;
 
         default:
@@ -41,14 +47,15 @@ void Level::update_game_state() {
             if(temp != Keys::nd)
                 player.set_dir(temp);
         
-            if(player_in_area()) player.move();
+            if(player_in_area()) player.update();
             else                 player.set_still();   
         
         } else 
-            player.move();
+            player.update();
     }
     
-    //update lines
+    for(auto it : lines)
+        it->update();
 }
 
 void Level::reset_game_state() {
@@ -57,12 +64,14 @@ void Level::reset_game_state() {
     pause = false;
     frogs_counter = 0;
     player.reset();
-    //reset lines
+    for(auto it : lines)
+        it->reset();
 }
 
 void Level::redraw_game() {
 
-    //redraw delle lines
+    for(auto it : lines)
+        it->redraw();
     player.redraw();
     Graphics::getInstance()->redraw();
 }

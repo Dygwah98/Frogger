@@ -28,3 +28,5 @@ Collision GameObject::collides(const GameObject& g) const {
         ? marker 
         : Collision::nd; 
 }
+
+Image* GameObject::get_img() const { return img; }
