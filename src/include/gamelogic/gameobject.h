@@ -33,7 +33,7 @@ class GameObject {
         void set_length(float l) { length = l; }
         float get_length() const { return length; }
         
-        void set_img();
+        void set_img(Image*);
         Image* get_img() const;
 
         Collision collides(const GameObject&) const;

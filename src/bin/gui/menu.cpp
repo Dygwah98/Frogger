@@ -14,6 +14,7 @@ PanelType Menu::body(PanelType caller) {
 
     PanelType executor = PanelType::MENU;
     PanelType swap = caller;
+    
     while(executor != PanelType::EXIT) {
     
         if(executor == PanelType::MENU)

@@ -10,7 +10,10 @@ PanelType WinScreen::body(PanelType caller) {
     return PanelType::EXIT;
 }
 
-WinScreen::WinScreen(): Panel() {}
+WinScreen::WinScreen(): Panel() {
+
+    std::cout << "\nWinScreen initialization\n";
+}
 
 //LossScreen methods
 
@@ -24,4 +27,7 @@ PanelType LossScreen::body(PanelType caller) {
     return PanelType::EXIT;
 }
 
-LossScreen::LossScreen(): Panel() {}
+LossScreen::LossScreen(): Panel() {
+   
+    std::cout << "\nLossScreen initialization\n";
+}

@@ -20,7 +20,7 @@ all: $(TARGET)
 
 $(TARGET) : $(SOURCE)
 	@$(CC) $(OPTIONS) -o $(TARGET) $(SOURCE) $(LINKING)
-	@./$(TARGET).$(TARGET_END)
+	@./$(TARGET)
 	@$(REMOVE) $(TARGET).$(TARGET_END)
 
 #old: $(OLD_TARGET)

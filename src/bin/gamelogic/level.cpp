@@ -79,7 +79,6 @@ void Level::reset_game_state() {
 void Level::redraw_game() {
 
     //std::cout << "Level::redraw_game() called... \n";
-
     for(auto it : lines)
         it->redraw();
     player.redraw();
@@ -141,9 +140,12 @@ PanelType Level::body(PanelType caller) {
 Level::Level(): 
 Panel(), exit(false), pause(false), player(), lines(), frogs_counter(0) {
 
-    for(int i = 0; i < 11; ++i) {
+    std::cout << "\nLevel initialization... ";
+
+    for(int i = 0; i < 11; ++i)
         lines.push_back(new Line());
-    }
+
+    std::cout << "Level initialization done.\n";
 }
 
 Level::~Level() {

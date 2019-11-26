@@ -116,14 +116,9 @@ void Buffer::draw() {
 
 }
 
-void Buffer::update_buffer() {
+void Buffer::update_buffer() {}
 
-    
-}
-
-void Buffer::refresh() {
-
-}
+void Buffer::refresh() {}
 
 void Buffer::set_component(PanelType index) {
 

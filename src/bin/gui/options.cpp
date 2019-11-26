@@ -10,4 +10,7 @@ PanelType Options::body(PanelType caller) {
     return PanelType::EXIT;
 }
 
-Options::Options(): Panel() {}
+Options::Options(): Panel() {
+
+    std::cout << "\nOptions initialization\n";
+}

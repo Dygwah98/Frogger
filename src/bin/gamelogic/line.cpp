@@ -2,11 +2,17 @@
 
 Line::Line(): img(new LineImage()), objects(), position(0.0f), speed(1.0f) {
 
+    std::cout << "\nLine initialization... ";
+
     for(int i = 0; i < 6; ++i)
         objects.push_back(new GameObject(0.0f, 0.0f, Collision::nd));
 
-    for(auto it : objects)
+    for(auto it : objects) {
+        it->set_img(new Image());
         img->add(it->get_img());
+    }
+
+    std::cout << "Line initialization done.\n";
 }
 
 Line::~Line() {
