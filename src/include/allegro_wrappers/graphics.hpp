@@ -39,6 +39,7 @@ class Graphics {
         std::vector<ALLEGRO_BITMAP*>& get_initializer();
 
         void set_component(PanelType index) { buffer.set_component(index); }
+        void schedule_drawing(Image* img) { buffer.push_image(img); }
         void clear() { buffer.clear(); }
         float get_buffer_width() const { return buffer.get_x(); }
         float get_buffer_height() const { return buffer.get_y(); }

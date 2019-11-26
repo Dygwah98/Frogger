@@ -56,14 +56,14 @@ void Image::set_bitmap(std::string&& s) {
 
     bitmap = al_load_bitmap(s.data());
     x = al_get_bitmap_width(bitmap);
-    y = al_get_bitmap_height(bitmap);
+    y = al_get_bitmap_height(bitmap);    
     is_bitmap_owner = true;
 }
 
 void Image::set_bitmap(ALLEGRO_BITMAP* b) {
 
     if(bitmap != nullptr and is_bitmap_owner) {
-        std::cout << "   \nerror here?";
+        //std::cout << "   \nerror here?";
         al_destroy_bitmap(bitmap);
     }
 

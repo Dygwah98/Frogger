@@ -15,6 +15,8 @@ class Level : public Panel {
         std::vector<Line*> lines;
         unsigned frogs_counter;
 
+        Image* game_area_background;
+
         Collision player_collides();
         bool player_in_area();
         Line* player_line();

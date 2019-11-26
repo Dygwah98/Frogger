@@ -15,6 +15,7 @@ class Line {
     
     public:
         Line();
+        Line(ALLEGRO_BITMAP*, int);
         ~Line();
 
         void update();

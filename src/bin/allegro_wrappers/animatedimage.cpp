@@ -24,6 +24,7 @@ AnimatedImage::~AnimatedImage() {}
 
 void AnimatedImage::draw() {
 
+    Image::draw();
 }
 
 void AnimatedImage::add(int K, Image* V) {

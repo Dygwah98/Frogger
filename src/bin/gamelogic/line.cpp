@@ -17,6 +17,28 @@ Line::Line(): img(new LineImage()), objects(), position(0.0f), speed(1.0f) {
     std::cout << "Line initialization done.\n";
 }
 
+Line::Line(ALLEGRO_BITMAP* b, int index):
+img(new LineImage()), objects(), position(0.0f), speed(1.0f) {
+
+    std::cout << "\nLine initialization... ";
+
+    img->set_bitmap(b);
+    img->set_coordinates(0.0f, ((600/11)+1)*index);
+
+    auto context = Graphics::getInstance()->get_initializer();
+
+    for(int i = 0; i < 6; ++i)
+        objects.push_back(new GameObject(0.0f, 0.0f, Collision::nd));
+
+    for(auto it : objects) {
+        it->set_img(context[1]);
+        img->add(it->get_img());
+    }
+
+    std::cout << "Line initialization done.\n";
+
+}
+
 Line::~Line() {
 
     delete img;
@@ -33,7 +55,7 @@ void Line::update() {
 
 void Line::redraw() {
 
-    img->draw();
+    Graphics::getInstance()->schedule_drawing(img);
 }
 
 void Line::reset() {

@@ -29,6 +29,7 @@ LineImage::~LineImage() {
 
 void LineImage::draw() {
 
+    Image::draw();
 }
 
 void LineImage::add(Image* it) {

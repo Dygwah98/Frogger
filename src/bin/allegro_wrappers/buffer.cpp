@@ -18,6 +18,10 @@ Buffer::~Buffer() {
 
 void Buffer::init(float x, float y, bool p, bool d) {
 
+    Image::set_coordinates(x, y);
+    Image::set_permanent(p);
+    Image::set_deletable(d);
+
     bitmaps.insert( {PanelType::LEVEL,   {} } );
     bitmaps.insert( {PanelType::MENU,    {} } );
     bitmaps.insert( {PanelType::OPTIONS, {} } );
@@ -84,17 +88,13 @@ void Buffer::init(float x, float y, bool p, bool d) {
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][12]);
     al_clear_to_color(al_map_rgb(150, 150, 150));
-
-    Image::set_coordinates(x, y);
-    Image::set_permanent(p);
-    Image::set_deletable(d);
 }
 
 void Buffer::draw() {
 
     al_set_target_bitmap(bitmap);
     al_clear_to_color(al_map_rgb(125, 125, 125));
-    for(const auto& it : queue)
+    for(auto it : queue)
         it->draw();
 
     al_set_target_backbuffer(al_get_current_display());

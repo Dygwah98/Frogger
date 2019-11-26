@@ -67,7 +67,6 @@ void Level::update_game_state() {
 void Level::reset_game_state() {
 
     //std::cout << "Level::reset_game_state()... \n";
-
     exit = false;
     pause = false;
     frogs_counter = 0;
@@ -79,6 +78,7 @@ void Level::reset_game_state() {
 void Level::redraw_game() {
 
     //std::cout << "Level::redraw_game() called... \n";
+    Graphics::getInstance()->schedule_drawing(game_area_background);
     for(auto it : lines)
         it->redraw();
     player.redraw();
@@ -138,20 +138,21 @@ PanelType Level::body(PanelType caller) {
 }
 
 Level::Level(): 
-Panel(), exit(false), pause(false), player(), lines(), frogs_counter(0) {
+Panel(), exit(false), pause(false), player(), lines(), frogs_counter(0), game_area_background(new Image()) {
 
     std::cout << "\nLevel initialization... ";
 
-    std::cout << "  \ngraphics setup";
+    //std::cout << "  \ngraphics setup";
     Graphics::getInstance()->set_component(this->type());
     auto context = Graphics::getInstance()->get_initializer();
 
-    std::cout << "  \nplayer graphics";
+    game_area_background->set_bitmap(context[0]);
+    game_area_background->set_coordinates(0.0f, 0.0f);
+    //std::cout << "  \nplayer graphics";
     player.set_img(context[1]);
-
-    std::cout << "  \nlines graphics";
+    //std::cout << "  \nlines graphics";
     for(int i = 0; i < 11; ++i)
-        lines.push_back(new Line());
+        lines.push_back(new Line(context[i+2], i));
 
     std::cout << "Level initialization done.\n";
 }

@@ -8,13 +8,10 @@ unsigned Player::max_counter() const {
 }
 
 Player::Player(): 
-    GameObject(1.0f, 30.0f, Collision::nd), 
-    position(0), vert_dim(30.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {
-}
+    GameObject(0.0f, 30.0f, Collision::nd), 
+    position(0), vert_dim(30.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {}
 
-Player::~Player() {
-
-}
+Player::~Player() {}
 
 void Player::reposition(const float& i, const float& f) {
 
@@ -93,6 +90,12 @@ void Player::reset() {
 //get_gindex(), get_coord() + 5.0f, 12.27f
 
 void Player::redraw() {
-    
-    //Graphics::getInstance()->push_image();
+
+    GameObject::redraw();    
+}
+
+void Player::set_img(ALLEGRO_BITMAP* b) {
+
+    GameObject::set_img(b);
+    get_img()->set_coordinates( ((600/11)+1)/2-30/2, ((600/11)+1)/2-30/2 );
 }
