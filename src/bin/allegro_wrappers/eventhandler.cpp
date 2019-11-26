@@ -15,8 +15,6 @@ void EventHandler::delInstance() {
     if(EventHandler::instance != nullptr)
         delete EventHandler::instance;
     EventHandler::instance = nullptr;
-
-    std::cout << "\nEventHandler::delInstance() ...\n";
 }
 
 EventHandler::EventHandler(): 
@@ -45,8 +43,6 @@ EventHandler::~EventHandler() {
 
     if(timer       != nullptr) al_destroy_timer(timer);
     if(event_queue != nullptr) al_destroy_event_queue(event_queue);
-
-    std::cout << "EventHandler::~EventHandler() " << this << std::endl;
 }
 
 void EventHandler::launch() {

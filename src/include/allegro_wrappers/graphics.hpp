@@ -1,7 +1,7 @@
 #ifndef GRAPHICS_HPP
 #define GRAPHICS_HPP
 
-#include"image.hpp"
+#include"buffer.hpp"
 
 class EventHandler;
 class Graphics {

@@ -17,8 +17,6 @@ void Graphics::delInstance() {
     if(Graphics::instance != nullptr)
         delete Graphics::instance;
     Graphics::instance = nullptr;
-
-    std::cout << "\nGraphics::delInstance() ...\n";
 }
 
 bool Graphics::isValid = false;
@@ -92,8 +90,6 @@ Graphics::~Graphics() {
     
     if(display != nullptr)
         al_destroy_display(display);
-
-    std::cout << "Graphics::~Graphics() " << this << std::endl;
 }
 
 /*

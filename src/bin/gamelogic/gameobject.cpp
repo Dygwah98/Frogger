@@ -24,6 +24,7 @@ void GameObject::update() {
 
 void GameObject::redraw() {
 
+    img->draw();
 }
 
 void GameObject::reset() {

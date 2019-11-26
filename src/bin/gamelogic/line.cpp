@@ -36,8 +36,14 @@ void Line::reset() {
         it->reset();
 }
 
-Collision Line::collides(const GameObject&) const {
+Collision Line::collides(const GameObject& in) const {
 
+    auto it = 
+    std::find_if(objects.begin(), objects.end(), [&](auto el) { 
+        return in.collides(*el) != Collision::nd; 
+    });
+
+    return it != objects.end() ? in.collides(**it) : Collision::nd;
 }
 
 float Line::get_speed() const { return speed; }
