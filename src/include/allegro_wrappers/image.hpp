@@ -8,6 +8,7 @@ class Image {
     private:
         bool permanent;
         bool deletable;
+        bool is_bitmap_owner;
 
     protected:
         ALLEGRO_BITMAP* bitmap;
@@ -30,6 +31,7 @@ class Image {
 
         void set_bitmap(int, int);
         void set_bitmap(std::string&&);
+        void set_bitmap(ALLEGRO_BITMAP*);
         void set_permanent(bool);
         void set_deletable(bool);
         void set_coordinates(float, float);

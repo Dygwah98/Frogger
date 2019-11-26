@@ -1,17 +1,12 @@
 #include"../../include/allegro_wrappers/image.hpp"
 
-Image::Image(): bitmap(nullptr) {
+Image::Image(): 
+permanent(true), deletable(false), is_bitmap_owner(false), bitmap(nullptr), x(-1.0f), y(-1.0f) {}
 
-}
-
-Image::Image(ALLEGRO_BITMAP*, float, float, bool, bool) {
-
-}
+Image::Image(ALLEGRO_BITMAP*, float, float, bool, bool) {}
 
 Image::Image(const Image& img):
-permanent(img.permanent), deletable(img.deletable), bitmap(img.bitmap), x(img.x), y(img.y) {
-
-}
+permanent(img.permanent), deletable(img.deletable), is_bitmap_owner(false), bitmap(img.bitmap), x(img.x), y(img.y) {}
 
 Image& Image::operator=(const Image& img) {
 
@@ -41,20 +36,35 @@ float Image::get_y() const { return y; }
 
 void Image::set_bitmap(int w, int h) {
 
-    if(bitmap != nullptr) al_destroy_bitmap(bitmap);
+    if(bitmap != nullptr and is_bitmap_owner)
+        al_destroy_bitmap(bitmap);
 
     bitmap = al_create_bitmap(w, h);
     x = w;
     y = h;
+    is_bitmap_owner = true;
 }
 
 void Image::set_bitmap(std::string&& s) {
 
-    if(bitmap != nullptr) al_destroy_bitmap(bitmap);
+    if(bitmap != nullptr and is_bitmap_owner)
+        al_destroy_bitmap(bitmap);
 
     bitmap = al_load_bitmap(s.data());
     x = al_get_bitmap_width(bitmap);
     y = al_get_bitmap_height(bitmap);
+    is_bitmap_owner = true;
+}
+
+void Image::set_bitmap(ALLEGRO_BITMAP* b) {
+
+    if(bitmap != nullptr and is_bitmap_owner)
+        al_destroy_bitmap(bitmap);
+
+    bitmap = b;
+    x = al_get_bitmap_width(bitmap);
+    y = al_get_bitmap_height(bitmap);
+    is_bitmap_owner = false;
 }
 
 void Image::set_permanent(bool p) { permanent = p; }

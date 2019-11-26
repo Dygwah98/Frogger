@@ -28,6 +28,8 @@ void Buffer::init(float x, float y, bool p, bool d) {
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][0]);
     al_clear_to_color(al_map_rgb(175, 175, 175));
 
+    Image::set_bitmap(bitmaps[PanelType::LEVEL][0]);
+
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(30, 30));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][1]);
     al_clear_to_color(al_map_rgb(255, 255, 255));

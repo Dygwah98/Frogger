@@ -16,11 +16,15 @@ TARGET = frogger
 #OLD_SOURCE = src_old/bin/*.cpp
 #OLD_TARGET = frogger
 
-all: $(TARGET)
+all: compile run clean
 
-$(TARGET) : $(SOURCE)
+compile: $(SOURCE)
 	@$(CC) $(OPTIONS) -o $(TARGET) $(SOURCE) $(LINKING)
+	
+run: $(SOURCE)
 	@./$(TARGET)
+
+clean: $(SOURCE)
 	@$(REMOVE) $(TARGET).$(TARGET_END)
 
 #old: $(OLD_TARGET)
