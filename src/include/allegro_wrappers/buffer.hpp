@@ -40,6 +40,7 @@ class Buffer : public Image {
 
         float get_line_width() const { return line_dim; };
 
+        std::vector<ALLEGRO_BITMAP*>& get_initializer();
 };
 
 #endif

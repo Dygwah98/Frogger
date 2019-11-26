@@ -127,3 +127,8 @@ void Graphics::redraw() {
 
     //buffer.refresh();
 }
+
+std::vector<ALLEGRO_BITMAP*>& Graphics::get_initializer() {
+
+    return buffer.get_initializer();
+}

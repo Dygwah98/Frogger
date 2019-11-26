@@ -1,7 +1,9 @@
 #include"../../include/gamelogic/gameobject.h"
 
 GameObject::GameObject(float f, float f2, Collision m): 
-    img(nullptr), coord(f), length(f2), marker(m) {
+img(nullptr), coord(f), length(f2), marker(m) {
+
+    img = new Image(nullptr, f, 0.0f, false, false);
 }
 
 GameObject& GameObject::operator=(const GameObject& G) {
@@ -14,22 +16,13 @@ GameObject& GameObject::operator=(const GameObject& G) {
     return *this;
 }
 
-GameObject::~GameObject() {
+GameObject::~GameObject() { delete img; }
 
-}
+void GameObject::update() {}
 
-void GameObject::update() {
+void GameObject::redraw() { img->draw(); }
 
-}
-
-void GameObject::redraw() {
-
-    img->draw();
-}
-
-void GameObject::reset() {
-    
-}
+void GameObject::reset() {}
 
 Collision GameObject::collides(const GameObject& g) const { 
     
@@ -39,7 +32,10 @@ Collision GameObject::collides(const GameObject& g) const {
         : Collision::nd; 
 }
 
-void GameObject::set_img(Image* img) { this->img = img; }
+void GameObject::set_img(ALLEGRO_BITMAP* bitmap) { 
+
+    img->set_bitmap(bitmap); 
+}
 
 Image* GameObject::get_img() const { 
 

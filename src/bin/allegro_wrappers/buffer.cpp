@@ -28,8 +28,6 @@ void Buffer::init(float x, float y, bool p, bool d) {
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][0]);
     al_clear_to_color(al_map_rgb(175, 175, 175));
 
-    Image::set_bitmap(bitmaps[PanelType::LEVEL][0]);
-
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(30, 30));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][1]);
     al_clear_to_color(al_map_rgb(255, 255, 255));
@@ -103,7 +101,7 @@ void Buffer::draw() {
     al_draw_scaled_bitmap(bitmap, 0.0f, 0.0f, x, y, scale[2], scale[3], scale[0], scale[1], 0);
 
     //si deallocano le bitmap temporanee create ad hoc
-    for(auto& it : queue)
+    for(auto it : queue)
      if(it->needs_freeing())
         delete it;
 
@@ -132,4 +130,9 @@ void Buffer::set_component(PanelType index) {
 void Buffer::push_image(Image* img) {
     
     queue.push_back(img);
+}
+
+std::vector<ALLEGRO_BITMAP*>& Buffer::get_initializer() {
+
+    return bitmaps.at(row);
 }

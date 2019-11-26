@@ -66,8 +66,6 @@ class Player: public GameObject {
         void reposition(const float&, const float&);
         float next_pos() const;
         float next_coord() const;
-
-        void print() {  std::cout << "(" << position << ", " << get_coord() << ")"; }
 };
 
 #endif

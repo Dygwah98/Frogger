@@ -33,8 +33,10 @@ class Graphics {
         static void delInstance();
         //dealloca le risorse di Allegro
         ~Graphics();
-        //disegna gli elementi presenti nella queue, consumandoli se is_permanent = false
+        //disegna gli elementi presenti nella queue, consumandoli se deletable
         void redraw();
+
+        std::vector<ALLEGRO_BITMAP*>& get_initializer();
 
         void set_component(PanelType index) { buffer.set_component(index); }
         void clear() { buffer.clear(); }

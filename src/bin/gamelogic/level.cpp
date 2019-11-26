@@ -142,6 +142,14 @@ Panel(), exit(false), pause(false), player(), lines(), frogs_counter(0) {
 
     std::cout << "\nLevel initialization... ";
 
+    std::cout << "  \ngraphics setup";
+    Graphics::getInstance()->set_component(this->type());
+    auto context = Graphics::getInstance()->get_initializer();
+
+    std::cout << "  \nplayer graphics";
+    player.set_img(context[1]);
+
+    std::cout << "  \nlines graphics";
     for(int i = 0; i < 11; ++i)
         lines.push_back(new Line());
 

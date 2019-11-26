@@ -3,7 +3,8 @@
 Image::Image(): 
 permanent(true), deletable(false), is_bitmap_owner(false), bitmap(nullptr), x(-1.0f), y(-1.0f) {}
 
-Image::Image(ALLEGRO_BITMAP*, float, float, bool, bool) {}
+Image::Image(ALLEGRO_BITMAP* _bitmap, float _x, float _y, bool _p, bool _d):
+permanent(_p), deletable(_d), is_bitmap_owner(false), bitmap(_bitmap), x(_x), y(_y) {}
 
 Image::Image(const Image& img):
 permanent(img.permanent), deletable(img.deletable), is_bitmap_owner(false), bitmap(img.bitmap), x(img.x), y(img.y) {}
@@ -21,7 +22,10 @@ Image& Image::operator=(const Image& img) {
     return *this;
 }
 
-Image::~Image() {}
+Image::~Image() {
+
+    if(is_bitmap_owner) al_destroy_bitmap(bitmap);
+}
 
 void Image::draw() {
 
@@ -58,8 +62,10 @@ void Image::set_bitmap(std::string&& s) {
 
 void Image::set_bitmap(ALLEGRO_BITMAP* b) {
 
-    if(bitmap != nullptr and is_bitmap_owner)
+    if(bitmap != nullptr and is_bitmap_owner) {
+        std::cout << "   \nerror here?";
         al_destroy_bitmap(bitmap);
+    }
 
     bitmap = b;
     x = al_get_bitmap_width(bitmap);

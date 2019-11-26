@@ -4,11 +4,13 @@ Line::Line(): img(new LineImage()), objects(), position(0.0f), speed(1.0f) {
 
     std::cout << "\nLine initialization... ";
 
+    auto context = Graphics::getInstance()->get_initializer();
+
     for(int i = 0; i < 6; ++i)
         objects.push_back(new GameObject(0.0f, 0.0f, Collision::nd));
 
     for(auto it : objects) {
-        it->set_img(new Image());
+        it->set_img(context[1]);
         img->add(it->get_img());
     }
 
