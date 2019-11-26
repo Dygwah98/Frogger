@@ -7,11 +7,14 @@ class LineImage: public Image {
     
     private:
         std::vector<Image*> subImages;
+        float position;
+        float speed;
+        float max_pos;
 
     protected:
 
     public:
-        LineImage();
+        LineImage(float, float);
         LineImage(ALLEGRO_BITMAP*, float, float, bool, bool);
         LineImage(const LineImage&);
         LineImage& operator=(const LineImage&);
@@ -19,6 +22,13 @@ class LineImage: public Image {
 
         void draw() override;
         void add(Image*);
+
+        void set_max(float);
+
+        float get_position() const;
+        float get_speed() const;
+        void update_position();
+        void reset_position();
 };
 
 #endif
