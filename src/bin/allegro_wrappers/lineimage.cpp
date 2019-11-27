@@ -27,12 +27,15 @@ LineImage::~LineImage() {
 
     for(auto it : subImages)
         delete it;
+    if(intermediate_buffer != nullptr)
+        al_destroy_bitmap(intermediate_buffer);
 }
 
 void LineImage::draw() {  
 
     ALLEGRO_BITMAP* buffer = al_get_target_bitmap();
 
+    al_set_new_bitmap_flags(ALLEGRO_NO_PRESERVE_TEXTURE);
     intermediate_buffer = al_clone_bitmap(bitmap);
     al_set_target_bitmap(intermediate_buffer);
     for(auto& it : subImages)
@@ -46,6 +49,7 @@ void LineImage::draw() {
     al_draw_bitmap_region(intermediate_buffer, position, 0, width - position, height, x, y, 0);
 
     al_destroy_bitmap(intermediate_buffer);
+    intermediate_buffer = nullptr;
 }
 
 void LineImage::add(Image* it) {

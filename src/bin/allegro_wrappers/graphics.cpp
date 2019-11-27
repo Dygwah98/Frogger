@@ -24,9 +24,10 @@ bool Graphics::isValid = false;
 bool Graphics::initAllegro() {
 
     if(!isValid) {
-        isValid = 
-            al_init() and 
-            al_install_keyboard();
+        al_init(); 
+        al_install_keyboard();
+    
+        isValid = al_is_system_installed() and al_is_keyboard_installed();
     }
 
     return isValid;
@@ -68,7 +69,7 @@ Graphics::Graphics():
 
     std::cout << "\nGraphics initialization... ";
     
-    buffer.init(0.0f, 0.0f, true, true);    
+    buffer.init(800, 600, true, false);    
     buffer.set_bitmap(800, 600);
 
     //inizializzazione display:
@@ -94,8 +95,6 @@ Graphics::~Graphics() {
 
 void Graphics::redraw() {
     
-    al_set_target_backbuffer(display);
-    al_clear_to_color(al_map_rgb(0, 0, 0));
     buffer.draw();
     al_flip_display();
 }

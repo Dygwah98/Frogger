@@ -36,7 +36,7 @@ class Buffer : public Image {
         //aggiunge una bitmap alla queue prendendola da backgrounds
         void push_image(Image*);
         //elimina tutti gli elementi nella queue e (al momento) NON resetta il buffer
-        void clear() { queue.clear(); }
+        void clear();
 
         float get_line_width() const { return line_dim; };
 

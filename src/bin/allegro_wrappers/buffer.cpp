@@ -5,7 +5,7 @@ Buffer::Buffer(): Image(), bitmaps(), queue() {
 }
 
 Buffer::Buffer(ALLEGRO_BITMAP* b, float x, float y, bool p, bool d):
-    Image(b, x, y, p, d) {
+    Image(b, x, y, p, d), bitmaps(), queue() {
 
 }
 
@@ -28,9 +28,7 @@ void Buffer::init(float x, float y, bool p, bool d) {
     bitmaps.insert( {PanelType::WIN,     {} } );
     bitmaps.insert( {PanelType::LOSS,    {} } );
 
-    bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600));
-    al_set_target_bitmap(bitmaps[PanelType::LEVEL][0]);
-    al_clear_to_color(al_map_rgb(175, 175, 175));
+    bitmaps[PanelType::LEVEL].push_back(nullptr);
 
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(30, 30));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][1]);
@@ -86,14 +84,20 @@ void Buffer::draw() {
 
     al_set_target_bitmap(bitmap);
     al_clear_to_color(al_map_rgb(125, 125, 125));
-    for(auto it : queue)
+    for(auto& it : queue)
         it->draw();
 
     al_set_target_backbuffer(al_get_current_display());
-    al_draw_scaled_bitmap(bitmap, 0.0f, 0.0f, x, y, scale[2], scale[3], scale[0], scale[1], 0);
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_scaled_bitmap(bitmap, 0, 0, x, y, scale[2], scale[3], scale[0], scale[1], 0);
+
+    clear();
+}
+
+void Buffer::clear() {
 
     //si deallocano le bitmap temporanee create ad hoc
-    for(auto it : queue)
+    for(auto& it : queue)
      if(it->needs_freeing())
         delete it;
 
@@ -105,7 +109,6 @@ void Buffer::draw() {
         else
             it = it + 1;
     }
-
 }
 
 void Buffer::update_buffer() {}

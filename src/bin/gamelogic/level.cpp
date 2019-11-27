@@ -60,7 +60,7 @@ void Level::update_game_state() {
             player.update();
     }
 
-    for(auto it : lines)
+    for(auto& it : lines)
         it->update();
 }
 
@@ -71,14 +71,14 @@ void Level::reset_game_state() {
     pause = false;
     frogs_counter = 0;
     player.reset();
-    for(auto it : lines)
+    for(auto& it : lines)
         it->reset();
 }
 
 void Level::redraw_game() {
 
     //std::cout << "Level::redraw_game() called... \n";
-    for(auto it : lines)
+    for(auto& it : lines)
         it->redraw();
     player.redraw();
     Graphics::getInstance()->redraw();
@@ -157,6 +157,6 @@ Panel(), exit(false), pause(false), player(), lines(), frogs_counter(0) {
 
 Level::~Level() {
 
-    for(auto it : lines)
+    for(auto& it : lines)
         delete it;
 }
