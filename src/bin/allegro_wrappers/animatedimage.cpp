@@ -20,7 +20,8 @@ AnimatedImage& AnimatedImage::operator=(const AnimatedImage& aimg) {
     return *this;
 }
 
-AnimatedImage::~AnimatedImage() {}
+AnimatedImage::~AnimatedImage() {
+}
 
 void AnimatedImage::draw() {
 

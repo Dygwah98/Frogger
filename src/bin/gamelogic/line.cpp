@@ -21,23 +21,27 @@ Line::Line(): img(new LineImage(0.0f, 1.0f)), objects() {
 Line::Line(ALLEGRO_BITMAP* b, int index):
 img(new LineImage(0.0f, 1.0f)), objects() {
 
-    std::cout << "\nLine initialization... ";
+    //std::cout << "\nLine initialization... ";
 
     img->set_bitmap(b);
     img->set_coordinates(0.0f, ((600/11)+1)*index);
 
     auto context = Graphics::getInstance()->get_initializer();
 
-    for(int i = 0; i < 6; ++i)
+    if(index%5 != 0)
+    for(int i = 0; i < 6; ++i) {
+        
         objects.push_back(new GameObject(0.0f, 0.0f, Collision::nd));
-    img->set_max(objects.size());
+        auto it = objects.back();
 
-    for(auto it : objects) {
         it->set_img(context[1]);
+        it->get_img()->set_coordinates( 
+            (((600/11)+1)/2.0f - 30/2.0f)+(Graphics::getInstance()->get_line_width()/6)*(i),
+            (((600/11)+1)/2.0f - 30/2.0f));
         img->add(it->get_img());
     }
 
-    std::cout << "Line initialization done.\n";
+    //std::cout << "Line initialization done.\n";
 
 }
 

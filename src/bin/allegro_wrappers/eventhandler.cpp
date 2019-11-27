@@ -24,7 +24,7 @@ EventHandler::EventHandler():
 
     Graphics* g = Graphics::getInstance();
     //inizializzazione timer:
-    timer = al_create_timer(1.0/g->getDispMode().refresh_rate);
+    timer = al_create_timer(1.0f/30.0f);
     assert(timer != nullptr);
 
     //inizializzazione coda degli eventi:
@@ -84,6 +84,15 @@ Event EventHandler::next_event() {
             ret = Event::Exit;
         
         break;
+
+        case ALLEGRO_EVENT_TIMER:
+        
+            if(!redraw) {
+                ret = Event::Execute;
+                redraw = true;        
+            }
+        
+        break;
         
         case ALLEGRO_EVENT_DISPLAY_RESIZE:
 
@@ -110,15 +119,6 @@ Event EventHandler::next_event() {
             else if(contains<int, Keys>(keymap, ev.keyboard.keycode))
                 if(key_pressed == keymap.at(ev.keyboard.keycode))
                     key_pressed = Keys::nd;
-        
-        break;
-
-        case ALLEGRO_EVENT_TIMER:
-        
-            if(!redraw) {
-                ret = Event::Execute;
-                redraw = true;        
-            }
         
         break;
 

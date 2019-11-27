@@ -7,6 +7,7 @@ class LineImage: public Image {
     
     private:
         std::vector<Image*> subImages;
+        std::map<float, std::pair<ALLEGRO_BITMAP*,ALLEGRO_BITMAP*>> frames;
         float position;
         float speed;
         float max_pos;

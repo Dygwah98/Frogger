@@ -33,9 +33,10 @@ PanelType Menu::body(PanelType caller) {
 Menu::Menu(): Panel(), panels() {
 
     std::cout << "\nMenu initialization... ";
-
-    Graphics::getInstance();
+    
+    Graphics::getInstance()->set_component(this->type());
     EventHandler::getInstance();
+
     panels[PanelType::OPTIONS] = new Options();
     panels[PanelType::LEVEL]   = new Level();
     panels[PanelType::WIN]     = new WinScreen();
@@ -55,8 +56,8 @@ void Menu::launchGame() {
     std::cout << "\nMenu::launchGame() called... ";
 
     this->execute(PanelType::MENU);
-    Graphics::delInstance();
     EventHandler::delInstance();
+    Graphics::delInstance();
 
     std::cout << "Menu::launchGame() done.\n";
 }

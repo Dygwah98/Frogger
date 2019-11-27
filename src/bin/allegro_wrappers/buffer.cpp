@@ -44,22 +44,18 @@ void Buffer::init(float x, float y, bool p, bool d) {
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][3]);
     al_clear_to_color(al_map_rgb(125, 175, 255));
-    al_put_pixel(line_dim/2, 300/11+1, al_map_rgb(255, 255, 255));
 
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][4]);
     al_clear_to_color(al_map_rgb(125, 255, 175));
-    al_put_pixel(line_dim/2+20, 300/11+1, al_map_rgb(255, 255, 255));
 
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][5]);
     al_clear_to_color(al_map_rgb(255, 175, 125));
-    al_put_pixel(line_dim/2+40, 300/11+1, al_map_rgb(255, 255, 255));
 
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][6]);
     al_clear_to_color(al_map_rgb(255, 125, 175));
-    al_put_pixel(line_dim/2+60, 300/11+1, al_map_rgb(255, 255, 255));
 //
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][7]);
@@ -68,22 +64,18 @@ void Buffer::init(float x, float y, bool p, bool d) {
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][8]);
     al_clear_to_color(al_map_rgb(125, 175, 255));
-    al_put_pixel(line_dim/2, 300/11+1, al_map_rgb(255, 255, 255));
 
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][9]);
     al_clear_to_color(al_map_rgb(125, 255, 175));
-    al_put_pixel(line_dim/2+20, 300/11+1, al_map_rgb(255, 255, 255));
 
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][10]);
     al_clear_to_color(al_map_rgb(255, 175, 125));
-    al_put_pixel(line_dim/2+40, 300/11+1, al_map_rgb(255, 255, 255));
 
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][11]);
     al_clear_to_color(al_map_rgb(255, 125, 175));
-    al_put_pixel(line_dim/2+60, 300/11+1, al_map_rgb(255, 255, 255));
 //
     bitmaps[PanelType::LEVEL].push_back(al_create_bitmap(line_dim, 600/11+1));
     al_set_target_bitmap(bitmaps[PanelType::LEVEL][12]);

@@ -80,7 +80,7 @@ void Player::reset() {
     //reset_gindex();
     position = 0;
     vert_dim = 30.0f;
-    speed = 0.0f;
+    speed = 1.0f;
     isMoving = false;
     counter = 0;
     dir = Keys::nd;
@@ -97,5 +97,5 @@ void Player::redraw() {
 void Player::set_img(ALLEGRO_BITMAP* b) {
 
     GameObject::set_img(b);
-    get_img()->set_coordinates( ((600/11)+1)/2-30/2, ((600/11)+1)/2-30/2 );
+    get_img()->set_coordinates( ((600/11)+1)/2.0f - vert_dim/2.0f, ((600/11)+1)/2.0f - get_length()/2.0f );
 }

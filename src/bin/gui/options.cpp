@@ -12,5 +12,10 @@ PanelType Options::body(PanelType caller) {
 
 Options::Options(): Panel() {
 
-    std::cout << "\nOptions initialization\n";
+    std::cout << "\nOptions initialization... ";
+
+    Graphics::getInstance()->set_component(this->type());
+    EventHandler::getInstance();
+
+    std::cout << "Options initialization done.\n";
 }
