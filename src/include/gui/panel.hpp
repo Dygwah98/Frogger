@@ -15,7 +15,7 @@ class Panel {
 
         inline PanelType execute(PanelType caller) {
             
-            Graphics::getInstance()->set_component(this->type());
+            Graphics::getInstance().set_component(this->type());
             return this->body(caller);
         }
 };

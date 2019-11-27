@@ -20,11 +20,12 @@ class EventHandler {
 
         bool redraw;
         Keys key_pressed;
+        Keys new_key;
 
         EventHandler();
 
     public:
-        static EventHandler* getInstance();
+        static EventHandler& getInstance();
         static void delInstance();
 
         ~EventHandler();
@@ -32,7 +33,7 @@ class EventHandler {
         //true se tutte le componenti sono valide per l'uso
         bool is_ready() const { 
         
-            return Graphics::getInstance()->initAllegro() and 
+            return Graphics::getInstance().initAllegro() and 
                 al_get_timer_started(timer) and 
                 !al_is_event_queue_paused(event_queue); 
         }
@@ -43,7 +44,12 @@ class EventHandler {
 
         Event next_event();
 
-        Keys next_key() { return key_pressed; }
+        Keys next_key() { 
+
+            Keys temp = new_key;
+            new_key = Keys::nd;
+            return temp; 
+        }
 
 };
 

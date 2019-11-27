@@ -34,7 +34,7 @@ Menu::Menu(): Panel(), panels() {
 
     std::cout << "\nMenu initialization... ";
     
-    Graphics::getInstance()->set_component(this->type());
+    Graphics::getInstance().set_component(this->type());
     EventHandler::getInstance();
 
     panels[PanelType::OPTIONS] = new Options();

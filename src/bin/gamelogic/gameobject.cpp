@@ -20,7 +20,7 @@ GameObject::~GameObject() { delete img; }
 
 void GameObject::update() {}
 
-void GameObject::redraw() { Graphics::getInstance()->schedule_drawing(img); }
+void GameObject::redraw() { Graphics::getInstance().schedule_drawing(img); }
 
 void GameObject::reset() {}
 

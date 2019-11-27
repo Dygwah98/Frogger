@@ -2,14 +2,14 @@
 
 Graphics* Graphics::instance = nullptr;
 
-Graphics* Graphics::getInstance() {
+Graphics& Graphics::getInstance() {
 
     if(Graphics::instance == nullptr) {
 
         assert(initAllegro());
         Graphics::instance = new Graphics();
     }
-    return Graphics::instance;
+    return *(Graphics::instance);
 }
 
 void Graphics::delInstance() {

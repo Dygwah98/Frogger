@@ -10,7 +10,7 @@ bool Level::player_in_area() {
     return 
         in_range<float>(0.0f, player.get_position(), (float)lines.size(), true, false) 
     and
-        in_range<float>(0.0f, player.get_position(), Graphics::getInstance()->get_line_width(), true, false);
+        in_range<float>(0.0f, player.get_position(), Graphics::getInstance().get_line_width(), true, false);
 }
 
 Line* Level::player_line() {
@@ -48,7 +48,7 @@ void Level::update_game_state() {
     if(!player.is_dead()) {
         if(!player.is_moving()) {
         
-            Keys temp = EventHandler::getInstance()->next_key();
+            Keys temp = EventHandler::getInstance().next_key();
 
             if(temp != Keys::nd)
                 player.set_dir(temp);
@@ -81,7 +81,7 @@ void Level::redraw_game() {
     for(auto& it : lines)
         it->redraw();
     player.redraw();
-    Graphics::getInstance()->redraw();
+    Graphics::getInstance().redraw();
 }
 
 PanelType Level::type() {
@@ -95,40 +95,41 @@ PanelType Level::body(PanelType caller) {
 
     reset_game_state();
 
-    EventHandler::getInstance()->launch();
+    EventHandler& evh = EventHandler::getInstance();
+    evh.launch();
 
     while(!exit) {
 
-        Event e = EventHandler::getInstance()->next_event();
+        Event e = evh.next_event();
         switch(e) {
             
             case Event::Exit:          
-                //std::cout << "EXIT EVENT\n"; 
+                std::cout << "EXIT EVENT\n"; 
                 exit = true;    
                 break;
             
             case Event::Pause:  
-                //std::cout << "PAUSE EVENT\n";
+                std::cout << "PAUSE EVENT\n";
                 pause = !pause; 
                 break;
 
             case Event::Execute: 
-                //std::cout << "EXECUTE EVENT\n";
+                std::cout << "EXECUTE EVENT\n";
                 if(!pause) update_game_state();
                 break;
 
             case Event::Redraw:
-                //std::cout << "REDRAW EVENT\n";
+                std::cout << "REDRAW EVENT\n";
                 if(!pause) redraw_game();
                 break;
 
             default:
-                //std::cout << "UNHANDLED EVENT\n";
+                std::cout << "UNHANDLED EVENT\n";
                 break;
         }
     }
 
-    EventHandler::getInstance()->suspend();
+    evh.suspend();
 
     if(player.get_lifes() == 0) return PanelType::LOSS;
     else if(frogs_counter >= 5) return PanelType::WIN;
@@ -142,9 +143,9 @@ Panel(), exit(false), pause(false), player(), lines(), frogs_counter(0) {
     std::cout << "\nLevel initialization... ";
 
     //std::cout << "  \ngraphics setup";
-    Graphics::getInstance()->set_component(this->type());
+    Graphics::getInstance().set_component(this->type());
     EventHandler::getInstance();
-    auto context = Graphics::getInstance()->get_initializer();
+    auto context = Graphics::getInstance().get_initializer();
 
     //std::cout << "  \nplayer graphics";
     player.set_img(context[1]);

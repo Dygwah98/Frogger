@@ -2,9 +2,9 @@
 
 unsigned Player::max_counter() const {
 
-    unsigned int temp = Graphics::getInstance()->get_refresh_rate();
+    unsigned int temp = Graphics::getInstance().get_refresh_rate();
     assert(temp != 0);
-    return 60*(60/temp);
+    return Graphics::getInstance().get_line_height()*(60/temp);
 }
 
 Player::Player(): 
@@ -17,7 +17,7 @@ void Player::reposition(const float& i, const float& f) {
 
     position = i;
     set_coord(f);
-    get_img()->set_coordinates(f, ((Graphics::getInstance()->get_line_height() - get_length())/2.0f)*(position+1.0f));
+    get_img()->set_coordinates(f, ((Graphics::getInstance().get_line_height() - get_length())/2.0f)*(position+1.0f));
 }
 
 void Player::set_dir(Keys key) {
@@ -89,14 +89,9 @@ void Player::reset() {
 
 //get_gindex(), get_coord() + 5.0f, 12.27f
 
-void Player::redraw() {
-
-    GameObject::redraw();    
-}
-
 void Player::set_img(ALLEGRO_BITMAP* b) {
 
     GameObject::set_img(b);
-    float temp = Graphics::getInstance()->get_line_height();
+    float temp = Graphics::getInstance().get_line_height();
     get_img()->set_coordinates( (temp-vert_dim)/2.0f, (temp-get_length())/2.0f );
 }

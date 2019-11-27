@@ -28,7 +28,7 @@ class Graphics {
         Graphics();
 
     public:
-        static Graphics* getInstance();
+        static Graphics& getInstance();
 
         static void delInstance();
         //dealloca le risorse di Allegro

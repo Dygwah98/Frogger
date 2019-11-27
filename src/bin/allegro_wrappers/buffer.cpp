@@ -84,8 +84,11 @@ void Buffer::draw() {
 
     al_set_target_bitmap(bitmap);
     al_clear_to_color(al_map_rgb(125, 125, 125));
+    
+    al_hold_bitmap_drawing(true);
     for(auto& it : queue)
         it->draw();
+    al_hold_bitmap_drawing(false);
 
     al_set_target_backbuffer(al_get_current_display());
     al_clear_to_color(al_map_rgb(0, 0, 0));

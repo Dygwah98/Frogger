@@ -47,7 +47,6 @@ class Player: public GameObject {
         ~Player();
 
         void update() override;
-        void redraw() override;
         void reset() override;
         
         void set_img(ALLEGRO_BITMAP*);

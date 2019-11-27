@@ -33,13 +33,19 @@ LineImage::~LineImage() {
 
 void LineImage::draw() {  
 
+    if(al_is_bitmap_drawing_held())
+        al_hold_bitmap_drawing(false);
+
     ALLEGRO_BITMAP* buffer = al_get_target_bitmap();
 
     al_set_new_bitmap_flags(ALLEGRO_NO_PRESERVE_TEXTURE);
     intermediate_buffer = al_clone_bitmap(bitmap);
     al_set_target_bitmap(intermediate_buffer);
+    
+    al_hold_bitmap_drawing(true);
     for(auto& it : subImages)
         it->draw();
+    al_hold_bitmap_drawing(false);
 
     int width  = al_get_bitmap_width(bitmap);
     int height = al_get_bitmap_height(bitmap);
@@ -47,6 +53,9 @@ void LineImage::draw() {
     al_set_target_bitmap(buffer);
     al_draw_bitmap_region(intermediate_buffer, 0, 0, position, height, x + width - position, y, 0);
     al_draw_bitmap_region(intermediate_buffer, position, 0, width - position, height, x, y, 0);
+
+    al_destroy_bitmap(intermediate_buffer);
+    intermediate_buffer = nullptr;
 }
 
 void LineImage::add(Image* it) {
