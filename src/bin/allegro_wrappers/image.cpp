@@ -62,10 +62,8 @@ void Image::set_bitmap(std::string&& s) {
 
 void Image::set_bitmap(ALLEGRO_BITMAP* b) {
 
-    if(bitmap != nullptr and is_bitmap_owner) {
-        //std::cout << "   \nerror here?";
+    if(bitmap != nullptr and is_bitmap_owner)
         al_destroy_bitmap(bitmap);
-    }
 
     bitmap = b;
     x = al_get_bitmap_width(bitmap);

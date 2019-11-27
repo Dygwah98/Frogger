@@ -24,7 +24,7 @@ EventHandler::EventHandler():
 
     Graphics* g = Graphics::getInstance();
     //inizializzazione timer:
-    timer = al_create_timer(1.0f/30.0f);
+    timer = al_create_timer(1.0f/60.0f);
     assert(timer != nullptr);
 
     //inizializzazione coda degli eventi:

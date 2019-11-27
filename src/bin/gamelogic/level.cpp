@@ -59,7 +59,7 @@ void Level::update_game_state() {
         } else 
             player.update();
     }
-    
+
     for(auto it : lines)
         it->update();
 }

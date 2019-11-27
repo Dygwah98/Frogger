@@ -6,6 +6,7 @@
 class LineImage: public Image {
     
     private:
+        ALLEGRO_BITMAP* intermediate_buffer;
         std::vector<Image*> subImages;
         std::map<float, std::pair<ALLEGRO_BITMAP*,ALLEGRO_BITMAP*>> frames;
         float position;

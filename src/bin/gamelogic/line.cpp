@@ -1,6 +1,6 @@
 #include"../../include/gamelogic/line.hpp"
 
-Line::Line(): img(new LineImage(0.0f, 1.0f)), objects() {
+Line::Line(): img(new LineImage(0.0f, 2.0f)), objects() {
 
     std::cout << "\nLine initialization... ";
 
@@ -19,7 +19,7 @@ Line::Line(): img(new LineImage(0.0f, 1.0f)), objects() {
 }
 
 Line::Line(ALLEGRO_BITMAP* b, int index):
-img(new LineImage(0.0f, 1.0f)), objects() {
+img(new LineImage(0.0f, 2.0f)), objects() {
 
     //std::cout << "\nLine initialization... ";
 
@@ -45,10 +45,7 @@ img(new LineImage(0.0f, 1.0f)), objects() {
 
 }
 
-Line::~Line() {
-
-    delete img;
-}
+Line::~Line() { delete img; }
 
 void Line::update() {
     

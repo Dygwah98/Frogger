@@ -45,7 +45,6 @@ void Player::update_gindex() {
 void Player::update() {
     
     if(isMoving) {
-
         reposition( position + dpos.at(dir)*speed, get_coord() + dcord.at(dir)*speed );
         --counter;
         if(counter == 0) {
