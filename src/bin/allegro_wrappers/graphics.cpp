@@ -92,40 +92,12 @@ Graphics::~Graphics() {
         al_destroy_display(display);
 }
 
-/*
-void Graphics::push_permanent_image(int element, float x, float y) {
-
-    assert(in_range<int>(0, element, bitmaps[row].size(), true, false));
-    queue.push_back( {bitmaps[row][element], x, y, true, false} );
-}
-
-//genera automaticamente due bitmap, corrispondenti alle due porzioni
-//dell'immagine originale, per simulare uno shift "circolare"    
-void Graphics::push_shifted_image(int element, float x, float y, float offset) {
-
-    ALLEGRO_BITMAP* pic = bitmaps[row][element];
-    float picH = al_get_bitmap_height(pic);
-    float picW = al_get_bitmap_width(pic);
-    
-    ALLEGRO_BITMAP* left = al_create_sub_bitmap(pic, 0, 0, offset, picH);
-    queue.push_back({left, x + (picW - offset), y, false, true});
-
-    ALLEGRO_BITMAP* right = al_create_sub_bitmap(pic, offset, 0, picW - offset, picH);
-    queue.push_back({right, x, y, false, true});
-}
-*/
-
 void Graphics::redraw() {
-
-    //buffer.update_buffer();
     
-    //operazioni di disegno sul display
     al_set_target_backbuffer(display);
     al_clear_to_color(al_map_rgb(0, 0, 0));
     buffer.draw();
     al_flip_display();
-
-    //buffer.refresh();
 }
 
 std::vector<ALLEGRO_BITMAP*>& Graphics::get_initializer() {

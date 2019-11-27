@@ -45,7 +45,12 @@ img(new LineImage(0.0f, 2.0f)), objects() {
 
 }
 
-Line::~Line() { delete img; }
+Line::~Line() { 
+
+    for(auto it : objects)
+        delete it;
+    delete img;
+}
 
 void Line::update() {
     

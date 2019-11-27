@@ -35,7 +35,7 @@ void LineImage::draw() {
 
     intermediate_buffer = al_clone_bitmap(bitmap);
     al_set_target_bitmap(intermediate_buffer);
-    for(auto it : subImages)
+    for(auto& it : subImages)
         it->draw();
 
     int width  = al_get_bitmap_width(bitmap);

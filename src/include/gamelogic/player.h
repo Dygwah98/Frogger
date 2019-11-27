@@ -18,9 +18,9 @@ class Player: public GameObject {
         inline static std::map<Keys, float> dcord = {
             {Keys::nd,     0.0f},
             {Keys::UP,     0.0f}, 
-            {Keys::LEFT, -60.0f}, 
+            {Keys::LEFT,  -1.0f}, 
             {Keys::DOWN,   0.0f}, 
-            {Keys::RIGHT, 60.0f}
+            {Keys::RIGHT,  1.0f}
         };
 
         //posizione sulla mappa (linea)
@@ -65,7 +65,7 @@ class Player: public GameObject {
         void lose_life() { if(lifes > 0) --lifes; }
         int get_lifes() const { return lifes; }
 
-        void reposition(const float&, const float&);
+        void reposition(const float& i = 0.0f, const float& f = 12.77f);
         float next_pos() const;
         float next_coord() const;
 };

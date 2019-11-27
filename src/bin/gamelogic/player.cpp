@@ -17,6 +17,7 @@ void Player::reposition(const float& i, const float& f) {
 
     position = i;
     set_coord(f);
+    get_img()->set_coordinates(f, ((Graphics::getInstance()->get_line_height() - get_length())/2.0f)*(position+1.0f));
 }
 
 void Player::set_dir(Keys key) {
@@ -45,7 +46,7 @@ void Player::update_gindex() {
 void Player::update() {
     
     if(isMoving) {
-        reposition( position + dpos.at(dir)*speed, get_coord() + dcord.at(dir)*speed );
+        reposition( position + (dpos.at(dir)*speed)/max_counter(), get_coord() + dcord.at(dir)*speed );
         --counter;
         if(counter == 0) {
             set_still();
@@ -60,8 +61,8 @@ float Player::next_pos() const {
     (dir != Keys::UP and dir != Keys::DOWN) 
     ? position
     : (dir == Keys::UP)
-        ? floor(position + dpos.at(dir) * speed * max_counter())
-        : position + dpos.at(dir) * speed * max_counter() + speed; 
+        ? floor(position + dpos.at(dir) * speed)
+        : position + dpos.at(dir) * speed + speed; 
 }
 
 float Player::next_coord() const { 
@@ -96,5 +97,6 @@ void Player::redraw() {
 void Player::set_img(ALLEGRO_BITMAP* b) {
 
     GameObject::set_img(b);
-    get_img()->set_coordinates( ((600/11)+1)/2.0f - vert_dim/2.0f, ((600/11)+1)/2.0f - get_length()/2.0f );
+    float temp = Graphics::getInstance()->get_line_height();
+    get_img()->set_coordinates( (temp-vert_dim)/2.0f, (temp-get_length())/2.0f );
 }

@@ -27,7 +27,7 @@ void Level::update_game_state() {
         case Collision::Deadly:
             player.lose_life(); 
             if(player.is_dead()) exit = true;
-            else                 player.reposition(0, 0.0f);            
+            else                 player.reposition();            
             break;
         
         case Collision::Arrival:
