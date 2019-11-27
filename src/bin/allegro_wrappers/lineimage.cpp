@@ -47,9 +47,6 @@ void LineImage::draw() {
     al_set_target_bitmap(buffer);
     al_draw_bitmap_region(intermediate_buffer, 0, 0, position, height, x + width - position, y, 0);
     al_draw_bitmap_region(intermediate_buffer, position, 0, width - position, height, x, y, 0);
-
-    al_destroy_bitmap(intermediate_buffer);
-    intermediate_buffer = nullptr;
 }
 
 void LineImage::add(Image* it) {
