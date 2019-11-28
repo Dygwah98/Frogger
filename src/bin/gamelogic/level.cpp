@@ -2,15 +2,22 @@
 
 Collision Level::player_collides() {
 
-    return player_line()->collides(player);
+    Collision c = player_line()->collides(player);
+
+    if(round(player.get_position()) > 0 and round(player.get_position()) <= 4)
+        if(c != Collision::Log)
+            c = Collision::Deadly;
+
+    if(player.is_moving())
+        c = Collision::nd;
+
+    return c;
 }
 
 bool Level::player_in_area() {
 
-    return 
-        in_range<float>(-0.5f, player.next_pos(), float(lines.size()-1), true, false) 
-    and
-        in_range<float>(0.0f, player.next_coord(), Graphics::getInstance().get_line_width()-player.get_length(), true, false);
+    return in_range<float>(-0.5f, player.next_pos(), float(lines.size()-1), true, false) 
+       and in_range<float>(0.0f, player.next_coord(), Graphics::getInstance().get_line_width()-player.get_length(), true, false);
 }
 
 Line* Level::player_line() {
@@ -29,8 +36,10 @@ void Level::update_game_state() {
             std::cout << round(player.get_position()) << std::endl;
 
             player.lose_life(); 
-            if(player.is_dead()) exit = true;
-            else                 player.reposition();            
+            if(player.is_dead())
+                exit = true;
+            else
+                player.reposition();            
             break;
         
         case Collision::Arrival:
@@ -50,8 +59,10 @@ void Level::update_game_state() {
                     player.reposition(player.get_position(), player.get_coord() - player_line()->get_speed());
                 else {
                     player.lose_life();
-                    if(player.is_dead()) exit = true;
-                    else                 player.reposition();
+                    if(player.is_dead())
+                        exit = true;
+                    else
+                        player.reposition();
                 }
             }
             break;

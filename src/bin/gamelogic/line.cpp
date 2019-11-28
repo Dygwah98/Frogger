@@ -10,7 +10,7 @@ Line::Line(): img(new LineImage(0.0f, 0.5f)), objects() {
 }
 
 Line::Line(ALLEGRO_BITMAP* b, int index):
-img(new LineImage(0.0f, 0.5f)), objects() {
+img(new LineImage(0.0f, index%5 == 0 ? 0.0f : 0.5f)), objects() {
 
     //std::cout << "\nLine initialization... ";
 
@@ -22,32 +22,27 @@ img(new LineImage(0.0f, 0.5f)), objects() {
 
     static float w = Graphics::getInstance().get_line_width();
     static float p = ((600/11)+1)/2.0f - 30/2.0f;
-    static std::map<int, std::vector<std::tuple<float, float, Collision>>> obj_initializer = {
-        {1,  { {p, p, Collision::Log},     {p+w/4, p, Collision::Deadly},  {p+w/2, p, Collision::Log},     {p+3*(w/4), p, Collision::Log}     } },
-        {2,  { {p, p, Collision::Deadly},  {p+w/4, p, Collision::Log},     {p+w/2, p, Collision::Log},     {p+3*(w/4), p, Collision::Log}     } },
-        {3,  { {p, p, Collision::Log},     {p+w/4, p, Collision::Log},     {p+w/2, p, Collision::Log},     {p+3*(w/4), p, Collision::Deadly}  } },
-        {4,  { {p, p, Collision::Log},     {p+w/4, p, Collision::Log},     {p+w/2, p, Collision::Deadly},  {p+3*(w/4), p, Collision::Log}     } },
-        {6,  { {p, p, Collision::Deadly},  {p+w/4, p, Collision::Deadly},  {p+w/2, p, Collision::Deadly},  {p+3*(w/4), p, Collision::Deadly}  } },
-        {7,  { {p, p, Collision::Deadly},  {p+w/4, p, Collision::Deadly},  {p+w/2, p, Collision::Deadly},  {p+3*(w/4), p, Collision::Deadly}  } },
-        {8,  { {p, p, Collision::Deadly},  {p+w/4, p, Collision::Deadly},  {p+w/2, p, Collision::Deadly},  {p+3*(w/4), p, Collision::Deadly}  } },
-        {9,  { {p, p, Collision::Deadly},  {p+w/4, p, Collision::Deadly},  {p+w/2, p, Collision::Deadly},  {p+3*(w/4), p, Collision::Deadly}  } },
-        {10, { {p, p, Collision::Arrival}, {p+w/4, p, Collision::Arrival}, {p+w/2, p, Collision::Arrival}, {p+3*(w/4), p, Collision::Arrival} } }
+    static std::map<int, std::vector<std::tuple<float, float, Collision, float, int>>> obj_initializer = {
+        {1,  { {p, p, Collision::Log, 90.0f, 15},    {p+w/4, p, Collision::Deadly, 30.0f, 14}, {p+3*(w/8), p, Collision::Log, 30.0f, 13},{p+w/2, p, Collision::Log, 90.0f, 15},        {p+3*(w/4), p, Collision::Log, 90.0f, 15} } },
+        {2,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+(w/8), p, Collision::Log, 30.0f, 13},  {p+w/4, p, Collision::Log, 90.0f, 15},    {p+w/2, p, Collision::Log, 90.0f, 15},        {p+3*(w/4), p, Collision::Log, 90.0f, 15} } },
+        {3,  { {p, p, Collision::Log, 90.0f, 15},    {p+w/4, p, Collision::Log, 90.0f, 15},    {p+w/2, p, Collision::Log, 90.0f, 15},    {p+3*(w/4), p, Collision::Deadly, 30.0f, 14}, {p+7*(w/8), p, Collision::Log, 30.0f, 13} } },
+        {4,  { {p, p, Collision::Log, 90.0f, 15},    {p+w/4, p, Collision::Log, 90.0f, 15},    {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+5*(w/8), p, Collision::Log, 30.0f, 13},    {p+3*(w/4), p, Collision::Log, 90.0f, 15}    } },
+        {6,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/4, p, Collision::Deadly, 30.0f, 14}, {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+3*(w/4), p, Collision::Deadly, 30.0f, 14} } },
+        {7,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/4, p, Collision::Deadly, 30.0f, 14}, {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+3*(w/4), p, Collision::Deadly, 30.0f, 14} } },
+        {8,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/4, p, Collision::Deadly, 30.0f, 14}, {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+3*(w/4), p, Collision::Deadly, 30.0f, 14} } },
+        {9,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/4, p, Collision::Deadly, 30.0f, 14}, {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+3*(w/4), p, Collision::Deadly, 30.0f, 14} } },
+        {10, { {p, p, Collision::Arrival, 30.0f, 1}, {p+w/4, p, Collision::Arrival, 30.0f, 1}, {p+w/2, p, Collision::Arrival, 30.0f, 1}, {p+3*(w/4), p, Collision::Arrival, 30.0f, 1} } }
     };
 
     if(index != 0 and index != 5)
-    for(int i = 0; i < 4; ++i) {
+    for(auto& oi : obj_initializer.at(index)) {
         
-        GameObject* it = new GameObject(std::get<0>(obj_initializer.at(index)[i]), 30.0f, std::get<2>(obj_initializer.at(index)[i]));
+        GameObject* it = new GameObject(std::get<0>(oi), std::get<3>(oi), std::get<2>(oi));
         objects.push_back(it);
 
-        if(std::get<2>(obj_initializer.at(index)[i]) != Collision::Deadly)
-            it->set_img(context[13]);
-        else
-            it->set_img(context[14]);
+        it->set_img(context[std::get<4>(oi)]);
 
-        it->get_img()->set_coordinates( 
-            std::get<0>(obj_initializer.at(index)[i]),
-            std::get<1>(obj_initializer.at(index)[i]));
+        it->get_img()->set_coordinates(std::get<0>(oi), std::get<1>(oi));
         img->add(it->get_img());
     }
     //std::cout << "Line initialization done.\n";
