@@ -51,7 +51,7 @@ class Player: public GameObject {
         
         void set_img(ALLEGRO_BITMAP*);
 
-        void set_speed(float s) { speed = s/60.0f; }
+        void set_speed(float s) { speed = s; }
         void set_dir(Keys);
         void set_still();
 

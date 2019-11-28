@@ -8,9 +8,9 @@ Collision Level::player_collides() {
 bool Level::player_in_area() {
 
     return 
-        in_range<float>(0.0f, player.get_position(), (float)lines.size(), true, false) 
+        in_range<float>(-0.5f, player.next_pos(), float(lines.size()-1), true, false) 
     and
-        in_range<float>(0.0f, player.get_position(), Graphics::getInstance().get_line_width(), true, false);
+        in_range<float>(0.0f, player.next_coord(), Graphics::getInstance().get_line_width()-player.get_length(), true, false);
 }
 
 Line* Level::player_line() {
