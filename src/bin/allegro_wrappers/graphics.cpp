@@ -72,7 +72,7 @@ Graphics::Graphics():
 
     std::cout << "\nGraphics initialization... ";
     
-    buffer.init(800, 600, true, false);    
+    buffer.init(800, 600, false);    
     buffer.set_bitmap(800, 600);
 
     //inizializzazione display:

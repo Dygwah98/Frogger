@@ -2,8 +2,8 @@
 
 Buffer::Buffer(): Image() {}
 
-Buffer::Buffer(ALLEGRO_BITMAP* b, float x, float y, bool p, bool d):
-    Image(b, x, y, p, d) {}
+Buffer::Buffer(ALLEGRO_BITMAP* b, float x, float y, bool d):
+    Image(b, x, y, d) {}
 
 Buffer::~Buffer() {
 
@@ -12,10 +12,9 @@ Buffer::~Buffer() {
             al_destroy_bitmap(el);
 }
 
-void Buffer::init(float x, float y, bool p, bool d) {
+void Buffer::init(float x, float y, bool d) {
 
     Image::set_coordinates(x, y);
-    Image::set_permanent(p);
     Image::set_deletable(d);
 
     bitmaps.insert( {PanelType::LEVEL,   {} } );

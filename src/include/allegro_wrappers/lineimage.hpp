@@ -17,7 +17,7 @@ class LineImage: public Image {
 
     public:
         LineImage(float, float);
-        LineImage(ALLEGRO_BITMAP*, float, float, bool, bool);
+        LineImage(ALLEGRO_BITMAP*, float, float, bool);
         LineImage(const LineImage&);
         LineImage& operator=(const LineImage&);
         ~LineImage() override;

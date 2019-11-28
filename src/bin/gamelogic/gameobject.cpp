@@ -3,7 +3,7 @@
 GameObject::GameObject(float f, float f2, Collision m): 
 img(nullptr), coord(f), length(f2), marker(m) {
 
-    img = new Image(nullptr, f, 0.0f, false, false);
+    img = new Image(nullptr, f, 0.0f, false);
 }
 
 GameObject& GameObject::operator=(const GameObject& G) {

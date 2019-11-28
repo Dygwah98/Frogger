@@ -13,7 +13,7 @@ class AnimatedImage: public Image {
 
     public:
         AnimatedImage();
-        AnimatedImage(ALLEGRO_BITMAP*, float, float, bool, bool);
+        AnimatedImage(ALLEGRO_BITMAP*, float, float, bool);
         AnimatedImage(const AnimatedImage&);
         AnimatedImage& operator=(const AnimatedImage&);
         ~AnimatedImage() override;

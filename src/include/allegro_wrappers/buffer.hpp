@@ -21,10 +21,10 @@ class Buffer : public Image {
     
     public:
         Buffer();
-        Buffer(ALLEGRO_BITMAP*, float, float, bool, bool);
+        Buffer(ALLEGRO_BITMAP*, float, float, bool);
         ~Buffer() override;
         
-        void init(float, float, bool, bool);
+        void init(float, float, bool);
 
         void draw() override;
 

@@ -3,8 +3,8 @@
 AnimatedImage::AnimatedImage(): 
 Image(), components(), actual(0) {}
 
-AnimatedImage::AnimatedImage(ALLEGRO_BITMAP* b, float x, float y, bool p, bool d): 
-Image(b, x, y, p, d), components(), actual(0) {}
+AnimatedImage::AnimatedImage(ALLEGRO_BITMAP* b, float x, float y, bool d): 
+Image(b, x, y, d), components(), actual(0) {}
 
 AnimatedImage::AnimatedImage(const AnimatedImage& aimg): 
 Image(aimg), components(aimg.components), actual(0) {}

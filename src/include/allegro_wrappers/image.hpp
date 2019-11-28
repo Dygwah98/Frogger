@@ -6,7 +6,6 @@
 class Image {
 
     private:
-        bool permanent;
         bool deletable;
         bool is_bitmap_owner;
 
@@ -17,14 +16,13 @@ class Image {
 
     public:
         Image();
-        Image(ALLEGRO_BITMAP*, float, float, bool, bool);
+        Image(ALLEGRO_BITMAP*, float, float, bool);
         Image(const Image&);
         Image& operator=(const Image&);
         virtual ~Image();
 
         virtual void draw();
 
-        bool is_permanent() const;
         bool needs_freeing() const;
         float get_x() const;
         float get_y() const;
@@ -32,7 +30,6 @@ class Image {
         void set_bitmap(int, int);
         void set_bitmap(std::string&&);
         void set_bitmap(ALLEGRO_BITMAP*);
-        void set_permanent(bool);
         void set_deletable(bool);
         void set_coordinates(float, float);
         void set_x(float);
