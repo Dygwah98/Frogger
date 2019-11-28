@@ -37,10 +37,16 @@ PanelType Menu::runMenuScreen() {
             break;
 
             case Event::Redraw:
-                for(int i = 0; i < button_released.size(); ++i)
-                 if(i != focus)
+                for(unsigned i = 0; i < button_released.size(); ++i)
+                 if(i != focus) {
                     Graphics::getInstance().schedule_drawing(button_released[i]);
+                    Graphics::getInstance().schedule_text(
+                        button_text[i].data(), button_released[i]->get_x()+50, button_released[i]->get_y()+50, al_map_rgb(255, 255, 255));
+                }
                 Graphics::getInstance().schedule_drawing(button_pressed[focus]);
+                Graphics::getInstance().schedule_text(
+                    button_text[focus].data(), button_released[focus]->get_x()+50, button_released[focus]->get_y()+50, al_map_rgb(255, 255, 255));
+                
                 Graphics::getInstance().redraw();
 
             break;
@@ -90,6 +96,7 @@ Menu::Menu(): Panel(), panels(), button_pressed(), button_released(), directions
     auto& context = Graphics::getInstance().get_initializer();
 
     directions = {PanelType::LEVEL, PanelType::OPTIONS, PanelType::EXIT};
+    button_text ={"Level", "Options", "Exit"};
     for(int i = 0; i < 3; ++i) {
         button_pressed.push_back( new Image(context[0], 200, 100 + 120*i, false));
         button_released.push_back(new Image(context[1], 200, 100 + 120*i, false));

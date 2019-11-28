@@ -13,6 +13,7 @@ class Menu : protected Panel {
 
         std::vector<Image*> button_pressed;
         std::vector<Image*> button_released;
+        std::vector<std::string> button_text;
         std::vector<PanelType> directions;
 
         PanelType runMenuScreen();
