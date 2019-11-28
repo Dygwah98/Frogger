@@ -12,7 +12,8 @@ class EventHandler {
             {ALLEGRO_KEY_UP, Keys::UP}, 
             {ALLEGRO_KEY_LEFT, Keys::LEFT},
             {ALLEGRO_KEY_DOWN, Keys::DOWN},
-            {ALLEGRO_KEY_RIGHT, Keys::RIGHT}
+            {ALLEGRO_KEY_RIGHT, Keys::RIGHT},
+            {ALLEGRO_KEY_ENTER, Keys::ENTER}
         };
 
         ALLEGRO_TIMER* timer;

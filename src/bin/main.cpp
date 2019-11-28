@@ -2,7 +2,10 @@
 
 int main(int argv, char** argc) {
 
-    Menu m;
-    m.launchGame();
+    Menu* m = new Menu();
+    m->launchGame();
+    
+    delete m;
+
     return 0;
 }

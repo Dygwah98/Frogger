@@ -148,6 +148,7 @@ PanelType Level::body(PanelType caller) {
     EventHandler& evh = EventHandler::getInstance();
     evh.launch();
 
+    bool forced_exit = false;
     while(!exit) {
 
         Event e = evh.next_event();
@@ -155,7 +156,8 @@ PanelType Level::body(PanelType caller) {
             
             case Event::Exit:          
                 //std::cout << "EXIT EVENT\n"; 
-                exit = true;    
+                exit = true; 
+                forced_exit = true;   
                 break;
             
             case Event::Pause:  
@@ -185,12 +187,14 @@ PanelType Level::body(PanelType caller) {
 
     evh.suspend();
 
-    if(player.is_dead()) 
-        return PanelType::LOSS;
-    else if(frogs_counter >= max_frogs)
-        return PanelType::WIN;
+    if(!forced_exit) {
+        if(player.is_dead()) 
+            return PanelType::LOSS;
+        else if(frogs_counter >= max_frogs)
+            return PanelType::WIN;
+    }
 
-    return PanelType::EXIT;
+    return PanelType::MENU;
 }
 
 Level::Level(): 

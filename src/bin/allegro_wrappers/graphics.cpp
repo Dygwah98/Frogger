@@ -16,6 +16,7 @@ void Graphics::delInstance() {
     if(Graphics::instance != nullptr)
         delete Graphics::instance;
     Graphics::instance = nullptr;
+    
 }
 
 bool Graphics::isValid = false;

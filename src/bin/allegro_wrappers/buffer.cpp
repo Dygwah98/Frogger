@@ -17,30 +17,21 @@ void Buffer::init(float x, float y, bool d, const char* data) {
     Image::set_coordinates(x, y);
     Image::set_deletable(d);
 
-    bitmaps.insert( {PanelType::LEVEL,   {} } );
-    bitmaps.insert( {PanelType::MENU,    {} } );
-    bitmaps.insert( {PanelType::OPTIONS, {} } );
-    bitmaps.insert( {PanelType::WIN,     {} } );
-    bitmaps.insert( {PanelType::LOSS,    {} } );
-
-
     font = al_load_ttf_font(data, 24, 0);
     assert(font != nullptr);
 
-    bitmaps[PanelType::LEVEL].push_back(al_load_bitmap("resources/Senzanome.png"));
+    bitmaps.insert( {PanelType::LEVEL,   {} } );
+
+    bitmaps[PanelType::LEVEL].push_back(al_load_bitmap("resources/atlas.png"));
 
     bitmaps[PanelType::LEVEL].push_back(
         al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], line_dim, 0, 30, 30));
     
     int h = 56;
-    int arr[] = {0,   1,   2,   3,   4};
+    int arr[] = {0, 1, 2, 3, 4};
 
-    for(int i = 0; i < 11; ++i) {
-        
-        bitmaps[PanelType::LEVEL].push_back(
-            al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], 0, arr[i%5]*h, line_dim, h)
-        );
-    }
+    for(int i = 0; i < 11; ++i)        
+        bitmaps[PanelType::LEVEL].push_back(al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], 0, arr[i%5]*h, line_dim, h));
 
     bitmaps[PanelType::LEVEL].push_back(
         al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], line_dim+60, 0, 30, 30));
@@ -50,6 +41,11 @@ void Buffer::init(float x, float y, bool d, const char* data) {
 
     bitmaps[PanelType::LEVEL].push_back(
         al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], line_dim+60, arr[2]*h + 10, 90, 30));
+
+    bitmaps.insert({PanelType::MENU,{}});
+    bitmaps[PanelType::MENU].push_back(al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], 176, 323, 400, 100));
+    bitmaps[PanelType::MENU].push_back(al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], 188, 460, 400, 100));
+    bitmaps.insert({PanelType::OPTIONS,bitmaps.at(PanelType::MENU)});
 }
 
 void Buffer::draw() { al_draw_scaled_bitmap(bitmap, 0, 0, x, y, scale[2], scale[3], scale[0], scale[1], 0); }

@@ -11,6 +11,10 @@ class Menu : protected Panel {
     private:
         std::map<PanelType, Panel*> panels;
 
+        std::vector<Image*> button_pressed;
+        std::vector<Image*> button_released;
+        std::vector<PanelType> directions;
+
         PanelType runMenuScreen();
 
     protected:
