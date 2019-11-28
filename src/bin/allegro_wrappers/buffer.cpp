@@ -12,7 +12,7 @@ Buffer::~Buffer() {
             al_destroy_bitmap(el);
 }
 
-void Buffer::init(float x, float y, bool d) {
+void Buffer::init(float x, float y, bool d, const char* data) {
 
     Image::set_coordinates(x, y);
     Image::set_deletable(d);
@@ -23,7 +23,11 @@ void Buffer::init(float x, float y, bool d) {
     bitmaps.insert( {PanelType::WIN,     {} } );
     bitmaps.insert( {PanelType::LOSS,    {} } );
 
-    bitmaps[PanelType::LEVEL].push_back(al_load_bitmap("Senzanome.png"));
+
+    font = al_load_ttf_font(data, 24, 0);
+    assert(font != nullptr);
+
+    bitmaps[PanelType::LEVEL].push_back(al_load_bitmap("resources/Senzanome.png"));
 
     bitmaps[PanelType::LEVEL].push_back(
         al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], line_dim, 0, 30, 30));
@@ -51,6 +55,7 @@ void Buffer::clear() {
         delete it;
 
     queue.clear();
+    text.clear();
 }
 
 void Buffer::update_buffer() {
@@ -62,6 +67,16 @@ void Buffer::update_buffer() {
     for(auto it = queue.begin(); it != queue.end(); ++it)
         (*it)->draw();
     al_hold_bitmap_drawing(false);
+
+    for(auto& it : text) 
+        al_draw_text(
+            font, 
+            std::get<3>(it), 
+            std::get<0>(it), 
+            std::get<1>(it), 
+            0, 
+            std::get<2>(it).data()
+        );
 }
 
 void Buffer::refresh() {}

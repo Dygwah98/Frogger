@@ -14,6 +14,10 @@ class Buffer : public Image {
         std::map<PanelType, std::vector<ALLEGRO_BITMAP*> > bitmaps = {};
         //coda di immagini da disegnare sul buffer
         std::vector<Image*> queue = {};
+
+        ALLEGRO_FONT* font = nullptr;
+
+        std::vector<std::tuple<int, int, std::string, ALLEGRO_COLOR>> text = {}; 
         //fattori di scala (usati per ridimensionare il buffer)
         float scale[4] = {0.0f, 0.0f, 0.0f, 0.0f};
 
@@ -24,15 +28,13 @@ class Buffer : public Image {
         Buffer(ALLEGRO_BITMAP*, float, float, bool);
         ~Buffer() override;
         
-        void init(float, float, bool);
+        void init(float, float, bool, const char*);
 
         void draw() override;
 
         void update_buffer();
 
         void refresh();
-
-        void push_image(Image* img) { queue.push_back(img); }
 
         std::vector<ALLEGRO_BITMAP*>& get_initializer() { return bitmaps.at(row); }
 

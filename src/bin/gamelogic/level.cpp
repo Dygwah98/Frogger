@@ -81,6 +81,10 @@ void Level::redraw_game() {
     for(auto& it : lines)
         it->redraw();
     player.redraw();
+    Graphics::getInstance().schedule_text("TIME:",  620, 20,  al_map_rgb(255, 255, 255));
+    Graphics::getInstance().schedule_text("SCORE:", 620, 120, al_map_rgb(255, 255, 255));
+    Graphics::getInstance().schedule_text("LIFES:", 620, 220, al_map_rgb(255, 255, 255));
+    Graphics::getInstance().schedule_text("SAVED:", 620, 320, al_map_rgb(255, 255, 255));
     Graphics::getInstance().redraw();
 }
 

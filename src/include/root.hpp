@@ -11,6 +11,8 @@
 #include<memory>
 #include<allegro5/allegro.h>
 #include<allegro5/allegro_image.h>
+#include<allegro5/allegro_font.h>
+#include<allegro5/allegro_ttf.h>
 
 enum struct PanelType : int {EXIT = -1, MENU = 0, LEVEL = 1, OPTIONS = 2, WIN = 3, LOSS = 4};
 enum struct Event : int { nd = -1, Exit = 0, Execute = 1, Redraw = 2, Pause = 3 };

@@ -23,11 +23,16 @@ bool Graphics::isValid = false;
 bool Graphics::initAllegro() {
 
     if(!isValid) {
-        al_init(); 
-        al_install_keyboard();
-        al_init_image_addon();
+        
+        assert(al_init()); 
+        assert(al_install_keyboard());
+        assert(al_init_image_addon());
+        assert(al_init_font_addon());
+        assert(al_init_ttf_addon());
     
-        isValid = al_is_system_installed() and al_is_keyboard_installed();
+        isValid = 
+            al_is_system_installed() and 
+            al_is_keyboard_installed();
     }
 
     return isValid;
@@ -72,7 +77,7 @@ Graphics::Graphics():
 
     std::cout << "\nGraphics initialization... ";
     
-    buffer.init(800, 600, false);    
+    buffer.init(800, 600, false, "resources/LemonMilk.otf");    
     buffer.set_bitmap(800, 600);
 
     //inizializzazione display:
@@ -86,7 +91,7 @@ Graphics::Graphics():
 
     //inizializzazione buffer
     calc_scale_factors();
-    
+
     std::cout << "Graphics initialization done.\n";
 }
 

@@ -19,7 +19,6 @@ class Graphics {
         ALLEGRO_DISPLAY* display;
         //bitmap d'appoggio, usata per la scalabilità
         Buffer buffer;
-
         //restituisce i parametri adatti per l'inizializzazione del display
         ALLEGRO_DISPLAY_MODE getDispMode() const;
         //calcola i fattori di scala per questo particolare display
@@ -39,7 +38,8 @@ class Graphics {
         std::vector<ALLEGRO_BITMAP*>& get_initializer();
 
         void set_component(PanelType index) { buffer.set_component(index); }
-        void schedule_drawing(Image* img) { buffer.push_image(img); }
+        void schedule_drawing(Image* img) { buffer.queue.push_back(img); }
+        void schedule_text(std::string s, int x, int y, ALLEGRO_COLOR c) { buffer.text.push_back({x, y, s, c}); }
         void clear() { buffer.clear(); }
         float get_buffer_width() const { return buffer.get_x(); }
         float get_buffer_height() const { return buffer.get_y(); }
