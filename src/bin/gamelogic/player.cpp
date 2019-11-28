@@ -3,7 +3,7 @@
 unsigned Player::max_counter() const {
 
     float space = Graphics::getInstance().get_line_height();
-    return (space/speed);
+    return ceil(space/speed);
 }
 
 Player::Player(): 

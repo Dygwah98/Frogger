@@ -16,8 +16,8 @@ Collision Level::player_collides() {
 
 bool Level::player_in_area() {
 
-    return in_range<float>(-0.5f, player.next_pos(), float(lines.size()-1), true, false) 
-       and in_range<float>(0.0f, player.next_coord(), Graphics::getInstance().get_line_width()-player.get_length(), true, false);
+    return in_range<float>(-0.5f, player.next_pos(), lines.size()-0.5f, true, true) 
+       and in_range<float>(0.0f, player.next_coord(), Graphics::getInstance().get_line_width()-(player.get_length()/2.0f), true, false);
 }
 
 Line* Level::player_line() {
@@ -38,15 +38,19 @@ void Level::update_game_state() {
             player.lose_life(); 
             if(player.is_dead())
                 exit = true;
-            else
-                player.reposition();            
+            else {
+                player.reposition();
+                player.set_still();
+            }
             break;
         
         case Collision::Arrival:
             //std::cout << "Collision::Arrival\n";
             ++frogs_counter;
-            if(frogs_counter >= 5)
+            if(frogs_counter >= 3)
                 exit = true;
+            player.reposition();
+            player.set_still();
             break;
         
         case Collision::Log:
@@ -61,10 +65,13 @@ void Level::update_game_state() {
                     player.lose_life();
                     if(player.is_dead())
                         exit = true;
-                    else
+                    else {
                         player.reposition();
+                        player.set_still();
+                    }
                 }
             }
+            
             break;
 
         default:
@@ -108,10 +115,14 @@ void Level::redraw_game() {
     for(auto& it : lines)
         it->redraw();
     player.redraw();
-    Graphics::getInstance().schedule_text("TIME:",  620, 20,  al_map_rgb(255, 255, 255));
-    Graphics::getInstance().schedule_text("SCORE:", 620, 120, al_map_rgb(255, 255, 255));
-    Graphics::getInstance().schedule_text("LIFES:", 620, 220, al_map_rgb(255, 255, 255));
-    Graphics::getInstance().schedule_text("SAVED:", 620, 320, al_map_rgb(255, 255, 255));
+    Graphics::getInstance().schedule_text("TIME:",                                       620, 20,  al_map_rgb(255, 255, 255));
+    Graphics::getInstance().schedule_text(EventHandler::getInstance().get_time().data(), 720, 20,  al_map_rgb(255, 255, 255));
+    Graphics::getInstance().schedule_text("SCORE:",                                      620, 120, al_map_rgb(255, 255, 255));
+    Graphics::getInstance().schedule_text(score_calc().data(),                           720, 120, al_map_rgb(255, 255, 255));
+    Graphics::getInstance().schedule_text("LIFES:",                                      620, 220, al_map_rgb(255, 255, 255));
+    Graphics::getInstance().schedule_text(std::to_string(player.get_lifes()).data(),     720, 220, al_map_rgb(255, 255, 255));
+    Graphics::getInstance().schedule_text("SAVED:",                                      620, 320, al_map_rgb(255, 255, 255));
+    Graphics::getInstance().schedule_text(std::to_string(frogs_counter).data(),          720, 320, al_map_rgb(255, 255, 255));
     Graphics::getInstance().redraw();
 }
 
@@ -159,6 +170,10 @@ PanelType Level::body(PanelType caller) {
                 break;
         }
     }
+    
+    update_game_state();
+    redraw_game();
+    al_rest(0.5f);
 
     evh.suspend();
 

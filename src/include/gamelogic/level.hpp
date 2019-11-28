@@ -19,6 +19,10 @@ class Level : public Panel {
         bool player_in_area();
         Line* player_line();
 
+        std::string score_calc() {
+            return std::to_string(frogs_counter*500);   
+        }
+
         void update_game_state();
         void reset_game_state();
 

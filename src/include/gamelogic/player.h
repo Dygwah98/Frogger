@@ -18,9 +18,9 @@ class Player: public GameObject {
         inline static std::map<Keys, float> dcord = {
             {Keys::nd,     0.0f},
             {Keys::UP,     0.0f}, 
-            {Keys::LEFT,  -1.0f}, 
+            {Keys::LEFT,  -0.7f}, 
             {Keys::DOWN,   0.0f}, 
-            {Keys::RIGHT,  1.0f}
+            {Keys::RIGHT,  0.7f}
         };
 
         //posizione sulla mappa (linea)

@@ -51,6 +51,7 @@ class EventHandler {
             return temp; 
         }
 
+        std::string get_time() const { return std::to_string(al_get_timer_count(timer)/60); }
 };
 
 #endif

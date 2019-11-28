@@ -10,7 +10,7 @@ Line::Line(): img(new LineImage(0.0f, 0.5f)), objects() {
 }
 
 Line::Line(ALLEGRO_BITMAP* b, int index):
-img(new LineImage(0.0f, index%5 == 0 ? 0.0f : 0.5f)), objects() {
+img(new LineImage(0.0f, (index%5 == 0) ? 0.0f : 0.5f)), objects() {
 
     //std::cout << "\nLine initialization... ";
 
@@ -26,12 +26,12 @@ img(new LineImage(0.0f, index%5 == 0 ? 0.0f : 0.5f)), objects() {
         {1,  { {p, p, Collision::Log, 90.0f, 15},    {p+w/4, p, Collision::Deadly, 30.0f, 14}, {p+3*(w/8), p, Collision::Log, 30.0f, 13},{p+w/2, p, Collision::Log, 90.0f, 15},        {p+3*(w/4), p, Collision::Log, 90.0f, 15} } },
         {2,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+(w/8), p, Collision::Log, 30.0f, 13},  {p+w/4, p, Collision::Log, 90.0f, 15},    {p+w/2, p, Collision::Log, 90.0f, 15},        {p+3*(w/4), p, Collision::Log, 90.0f, 15} } },
         {3,  { {p, p, Collision::Log, 90.0f, 15},    {p+w/4, p, Collision::Log, 90.0f, 15},    {p+w/2, p, Collision::Log, 90.0f, 15},    {p+3*(w/4), p, Collision::Deadly, 30.0f, 14}, {p+7*(w/8), p, Collision::Log, 30.0f, 13} } },
-        {4,  { {p, p, Collision::Log, 90.0f, 15},    {p+w/4, p, Collision::Log, 90.0f, 15},    {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+5*(w/8), p, Collision::Log, 30.0f, 13},    {p+3*(w/4), p, Collision::Log, 90.0f, 15}    } },
-        {6,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/4, p, Collision::Deadly, 30.0f, 14}, {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+3*(w/4), p, Collision::Deadly, 30.0f, 14} } },
-        {7,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/4, p, Collision::Deadly, 30.0f, 14}, {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+3*(w/4), p, Collision::Deadly, 30.0f, 14} } },
-        {8,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/4, p, Collision::Deadly, 30.0f, 14}, {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+3*(w/4), p, Collision::Deadly, 30.0f, 14} } },
-        {9,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/4, p, Collision::Deadly, 30.0f, 14}, {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+3*(w/4), p, Collision::Deadly, 30.0f, 14} } },
-        {10, { {p, p, Collision::Arrival, 30.0f, 1}, {p+w/4, p, Collision::Arrival, 30.0f, 1}, {p+w/2, p, Collision::Arrival, 30.0f, 1}, {p+3*(w/4), p, Collision::Arrival, 30.0f, 1} } }
+        {4,  { {p, p, Collision::Log, 90.0f, 15},    {p+w/4, p, Collision::Log, 90.0f, 15},    {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+5*(w/8), p, Collision::Log, 30.0f, 13},    {p+3*(w/4), p, Collision::Log, 90.0f, 15} } },
+        {6,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/3, p, Collision::Deadly, 30.0f, 14}, {p+2*(w/3), p, Collision::Deadly, 30.0f, 14} } },
+        {7,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/3, p, Collision::Deadly, 30.0f, 14}, {p+2*(w/3), p, Collision::Deadly, 30.0f, 14} } },
+        {8,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/3, p, Collision::Deadly, 30.0f, 14}, {p+2*(w/3), p, Collision::Deadly, 30.0f, 14} } },
+        {9,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/3, p, Collision::Deadly, 30.0f, 14}, {p+2*(w/3), p, Collision::Deadly, 30.0f, 14} } },
+        {10, { {p, p, Collision::Arrival, 30.0f, 1}, {p+w/3, p, Collision::Arrival, 30.0f, 1}, {p+2*(w/3), p, Collision::Arrival, 30.0f, 1} } }
     };
 
     if(index != 0 and index != 5)
@@ -41,7 +41,6 @@ img(new LineImage(0.0f, index%5 == 0 ? 0.0f : 0.5f)), objects() {
         objects.push_back(it);
 
         it->set_img(context[std::get<4>(oi)]);
-
         it->get_img()->set_coordinates(std::get<0>(oi), std::get<1>(oi));
         img->add(it->get_img());
     }
@@ -66,7 +65,7 @@ void Line::update() {
 
         temp = it->get_coord() - img->get_speed();
         if(temp < 0)
-            temp += (img->get_max() - it->get_length());
+            temp += (img->get_max());
         
         it->set_coord(temp);
     }
