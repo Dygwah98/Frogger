@@ -67,6 +67,8 @@ class Player: public GameObject {
         void reposition(float i = 0.0f, float f = 12.77f);
         float next_pos() const;
         float next_coord() const;
+
+        void set_lifes(unsigned l) { lifes = l; }
 };
 
 #endif

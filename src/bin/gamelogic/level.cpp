@@ -16,7 +16,7 @@ Collision Level::player_collides() {
 
 bool Level::player_in_area() {
 
-    return in_range<float>(-0.5f, player.next_pos(), lines.size()-0.5f, true, true) 
+    return in_range<float>(-0.5f, player.next_pos(), lines.size()-0.8f, true, false) 
        and in_range<float>(0.0f, player.next_coord(), Graphics::getInstance().get_line_width()-(player.get_length()/2.0f), true, false);
 }
 
@@ -32,31 +32,33 @@ void Level::update_game_state() {
     switch(player_collides()) {
 
         case Collision::Deadly:
-            std::cout << "Collision::Deadly ";
-            std::cout << round(player.get_position()) << std::endl;
-
+            //std::cout << "Collision::Deadly ";
+            //std::cout << round(player.get_position()) << std::endl;
             player.lose_life(); 
             if(player.is_dead())
                 exit = true;
             else {
                 player.reposition();
                 player.set_still();
+                EventHandler::getInstance().next_key();
             }
             break;
         
         case Collision::Arrival:
             //std::cout << "Collision::Arrival\n";
             ++frogs_counter;
-            if(frogs_counter >= 3)
+            if(frogs_counter >= max_frogs)
                 exit = true;
             player.reposition();
             player.set_still();
+            EventHandler::getInstance().next_key();
+            //lines.back()->remove_nearest_to(player.get_coord());
+
             break;
         
         case Collision::Log:
-            std::cout << "Collision::Log ";
-            std::cout << round(player.get_position()) << std::endl;
-    
+            //std::cout << "Collision::Log ";
+            //std::cout << round(player.get_position()) << std::endl;
             if(!player.is_moving()) {
                 float newcord = player.get_coord() - player_line()->get_speed();
                 if(newcord > 0)
@@ -68,6 +70,7 @@ void Level::update_game_state() {
                     else {
                         player.reposition();
                         player.set_still();
+                        EventHandler::getInstance().next_key();
                     }
                 }
             }
@@ -105,8 +108,13 @@ void Level::reset_game_state() {
     pause = false;
     frogs_counter = 0;
     player.reset();
-    for(auto& it : lines)
-        it->reset();
+    player.set_lifes(player_lifes);
+    for(int i = 0; i < lines.size(); ++i) {
+        auto it = std::next(lines.begin(), i);
+        (**it).reset();
+        if(i%5 != 0)
+        (**it).set_speed(line_speed);
+    }
 }
 
 void Level::redraw_game() {
@@ -179,7 +187,7 @@ PanelType Level::body(PanelType caller) {
 
     if(player.is_dead()) 
         return PanelType::LOSS;
-    else if(frogs_counter >= 5)
+    else if(frogs_counter >= max_frogs)
         return PanelType::WIN;
 
     return PanelType::EXIT;
@@ -192,11 +200,14 @@ Panel(), exit(false), pause(false), player(), lines(), frogs_counter(0) {
 
     Graphics::getInstance().set_component(this->type());
     EventHandler::getInstance();
+
     auto& context = Graphics::getInstance().get_initializer();
 
     player.set_img(context[1]);
     for(int i = 0; i < 11; ++i)
         lines.push_back(new Line(context[i+2], i));
+
+    set_difficulty_to(Difficulty::NORMAL);
 
     std::cout << "Level initialization done.\n";
 }
@@ -205,4 +216,26 @@ Level::~Level() {
 
     for(auto& it : lines)
         delete it;
+}
+
+void Level::set_difficulty_to(Difficulty d) {
+
+    if(d == Difficulty::EASY) {
+
+        max_frogs = 1;
+        line_speed = 0.5f;
+        player_lifes = 100;
+
+    } else if(d == Difficulty::NORMAL) {
+
+        max_frogs = 3;
+        line_speed = 1.0f;
+        player_lifes = 3;
+
+    } else {
+
+        max_frogs = 5;
+        line_speed = 2.5f;
+        player_lifes = 1;
+    }
 }

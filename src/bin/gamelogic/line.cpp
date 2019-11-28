@@ -28,10 +28,10 @@ img(new LineImage(0.0f, (index%5 == 0) ? 0.0f : 0.5f)), objects() {
         {3,  { {p, p, Collision::Log, 90.0f, 15},    {p+w/4, p, Collision::Log, 90.0f, 15},    {p+w/2, p, Collision::Log, 90.0f, 15},    {p+3*(w/4), p, Collision::Deadly, 30.0f, 14}, {p+7*(w/8), p, Collision::Log, 30.0f, 13} } },
         {4,  { {p, p, Collision::Log, 90.0f, 15},    {p+w/4, p, Collision::Log, 90.0f, 15},    {p+w/2, p, Collision::Deadly, 30.0f, 14}, {p+5*(w/8), p, Collision::Log, 30.0f, 13},    {p+3*(w/4), p, Collision::Log, 90.0f, 15} } },
         {6,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/3, p, Collision::Deadly, 30.0f, 14}, {p+2*(w/3), p, Collision::Deadly, 30.0f, 14} } },
-        {7,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/3, p, Collision::Deadly, 30.0f, 14}, {p+2*(w/3), p, Collision::Deadly, 30.0f, 14} } },
-        {8,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/3, p, Collision::Deadly, 30.0f, 14}, {p+2*(w/3), p, Collision::Deadly, 30.0f, 14} } },
-        {9,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/3, p, Collision::Deadly, 30.0f, 14}, {p+2*(w/3), p, Collision::Deadly, 30.0f, 14} } },
-        {10, { {p, p, Collision::Arrival, 30.0f, 1}, {p+w/3, p, Collision::Arrival, 30.0f, 1}, {p+2*(w/3), p, Collision::Arrival, 30.0f, 1} } }
+        {7,  { {p, p+w/5, Collision::Deadly, 30.0f, 14}, {p+w/4, p, Collision::Deadly, 30.0f, 14}, {p+2*(w/4), p, Collision::Deadly, 30.0f, 14} } },
+        {8,  { {p, p, Collision::Deadly, 30.0f, 14}, {p+w/5, p, Collision::Deadly, 30.0f, 14}, {p+2*(w/4), p, Collision::Deadly, 30.0f, 14} } },
+        {9,  { {p+w/5, p, Collision::Deadly, 30.0f, 14}, {p+2*(w/5), p, Collision::Deadly, 30.0f, 14} } },
+        {10, { {p, p, Collision::Arrival, 30.0f, 1}, {p+w/4, p, Collision::Arrival, 30.0f, 1}, {p+w/2, p, Collision::Arrival, 30.0f, 1}, {p+3*(w/4), p, Collision::Arrival, 30.0f, 1} } }
     };
 
     if(index != 0 and index != 5)
@@ -98,3 +98,20 @@ Collision Line::collides(const GameObject& in) const {
 }
 
 float Line::get_speed() const { return img->get_speed(); }
+
+void Line::remove_nearest_to(float pos) {
+
+    if(!objects.empty()) {
+        
+        auto it = std::min_element(objects.begin(), objects.end(), [&](auto& el1, auto& el2)
+        {
+            return std::abs(el1->get_coord()-pos) < std::abs(el2->get_coord()-pos); 
+        });
+
+        if(it != objects.end()) {
+            img->remove((**it).get_img());
+            delete *it;
+            objects.erase(it);
+        }
+    }
+}

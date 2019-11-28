@@ -24,6 +24,7 @@ class LineImage: public Image {
 
         void draw() override;
         void add(Image*);
+        void remove(Image*);
 
         void update_position();
 
@@ -34,6 +35,7 @@ class LineImage: public Image {
         float get_position() const { return position; }
 
         float get_speed() const { return speed; }
+        void set_speed(float f) { speed = f; }
 
         float get_max() const { return max_pos; }
 };

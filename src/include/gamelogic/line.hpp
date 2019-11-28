@@ -23,6 +23,8 @@ class Line {
         Collision collides(const GameObject&) const;
 
         float get_speed() const;
+        void set_speed(float f) { img->set_speed(f); }
+        void remove_nearest_to(float);
 };
 
 #endif

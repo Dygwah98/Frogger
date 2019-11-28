@@ -11,6 +11,10 @@ class Level : public Panel {
         bool exit;
         bool pause;
 
+        unsigned max_frogs;
+        unsigned line_speed;
+        unsigned player_lifes;
+
         Player player;
         std::vector<Line*> lines;
         unsigned frogs_counter;
@@ -33,8 +37,11 @@ class Level : public Panel {
         PanelType body(PanelType) override;
     
     public:
-        Level();
+        enum struct Difficulty: int {EASY=0, NORMAL=1, HARD=2};
+        Level();  
         ~Level() override;
+
+        void set_difficulty_to(Difficulty);
 };
 
 #endif

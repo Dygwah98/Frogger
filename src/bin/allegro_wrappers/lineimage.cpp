@@ -77,6 +77,13 @@ void LineImage::add(Image* it) {
     subImages.push_back(new Image(*it));
 }
 
+void LineImage::remove(Image* el) {
+
+    auto it = std::find(subImages.begin(), subImages.end(), el);
+    if(it != subImages.end())
+        subImages.erase(it);
+}
+
 void LineImage::update_position() {
     
     position += speed;

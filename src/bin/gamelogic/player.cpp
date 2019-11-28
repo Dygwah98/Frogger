@@ -3,12 +3,12 @@
 unsigned Player::max_counter() const {
 
     float space = Graphics::getInstance().get_line_height();
-    return ceil(space/speed);
+    return (space/speed);
 }
 
 Player::Player(): 
     GameObject((Graphics::getInstance().get_line_height()-32.0f)/2.0f, 32.0f, Collision::nd), 
-    position(0), vert_dim(32.0f), speed(2.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {}
+    position(0), vert_dim(32.0f), speed(1.5f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {}
 
 Player::~Player() {}
 
@@ -34,6 +34,7 @@ void Player::set_still() {
 
     isMoving = false;
     counter = 0;
+    dir = Keys::nd;
 }
 
 void Player::update() {
@@ -62,7 +63,6 @@ void Player::reset() {
 
     position = 0;
     vert_dim = 30.0f;
-    speed = 1.0f;
     isMoving = false;
     counter = 0;
     dir = Keys::nd;
