@@ -44,6 +44,9 @@ void Buffer::init(float x, float y, bool d, const char* data) {
 
     bitmaps[PanelType::LEVEL].push_back(
         al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], line_dim+60, 0, 30, 30));
+
+    bitmaps[PanelType::LEVEL].push_back(
+        al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], line_dim+60, arr[4]*h + 10, 30, 30));
 }
 
 void Buffer::draw() { al_draw_scaled_bitmap(bitmap, 0, 0, x, y, scale[2], scale[3], scale[0], scale[1], 0); }

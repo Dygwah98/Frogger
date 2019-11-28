@@ -61,7 +61,7 @@ class Player: public GameObject {
         bool is_moving() const { return isMoving; }
         bool is_dead() const { return lifes == 0; }
 
-        void lose_life() { if(lifes > 0) --lifes; }
+        void lose_life() { if(lifes > 0) --lifes; set_still(); }
         int get_lifes() const { return lifes; }
 
         void reposition(float i = 0.0f, float f = 12.77f);

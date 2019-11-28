@@ -2,9 +2,7 @@
 
 Collision Level::player_collides() {
 
-    if(!player.is_dead())
-        return player_line()->collides(player);
-    return Collision::nd;
+    return player_line()->collides(player);
 }
 
 bool Level::player_in_area() {
@@ -16,10 +14,8 @@ bool Level::player_in_area() {
 }
 
 Line* Level::player_line() {
-    
-    if(!player.is_moving())
-        return lines.at(player.get_position());
-    return lines.at(player.next_pos());
+
+    return lines.at(round(player.get_position()));
 }
 
 void Level::update_game_state() {
@@ -29,23 +25,35 @@ void Level::update_game_state() {
     switch(player_collides()) {
 
         case Collision::Deadly:
-            std::cout << "Collision::Deadly\n";
+            std::cout << "Collision::Deadly ";
+            std::cout << round(player.get_position()) << std::endl;
+
             player.lose_life(); 
             if(player.is_dead()) exit = true;
             else                 player.reposition();            
             break;
         
         case Collision::Arrival:
-            std::cout << "Collision::Arrival\n";
+            //std::cout << "Collision::Arrival\n";
             ++frogs_counter;
             if(frogs_counter >= 5)
                 exit = true;
             break;
         
         case Collision::Log:
-            std::cout << "Collision::Log\n";
-            if(!player.is_moving())
-                player.reposition(player.get_position(), player.get_coord() + player_line()->get_speed());
+            std::cout << "Collision::Log ";
+            std::cout << round(player.get_position()) << std::endl;
+    
+            if(!player.is_moving()) {
+                float newcord = player.get_coord() - player_line()->get_speed();
+                if(newcord > 0)
+                    player.reposition(player.get_position(), player.get_coord() - player_line()->get_speed());
+                else {
+                    player.lose_life();
+                    if(player.is_dead()) exit = true;
+                    else                 player.reposition();
+                }
+            }
             break;
 
         default:
@@ -143,8 +151,10 @@ PanelType Level::body(PanelType caller) {
 
     evh.suspend();
 
-    if(player.get_lifes() == 0) return PanelType::LOSS;
-    else if(frogs_counter >= 5) return PanelType::WIN;
+    if(player.is_dead()) 
+        return PanelType::LOSS;
+    else if(frogs_counter >= 5)
+        return PanelType::WIN;
 
     return PanelType::EXIT;
 }

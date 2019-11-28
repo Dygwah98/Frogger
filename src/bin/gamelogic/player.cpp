@@ -40,10 +40,7 @@ void Player::update() {
     
     if(isMoving) {
         
-        reposition(
-            position + (dpos.at(dir)*speed)/Graphics::getInstance().get_line_height(), 
-            get_coord() + dcord.at(dir)*speed 
-        );
+        reposition(position + (dpos.at(dir)*speed)/Graphics::getInstance().get_line_height(), get_coord() + dcord.at(dir)*speed);
         
         --counter;
         if(counter == 0)
