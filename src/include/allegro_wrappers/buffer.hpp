@@ -1,7 +1,6 @@
 #ifndef BUFFER_HPP
 #define BUFFER_HPP
 
-#include"animatedimage.hpp"
 #include"lineimage.hpp"
 
 class Graphics;

@@ -2,7 +2,6 @@
 #define GAMEOBJECT_H
 
 #include"../allegro_wrappers/graphics.hpp"
-#include"../allegro_wrappers/animatedimage.hpp"
 #include"../allegro_wrappers/lineimage.hpp"
 
 class GameObject {

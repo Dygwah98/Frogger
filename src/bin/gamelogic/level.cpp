@@ -109,7 +109,7 @@ void Level::reset_game_state() {
     frogs_counter = 0;
     player.reset();
     player.set_lifes(player_lifes);
-    for(int i = 0; i < lines.size(); ++i) {
+    for(unsigned i = 0; i < lines.size(); ++i) {
         auto it = std::next(lines.begin(), i);
         (**it).reset();
         if(i%5 != 0)
