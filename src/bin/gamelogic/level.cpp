@@ -2,7 +2,9 @@
 
 Collision Level::player_collides() {
 
-    return player_line()->collides(player);
+    if(!player.is_dead())
+        return player_line()->collides(player);
+    return Collision::nd;
 }
 
 bool Level::player_in_area() {
@@ -14,8 +16,10 @@ bool Level::player_in_area() {
 }
 
 Line* Level::player_line() {
-
-    return lines.at(player.get_position());
+    
+    if(!player.is_moving())
+        return lines.at(player.get_position());
+    return lines.at(player.next_pos());
 }
 
 void Level::update_game_state() {
@@ -25,19 +29,23 @@ void Level::update_game_state() {
     switch(player_collides()) {
 
         case Collision::Deadly:
+            std::cout << "Collision::Deadly\n";
             player.lose_life(); 
             if(player.is_dead()) exit = true;
             else                 player.reposition();            
             break;
         
         case Collision::Arrival:
+            std::cout << "Collision::Arrival\n";
             ++frogs_counter;
             if(frogs_counter >= 5)
                 exit = true;
             break;
         
         case Collision::Log:
-            player.reposition(player.get_position(), player.get_coord() + player_line()->get_speed());
+            std::cout << "Collision::Log\n";
+            if(!player.is_moving())
+                player.reposition(player.get_position(), player.get_coord() + player_line()->get_speed());
             break;
 
         default:
@@ -146,14 +154,11 @@ Panel(), exit(false), pause(false), player(), lines(), frogs_counter(0) {
 
     std::cout << "\nLevel initialization... ";
 
-    //std::cout << "  \ngraphics setup";
     Graphics::getInstance().set_component(this->type());
     EventHandler::getInstance();
     auto& context = Graphics::getInstance().get_initializer();
 
-    //std::cout << "  \nplayer graphics";
     player.set_img(context[1]);
-    //std::cout << "  \nlines graphics";
     for(int i = 0; i < 11; ++i)
         lines.push_back(new Line(context[i+2], i));
 

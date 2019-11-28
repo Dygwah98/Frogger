@@ -34,6 +34,8 @@ class LineImage: public Image {
         float get_position() const { return position; }
 
         float get_speed() const { return speed; }
+
+        float get_max() const { return max_pos; }
 };
 
 #endif

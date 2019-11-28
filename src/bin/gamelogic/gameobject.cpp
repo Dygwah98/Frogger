@@ -27,9 +27,8 @@ void GameObject::reset() {}
 Collision GameObject::collides(const GameObject& g) const { 
     
     return 
-    in_range<float>(coord, g.coord, coord + length) 
-        ? marker 
-        : Collision::nd; 
+        in_range<float>(coord, g.coord, coord + length)  or in_range<float>(g.coord, coord, g.coord + g.length)
+        ? marker : Collision::nd; 
 }
 
 void GameObject::set_img(ALLEGRO_BITMAP* bitmap) { 
