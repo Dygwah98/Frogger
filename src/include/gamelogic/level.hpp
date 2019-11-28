@@ -12,7 +12,7 @@ class Level : public Panel {
         bool pause;
 
         unsigned max_frogs;
-        unsigned line_speed;
+        float line_speed;
         unsigned player_lifes;
 
         Player player;

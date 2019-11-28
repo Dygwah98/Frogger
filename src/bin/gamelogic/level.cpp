@@ -183,7 +183,7 @@ PanelType Level::body(PanelType caller) {
     
     update_game_state();
     redraw_game();
-    al_rest(0.5f);
+    al_rest(0.1f);
 
     evh.suspend();
 

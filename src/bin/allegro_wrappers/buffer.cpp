@@ -45,7 +45,13 @@ void Buffer::init(float x, float y, bool d, const char* data) {
     bitmaps.insert({PanelType::MENU,{}});
     bitmaps[PanelType::MENU].push_back(al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], 176, 323, 400, 100));
     bitmaps[PanelType::MENU].push_back(al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], 188, 460, 400, 100));
-    bitmaps.insert({PanelType::OPTIONS,bitmaps.at(PanelType::MENU)});
+
+    bitmaps.insert({PanelType::OPTIONS,{}});
+    bitmaps[PanelType::OPTIONS].push_back(al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], 176, 323, 400, 100));
+    bitmaps[PanelType::OPTIONS].push_back(al_create_sub_bitmap(bitmaps[PanelType::LEVEL][0], 188, 460, 400, 100));
+
+    bitmaps.insert({PanelType::WIN,  {al_load_bitmap("resources/won.png")}});
+    bitmaps.insert({PanelType::LOSS, {al_load_bitmap("resources/lost.png")}});
 }
 
 void Buffer::draw() { al_draw_scaled_bitmap(bitmap, 0, 0, x, y, scale[2], scale[3], scale[0], scale[1], 0); }

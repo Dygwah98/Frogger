@@ -41,11 +41,19 @@ PanelType Menu::runMenuScreen() {
                  if(i != focus) {
                     Graphics::getInstance().schedule_drawing(button_released[i]);
                     Graphics::getInstance().schedule_text(
-                        button_text[i].data(), button_released[i]->get_x()+50, button_released[i]->get_y()+50, al_map_rgb(255, 255, 255));
+                        button_text[i].data(), 
+                        button_released[i]->get_x()+25, 
+                        button_released[i]->get_y()+25, 
+                        al_map_rgb(255, 255, 255)
+                    );
                 }
                 Graphics::getInstance().schedule_drawing(button_pressed[focus]);
                 Graphics::getInstance().schedule_text(
-                    button_text[focus].data(), button_released[focus]->get_x()+50, button_released[focus]->get_y()+50, al_map_rgb(255, 255, 255));
+                    button_text[focus].data(), 
+                    button_released[focus]->get_x()+25, 
+                    button_released[focus]->get_y()+25, 
+                    al_map_rgb(255, 255, 255)
+                );
                 
                 Graphics::getInstance().redraw();
 
@@ -102,8 +110,8 @@ Menu::Menu(): Panel(), panels(), button_pressed(), button_released(), directions
         button_released.push_back(new Image(context[1], 200, 100 + 120*i, false));
     }
 
-    panels[PanelType::OPTIONS] = new Options();
     panels[PanelType::LEVEL]   = new Level();
+    panels[PanelType::OPTIONS] = new Options( *((Level*)panels.at(PanelType::LEVEL)));
     panels[PanelType::WIN]     = new WinScreen();
     panels[PanelType::LOSS]    = new LossScreen();
 
