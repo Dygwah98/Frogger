@@ -1,11 +1,11 @@
 ifdef ComSpec
 	REMOVE = del /F /Q
 	LINKING = -lallegro_monolith
-	TARGET_END = exe
+	TARGET_END = .exe
 else
 	REMOVE = rm -f
-	LINKING = -lallegro -lallegro_primitives -lallegro_image
-	TARGET_END = out
+	LINKING = -lallegro -lallegro_primitives -lallegro_image -lallegro_font -lallegro_ttf
+	TARGET_END = ""
 endif
 
 CC = g++
@@ -23,4 +23,4 @@ run: $(SOURCE)
 	@./$(TARGET)
 
 clean: $(SOURCE)
-	@$(REMOVE) $(TARGET).$(TARGET_END)
+	@$(REMOVE) $(TARGET)$(TARGET_END)
