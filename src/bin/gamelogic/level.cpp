@@ -104,27 +104,27 @@ PanelType Level::body(PanelType caller) {
         switch(e) {
             
             case Event::Exit:          
-                std::cout << "EXIT EVENT\n"; 
+                //std::cout << "EXIT EVENT\n"; 
                 exit = true;    
                 break;
             
             case Event::Pause:  
-                std::cout << "PAUSE EVENT\n";
+                //std::cout << "PAUSE EVENT\n";
                 pause = !pause; 
                 break;
 
             case Event::Execute: 
-                std::cout << "EXECUTE EVENT\n";
+                //std::cout << "EXECUTE EVENT\n";
                 if(!pause) update_game_state();
                 break;
 
             case Event::Redraw:
-                std::cout << "REDRAW EVENT\n";
+                //std::cout << "REDRAW EVENT\n";
                 if(!pause) redraw_game();
                 break;
 
             default:
-                std::cout << "UNHANDLED EVENT\n";
+                //std::cout << "UNHANDLED EVENT\n";
                 break;
         }
     }
@@ -145,7 +145,7 @@ Panel(), exit(false), pause(false), player(), lines(), frogs_counter(0) {
     //std::cout << "  \ngraphics setup";
     Graphics::getInstance().set_component(this->type());
     EventHandler::getInstance();
-    auto context = Graphics::getInstance().get_initializer();
+    auto& context = Graphics::getInstance().get_initializer();
 
     //std::cout << "  \nplayer graphics";
     player.set_img(context[1]);

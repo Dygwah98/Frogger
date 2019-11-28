@@ -43,11 +43,11 @@ class Graphics {
         void clear() { buffer.clear(); }
         float get_buffer_width() const { return buffer.get_x(); }
         float get_buffer_height() const { return buffer.get_y(); }
-        unsigned get_refresh_rate() const { return getDispMode().refresh_rate; }
+        float get_refresh_rate() const { return 30.0f; }
         float get_display_width() const { return al_get_display_width(display); }
         float get_display_height() const { return al_get_display_height(display); }
         float get_line_width() const { return buffer.get_line_width(); }
-        float get_line_height() const { return (600/11)+1; }
+        float get_line_height() const { return (600.0f/11.0f)+1.0f; }
 };
 
 #endif

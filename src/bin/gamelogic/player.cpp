@@ -2,18 +2,17 @@
 
 unsigned Player::max_counter() const {
 
-    unsigned int temp = Graphics::getInstance().get_refresh_rate();
-    assert(temp != 0);
-    return Graphics::getInstance().get_line_height()*(60/temp);
+    float space = Graphics::getInstance().get_line_height();
+    return (space/speed)*(60.0f/Graphics::getInstance().get_refresh_rate());
 }
 
 Player::Player(): 
-    GameObject(0.0f, 30.0f, Collision::nd), 
-    position(0), vert_dim(30.0f), speed(1.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {}
+    GameObject((Graphics::getInstance().get_line_height()-30.0f)/2.0f, 30.0f, Collision::nd), 
+    position(0), vert_dim(30.0f), speed(2.0f), isMoving(false), counter(0), dir(Keys::nd), lifes(3) {}
 
 Player::~Player() {}
 
-void Player::reposition(const float& i, const float& f) {
+void Player::reposition(float i, float f) {
 
     position = i;
     set_coord(f);
@@ -34,24 +33,20 @@ void Player::set_still() {
 
     isMoving = false;
     counter = 0;
-    //reset_gindex();
 }
-/*
-void Player::update_gindex() {
 
-    if(isMoving)
-        AnimatedGameObject::update_gindex();
-}
-*/
 void Player::update() {
     
     if(isMoving) {
-        reposition( position + (dpos.at(dir)*speed)/max_counter(), get_coord() + dcord.at(dir)*speed );
+        
+        reposition(
+            position + (dpos.at(dir)*speed)/Graphics::getInstance().get_line_height(), 
+            get_coord() + dcord.at(dir)*speed 
+        );
+        
         --counter;
-        if(counter == 0) {
-            set_still();
-        } else {} 
-            //update_gindex();
+        if(counter == 0)
+            set_still();    
     }
 }
 
@@ -77,7 +72,6 @@ float Player::next_coord() const {
 
 void Player::reset() {
 
-    //reset_gindex();
     position = 0;
     vert_dim = 30.0f;
     speed = 1.0f;
@@ -86,8 +80,6 @@ void Player::reset() {
     dir = Keys::nd;
     lifes = 3;
 }
-
-//get_gindex(), get_coord() + 5.0f, 12.27f
 
 void Player::set_img(ALLEGRO_BITMAP* b) {
 

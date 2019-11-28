@@ -64,7 +64,7 @@ class Player: public GameObject {
         void lose_life() { if(lifes > 0) --lifes; }
         int get_lifes() const { return lifes; }
 
-        void reposition(const float& i = 0.0f, const float& f = 12.77f);
+        void reposition(float i = 0.0f, float f = 12.77f);
         float next_pos() const;
         float next_coord() const;
 };

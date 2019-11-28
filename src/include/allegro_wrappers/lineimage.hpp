@@ -25,12 +25,15 @@ class LineImage: public Image {
         void draw() override;
         void add(Image*);
 
-        void set_max(float);
-
-        float get_position() const;
-        float get_speed() const;
         void update_position();
-        void reset_position();
+
+        void reset_position() { position = 0.0f; }
+
+        void set_max(float m) { max_pos = m; }
+
+        float get_position() const { return position; }
+
+        float get_speed() const { return speed; }
 };
 
 #endif

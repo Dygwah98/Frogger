@@ -18,7 +18,7 @@ void EventHandler::delInstance() {
 }
 
 EventHandler::EventHandler(): 
-    timer(nullptr), event_queue(nullptr), redraw(false), key_pressed(Keys::nd), new_key(Keys::nd) {
+    timer(nullptr), event_queue(nullptr), redraw(true), key_pressed(Keys::nd), new_key(Keys::nd) {
 
     std::cout << "\nEventHandler initialization... ";
 
@@ -50,8 +50,8 @@ void EventHandler::launch() {
     if(is_ready()) return;
 
     al_flush_event_queue(event_queue);
-    al_pause_event_queue(event_queue, false);
     al_start_timer(timer);
+    al_pause_event_queue(event_queue, false);
 }
 
 void EventHandler::suspend() {
@@ -129,6 +129,7 @@ Event EventHandler::next_event() {
             default:
             break;
         }
+        
     } while(!al_is_event_queue_empty(event_queue));
     
     return ret;

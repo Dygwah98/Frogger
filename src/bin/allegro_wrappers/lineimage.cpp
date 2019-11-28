@@ -33,8 +33,11 @@ LineImage::~LineImage() {
 
 void LineImage::draw() {  
 
-    if(al_is_bitmap_drawing_held())
+    bool reheld = false;
+    if(al_is_bitmap_drawing_held()) {
+        reheld = true;
         al_hold_bitmap_drawing(false);
+    }
 
     ALLEGRO_BITMAP* buffer = al_get_target_bitmap();
 
@@ -43,19 +46,30 @@ void LineImage::draw() {
     al_set_target_bitmap(intermediate_buffer);
     
     al_hold_bitmap_drawing(true);
-    for(auto& it : subImages)
-        it->draw();
+    for(auto& it : subImages) it->draw();
     al_hold_bitmap_drawing(false);
 
     int width  = al_get_bitmap_width(bitmap);
     int height = al_get_bitmap_height(bitmap);
 
     al_set_target_bitmap(buffer);
-    al_draw_bitmap_region(intermediate_buffer, 0, 0, position, height, x + width - position, y, 0);
-    al_draw_bitmap_region(intermediate_buffer, position, 0, width - position, height, x, y, 0);
+    al_draw_bitmap_region(
+        intermediate_buffer, 
+        0, 0, 
+        position, height, 
+        x + width - position, y, 0);
+    
+    al_draw_bitmap_region(
+        intermediate_buffer, 
+        position, 0, 
+        width - position, height, 
+        x, y, 0);
 
     al_destroy_bitmap(intermediate_buffer);
     intermediate_buffer = nullptr;
+
+    if(reheld)
+        al_hold_bitmap_drawing(true);
 }
 
 void LineImage::add(Image* it) {
@@ -69,11 +83,3 @@ void LineImage::update_position() {
     if(position >= max_pos)
         position -= max_pos;     
 }
-
-void LineImage::reset_position() { position = 0.0f; }
-
-void LineImage::set_max(float m) { max_pos = m; }
-
-float LineImage::get_position() const { return position; }
-
-float LineImage::get_speed() const { return speed; }
