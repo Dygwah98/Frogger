@@ -10,7 +10,7 @@ endif
 
 CC = g++
 
-OPTIONS = -Wall -std=c++17
+OPTIONS = -std=c++17
 SOURCE = src/bin/allegro_wrappers/*.cpp src/bin/gamelogic/*.cpp src/bin/gui/*.cpp src/bin/main.cpp
 TARGET = frogger
 
