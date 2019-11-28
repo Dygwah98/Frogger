@@ -17,7 +17,7 @@ class Buffer : public Image {
         //fattori di scala (usati per ridimensionare il buffer)
         float scale[4] = {0.0f, 0.0f, 0.0f, 0.0f};
 
-        float line_dim = 520.0f;
+        float line_dim = 600.0f;
     
     public:
         Buffer();

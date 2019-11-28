@@ -16,6 +16,7 @@ img(new LineImage(0.0f, 0.5f)), objects() {
 
     img->set_bitmap(b);
     img->set_coordinates(0.0f, ((600/11)+1)*index);
+    img->set_max(Graphics::getInstance().get_line_width());
 
     auto& context = Graphics::getInstance().get_initializer();
 
@@ -27,7 +28,7 @@ img(new LineImage(0.0f, 0.5f)), objects() {
         objects.push_back(new GameObject(0.0f, 0.0f, Collision::nd));
         auto it = objects.back();
 
-        it->set_img(context[1]);
+        it->set_img(context[13]);
         it->get_img()->set_coordinates( 
             (((600/11)+1)/2.0f - 30/2.0f)+(val/4)*(i),
             (((600/11)+1)/2.0f - 30/2.0f));

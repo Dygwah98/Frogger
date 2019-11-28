@@ -1,10 +1,10 @@
 #include"../../include/allegro_wrappers/lineimage.hpp"
 
 LineImage::LineImage(float pos, float speed): 
-Image(), intermediate_buffer(nullptr), subImages(), position(pos), speed(speed), max_pos(520.0f) {}
+Image(), intermediate_buffer(nullptr), subImages(), position(pos), speed(speed), max_pos(600.0f) {}
 
 LineImage::LineImage(ALLEGRO_BITMAP* b, float x, float y, bool d):
-Image(b, x, y, d), intermediate_buffer(nullptr), subImages(), position(0.0f), speed(2.0f), max_pos(520.0f) {}
+Image(b, x, y, d), intermediate_buffer(nullptr), subImages(), position(0.0f), speed(2.0f), max_pos(600.0f) {}
 
 LineImage::LineImage(const LineImage& limg): Image(limg), subImages() {
 
