@@ -13,9 +13,9 @@
   3) 'clean': deletes the default executable.
  Feel free to modify any variable you want to test with different settings (for example, to add --sanitize==address).
 
- If you don't have a make utility, just paste this command string in your terminal:
-    g++ -std=c++17 "src/bin/allegro_wrappers/*.cpp" "src/bin/gamelogic/*.cpp" "src/bin/gui/*.cpp" "src/bin/main.cpp" -o frogger \
-     -lallegro_monolith #(for monolith users)
+ If you don't have a make utility, just paste this command string in your terminal: </br>
+    g++ -std=c++17 "src/bin/allegro_wrappers/*.cpp" "src/bin/gamelogic/*.cpp" "src/bin/gui/*.cpp" "src/bin/main.cpp" -o frogger \ </br>
+     -lallegro_monolith #(for monolith users) </br>
      -lallegro -lallegro_primitives -lallegro_image -lallegro_font -lallegro_ttf #(for the weak).
 
  Enjoy!
